@@ -4,7 +4,7 @@
     "slug": "tcc-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "entryPoint": "./src/AppEntry.tsx",
+    "entryPoint": "./src/AppEntry.ts",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
