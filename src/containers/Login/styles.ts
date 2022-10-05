@@ -1,7 +1,9 @@
-import styled from "styled-components";
+import { StyleSheet } from "react-native";
 
-export const Title = styled.h1`
-    font-size: 1.5em;
-    text-align: center;
-    color: palevioletred;
-`;
+export default StyleSheet.create({
+    view: {
+        marginTop: 100,
+        maxWidth: "90%",
+        flex: 1,
+    }
+});
