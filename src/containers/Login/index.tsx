@@ -5,7 +5,7 @@ import { createUser } from "../../services";
 
 import styles from "./styles";
 
-export function Login() {
+export function Login({ navigation }) {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
     const [isActive, setIsActive] = useState(false);
@@ -45,8 +45,8 @@ export function Login() {
                         <Anchor onPress={() => console.log("esqueceu a senha")}>Esqueceu a senha?</Anchor>
                     </View>
 
-                    <View style={{flexDirection:"row", justifyContent: "space-evenly"}}>
-                        <Text>Não possui uma conta?</Text><Anchor onPress={() => console.log("registrar")}>registre-se aqui</Anchor>
+                    <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
+                        <Text>Não possui uma conta?</Text><Anchor onPress={() => navigation.navigate("Register")}>registre-se aqui</Anchor>
                     </View>
                 </View>
             </KeyboardAvoidingView>
