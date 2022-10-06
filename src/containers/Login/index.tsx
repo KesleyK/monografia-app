@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Switch, View } from "react-native";
 import { Button, Input, PrimaryTitle, Text, Wrapper, KeyboardAvoidingView, Anchor } from "../../components";
+import { createUser } from "../../services";
+
 import styles from "./styles";
 
 export function Login() {
@@ -8,13 +10,8 @@ export function Login() {
     const [password, setPassword] = useState("");
     const [isActive, setIsActive] = useState(false);
 
-    const onFormSubmit = () => {
-        const formData = {
-            user,
-            password,
-        };
-
-        console.log(formData);
+    const onFormSubmit = async () => {
+        await createUser(user, password);
     };
 
     return (
