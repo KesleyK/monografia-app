@@ -3,6 +3,6 @@ import { DefaultStyles } from "../../styles";
 
 export default StyleSheet.create({
     link: {
-        color: DefaultStyles.SECONDARY_COLOR,
+        color: DefaultStyles.ANCHOR_COLOR,
     }
 });

@@ -7,10 +7,8 @@ const Stack = createStackNavigator();
 
 export function UserStack() {
     return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={Home} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={Home} />
+        </Stack.Navigator>
     );
 }

@@ -71,8 +71,8 @@ export function Register({ navigation }) {
 
                     <Button title="Login" onPress={onFormSubmit} />
 
-                    <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
-                        <Text>Já possui uma conta?</Text><Anchor onPress={() => navigation.navigate("Login")}>faça login</Anchor>
+                    <View style={styles.signinText}>
+                        <Text>Já possui uma conta? </Text><Anchor onPress={() => navigation.navigate("Login")}>faça login</Anchor>
                     </View>
                 </View>
             </KeyboardAvoidingView>
