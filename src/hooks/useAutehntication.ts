@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { watchAuthStateChange } from "../../services";
+import { watchAuthStateChanged } from "../services/firebase/auth/watchAuthStateChanged";
 
 export function useAuthentication() {
     const [user, setUser] = useState();
@@ -9,7 +9,7 @@ export function useAuthentication() {
     }
 
     useEffect(() => {
-        return watchAuthStateChange(onAuthStateChange);
+        return watchAuthStateChanged(onAuthStateChange);
     }, []);
 
     return { user };

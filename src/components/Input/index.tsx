@@ -1,5 +1,5 @@
 import { TextInput } from "react-native";
-import { DefaultStyles } from "../../styles";
+import { DefaultStyles } from "../../styles/global";
 
 import styles from "./styles";
 

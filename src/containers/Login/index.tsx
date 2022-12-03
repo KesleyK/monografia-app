@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Switch, View } from "react-native";
 import { Button, Input, PrimaryTitle, Text, Wrapper, Anchor } from "../../components";
-import { signinUser } from "../../services";
+import { signinUser } from "../../services/firebase/auth/signinUser";
 import styles from "./styles";
 
 /*

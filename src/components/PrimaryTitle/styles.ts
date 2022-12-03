@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { DefaultStyles } from '../../styles';
+import { DefaultStyles } from '../../styles/global';
 
 export default StyleSheet.create({
     primaryTitle: {

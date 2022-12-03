@@ -1,5 +1,5 @@
 import registerRootComponent from "expo/build/launch/registerRootComponent";
-import "./firebase";
+import "./config/firebase";
 
 import App from "./App";
 
