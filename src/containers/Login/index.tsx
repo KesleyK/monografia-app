@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Switch, View } from "react-native";
 import { Button, Input, PrimaryTitle, Text, Wrapper, Anchor } from "../../components";
-import { createUser } from "../../services";
+import { signinUser } from "../../services";
 import styles from "./styles";
 
 /*
@@ -15,7 +15,7 @@ export function Login({ navigation }) {
     const [password, setPassword] = useState("");
     const [isActive, setIsActive] = useState(false);
 
-    const onFormSubmitted = async () => await createUser(user, password);
+    const onFormSubmitted = async () => await signinUser(user, password);
     const onForgotPasswordClicked = () => console.log("esqueceu a senha");
     const onGoToSignupPageClicked = () =>  navigation.navigate("Register");
 
@@ -28,11 +28,13 @@ export function Login({ navigation }) {
                     placeholder="Usuário"
                     value={user}
                     onChangeText={setUser}
+                    keyboardType="email-address"
                 />
                 <Input
                     placeholder="Senha"
                     onChangeText={setPassword}
                     value={password}
+                    secureTextEntry={true}
                 />
                 <Button title="Login" onPress={onFormSubmitted} />
 

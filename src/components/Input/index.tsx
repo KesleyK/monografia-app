@@ -11,6 +11,9 @@ export function Input(props) {
             placeholderTextColor={DefaultStyles.PRIMARY_COLOR}
             onChangeText={props.onChangeText}
             value={props.value}
+            autoCapitalize={props.autoCapitalize ?? "none"}
+            keyboardType={props.keyboardType ?? "default"}
+            secureTextEntry={props.secureTextEntry}
         />
     );
 }
