@@ -9,6 +9,7 @@ export default StyleSheet.create({
     },
     signinText: {
         flexDirection: "row",
-        alignSelf: "center"
+        alignSelf: "center",
+        marginTop: "10%"
     }
 });

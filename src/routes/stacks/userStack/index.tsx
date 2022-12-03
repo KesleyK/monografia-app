@@ -1,13 +1,17 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Home } from "../../../containers";
+import { Home, PreHome } from "../../../containers";
 
 const Stack = createStackNavigator();
 
 export function UserStack() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false
+            }}
+        >
+            <Stack.Screen name="PreHome" component={PreHome} />
             <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
     );

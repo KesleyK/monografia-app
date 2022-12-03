@@ -15,7 +15,14 @@ export function Login({ navigation }) {
     const [password, setPassword] = useState("");
     const [isActive, setIsActive] = useState(false);
 
-    const onFormSubmitted = async () => await signinUser(user, password);
+    const onFormSubmitted = async () => {
+        try {
+            await signinUser(user, password);
+        } catch (err) {
+            alert("Credenciais inválidas");
+        }
+    };
+
     const onForgotPasswordClicked = () => console.log("esqueceu a senha");
     const onGoToSignupPageClicked = () =>  navigation.navigate("Register");
 
@@ -36,7 +43,7 @@ export function Login({ navigation }) {
                     value={password}
                     secureTextEntry={true}
                 />
-                <Button title="Login" onPress={onFormSubmitted} />
+                <Button title="Login" fullWidth onPress={onFormSubmitted} />
 
                 <View style={styles.userHelpersBox}>
                     <View style={styles.userHelpersRememberMeBox}>

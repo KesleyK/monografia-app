@@ -27,55 +27,53 @@ export function Register({ navigation }) {
 
     return (
         <Wrapper>
-            <KeyboardAvoidingView>
-                <View style={styles.view}>
-                    <PrimaryTitle>Registrar conta</PrimaryTitle>
+            <View style={styles.view}>
+                <PrimaryTitle>Registrar conta</PrimaryTitle>
 
-                    <Input
-                        placeholder="Usuário"
-                        value={user}
-                        onChangeText={setUser}
-                    />
+                <Input
+                    placeholder="Usuário"
+                    value={user}
+                    onChangeText={setUser}
+                />
 
-                    <Input
-                        placeholder="E-mail"
-                        onChangeText={setEmail}
-                        value={email}
-                    />
+                <Input
+                    placeholder="E-mail"
+                    onChangeText={setEmail}
+                    value={email}
+                />
 
-                    <DatePicker
-                        date={date}
-                        placeholder={date?.toDateString() === new Date().toDateString() ? "Data de Nascimento" : date.toLocaleDateString('pt-BR')}
-                        onChange={(event, selectedDate) => {
-                            setDate(selectedDate);
-                        }}
-                    />
+                <DatePicker
+                    date={date}
+                    placeholder={date?.toDateString() === new Date().toDateString() ? "Data de Nascimento" : date.toLocaleDateString('pt-BR')}
+                    onChange={(event, selectedDate) => {
+                        setDate(selectedDate);
+                    }}
+                />
 
-                    <Input
-                        placeholder="Formação Acadêmica"
-                        onChangeText={setFormacaoAcademica}
-                        value={formacaoAcademica}
-                    />
+                <Input
+                    placeholder="Formação Acadêmica"
+                    onChangeText={setFormacaoAcademica}
+                    value={formacaoAcademica}
+                />
 
-                    <Input
-                        placeholder="Senha"
-                        onChangeText={setPassword}
-                        value={password}
-                    />
+                <Input
+                    placeholder="Senha"
+                    onChangeText={setPassword}
+                    value={password}
+                />
 
-                    <Input
-                        placeholder="Confirmar Senha"
-                        onChangeText={setPasswordConfirmation}
-                        value={passwordConfirmation}
-                    />
+                <Input
+                    placeholder="Confirmar Senha"
+                    onChangeText={setPasswordConfirmation}
+                    value={passwordConfirmation}
+                />
 
-                    <Button title="Login" onPress={onFormSubmit} />
+                <Button title="Login" fullWidth onPress={onFormSubmit} />
 
-                    <View style={styles.signinText}>
-                        <Text>Já possui uma conta? </Text><Anchor onPress={() => navigation.navigate("Login")}>faça login</Anchor>
-                    </View>
+                <View style={styles.signinText}>
+                    <Text>Já possui uma conta? </Text><Anchor onPress={() => navigation.navigate("Login")}>faça login</Anchor>
                 </View>
-            </KeyboardAvoidingView>
+            </View>
         </Wrapper>
     );
 }
