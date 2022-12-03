@@ -1,10 +1,10 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import config from "./config/user";
+import config from "./config/preHome";
 
 const Stack = createStackNavigator();
 
-export function UserStack() {
+export function PreHome() {
     return (
         <Stack.Navigator screenOptions={config.navigator.screenOptions}>
             {config.screens.map((screen) => (

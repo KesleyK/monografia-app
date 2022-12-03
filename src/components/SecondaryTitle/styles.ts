@@ -2,13 +2,9 @@ import { StyleSheet } from 'react-native'
 import { DefaultStyles } from '../../styles/global';
 
 export default StyleSheet.create({
-    primaryTitle: {
+    secondaryTitle: {
         color: DefaultStyles.PRIMARY_COLOR,
-        fontSize: 20,
-        fontWeight: "bold",
+        fontSize: 18,
         marginBottom: 50,
     },
-    smallTitle: {
-        fontSize: 16,
-    }
 });

@@ -1,12 +1,27 @@
-import { PrimaryTitle, Wrapper, Button } from "../../components";
-import { signoutUser } from "../../services/firebase/auth/signoutUser";
+import React, { useState } from "react";
+import { View } from "react-native";
+import Foundation from "react-native-vector-icons/Foundation";
+import { Wrapper, PrimaryTitle, SearchBar, Text } from "../../components";
+
+import styles from "./styles";
 
 export function Home() {
+    const [searchPhrase, setSearchPhrase] = useState("");
+
     return (
         <Wrapper>
-            <PrimaryTitle>Home</PrimaryTitle>
+            <View style={styles.container}>
+                <PrimaryTitle>Bem-vindo!</PrimaryTitle>
 
-            <Button title="Sign out ->" onPress={signoutUser}/>
+                <SearchBar style={styles.searchBar} searchPhrase={searchPhrase} setSearchPhrase={setSearchPhrase} />
+
+                <PrimaryTitle small>Tópicos</PrimaryTitle>
+
+                <View>
+                    <Foundation name="graph-bar" size={30} color="white" />
+                    <Text>Ciência de Dados</Text>
+                </View>
+            </View>
         </Wrapper>
     );
 }

@@ -1,4 +1,5 @@
-import { PreHome, Home } from "../../../containers";
+import { PreHome } from "../../../containers";
+import { BottomTabNavigator } from "../bottomTabNavigator";
 
 export default {
     navigator: {
@@ -10,11 +11,11 @@ export default {
         {
             name: "PreHome",
             component: PreHome,
-            options: {}
+            options: {},
         },
         {
-            name: "Home",
-            component: Home,
+            name: "BottomTabNavigator",
+            component: BottomTabNavigator,
             options: {}
         }
     ]

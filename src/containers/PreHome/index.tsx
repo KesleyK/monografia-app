@@ -1,16 +1,16 @@
 import React from "react";
 import { View } from "react-native";
-import { Wrapper, PrimaryTitle, Text, Button } from "../../components";
+import { Wrapper, SecondaryTitle, Text, Button } from "../../components";
 
 import styles from "./styles";
 
 export function PreHome({ navigation }) {
-    const onGoToGlobalPlatform = () =>  navigation.navigate("Home");
+    const onGoToGlobalPlatform = () =>  navigation.navigate("BottomTabNavigator");
 
     return (
         <Wrapper>
             <View style={styles.container}>
-                <PrimaryTitle>Escolha a forma como deseja acessar a plataforma</PrimaryTitle>
+                <SecondaryTitle>Escolha a forma como deseja acessar a plataforma</SecondaryTitle>
 
                 <View style={styles.card}>
                     <Text style={styles.cardTitle}>Plataforma Global</Text>
