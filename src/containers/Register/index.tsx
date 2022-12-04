@@ -28,7 +28,7 @@ export function Register({ navigation }) {
     return (
         <Wrapper>
             <View style={styles.view}>
-                <PrimaryTitle>Registrar conta</PrimaryTitle>
+                <PrimaryTitle style={styles.title}>Registrar conta</PrimaryTitle>
 
                 <Input
                     placeholder="Usuário"

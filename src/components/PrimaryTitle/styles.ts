@@ -5,8 +5,7 @@ export default StyleSheet.create({
     primaryTitle: {
         color: DefaultStyles.PRIMARY_COLOR,
         fontSize: 20,
-        fontWeight: "bold",
-        marginBottom: 50,
+        fontWeight: "bold"
     },
     smallTitle: {
         fontSize: 16,

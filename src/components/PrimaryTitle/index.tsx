@@ -2,8 +2,8 @@ import { Text } from "react-native";
 
 import styles from "./styles";
 
-export function PrimaryTitle({ small = false, children }) {
-    let titleStyles = { ...styles.primaryTitle };
+export function PrimaryTitle({ small = false, style = {}, children }) {
+    let titleStyles = { ...styles.primaryTitle, ...style };
 
     if (small) {
         titleStyles = {

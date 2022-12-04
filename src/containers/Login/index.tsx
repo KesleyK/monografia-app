@@ -29,7 +29,7 @@ export function Login({ navigation }) {
     return (
         <Wrapper>
             <View style={styles.container}>
-                <PrimaryTitle>Login</PrimaryTitle>
+                <PrimaryTitle style={styles.title}>Login</PrimaryTitle>
 
                 <Input
                     placeholder="Usuário"

@@ -6,6 +6,9 @@ export default StyleSheet.create({
         justifyContent: "center",
         paddingHorizontal: "10%",
     },
+    title: {
+        marginBottom: "15%"
+    },
     userHelpersBox: { 
         flexDirection: "row",
         justifyContent: "space-between",

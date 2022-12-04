@@ -7,6 +7,9 @@ export default StyleSheet.create({
         paddingVertical: "25%",
         paddingHorizontal: "10%"
     },
+    title: {
+        marginBottom: "15%"
+    },
     signinText: {
         flexDirection: "row",
         alignSelf: "center",
