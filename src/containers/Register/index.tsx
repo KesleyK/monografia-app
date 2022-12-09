@@ -1,28 +1,28 @@
 import React, { useState } from "react";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
-import { Switch, View } from "react-native";
-import { Button, Input, PrimaryTitle, Text, Wrapper, KeyboardAvoidingView, Anchor, DatePicker } from "../../components";
+import { View } from "react-native";
+import { Anchor, Button, DatePicker, Input, PrimaryTitle, Text, Wrapper } from "../../components";
+import { EducationalBackground } from "../../models/enum/EducationalBackground";
+import { IUser } from "../../models/IUser";
+import { createUser } from "../../services/firebase/auth/createUser";
 import styles from "./styles";
 
 export function Register({ navigation }) {
     const [user, setUser] = useState("");
     const [email, setEmail] = useState("");
     const [date, setDate] = useState(new Date());
-    const [formacaoAcademica, setFormacaoAcademica] = useState("");
+    const [educationalBackground, setEducationalBackground] = useState(EducationalBackground.HIGH_COMPLETE);
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
     const onFormSubmit = () => {
-        const formData = {
-            user,
+        const formData: IUser = {
+            name: user,
             email,
-            date,
-            formacaoAcademica,
-            password,
-            passwordConfirmation
+            birthDate: date,
+            educationalBackground,
         };
 
-        console.log(formData);
+        createUser(formData, password);
     };
 
     return (
@@ -52,8 +52,8 @@ export function Register({ navigation }) {
 
                 <Input
                     placeholder="Formação Acadêmica"
-                    onChangeText={setFormacaoAcademica}
-                    value={formacaoAcademica}
+                    onChangeText={setEducationalBackground}
+                    value={educationalBackground}
                 />
 
                 <Input

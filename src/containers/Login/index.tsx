@@ -13,7 +13,7 @@ import styles from "./styles";
 export function Login({ navigation }) {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
-    const [isActive, setIsActive] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
 
     const onFormSubmitted = async () => {
         try {
@@ -50,7 +50,7 @@ export function Login({ navigation }) {
                         <Text style={styles.userHelpersRememberMeText}>
                             Lembrar de Mim?
                         </Text>
-                        <Switch onValueChange={setIsActive} value={isActive} />
+                        <Switch onValueChange={setRememberMe} value={rememberMe} />
                     </View>
 
                     <View>
