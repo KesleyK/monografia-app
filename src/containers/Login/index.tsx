@@ -1,58 +1,74 @@
 import React, { useState } from "react";
 import { Switch, View } from "react-native";
-import { Button, Input, PrimaryTitle, Text, Wrapper, KeyboardAvoidingView, Anchor } from "../../components";
+import { Button, Input, PrimaryTitle, Text, Wrapper, Anchor } from "../../components";
+import { signinUser } from "../../services/firebase/auth/signinUser";
 import styles from "./styles";
 
-export function Login() {
+/*
+    TODO:
+        1 - KeyboardAvoidingView is breaking the layout. We have to fix it before using
+        2 - On a small device, "userHelpersBox" won't match the layout. We have to fix it
+*/
+
+export function Login({ navigation }) {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("");
-    const [isActive, setIsActive] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false);
 
-    const onFormSubmit = () => {
-        const formData = {
-            user,
-            password,
-        };
-
-        console.log(formData);
+    const onFormSubmitted = async () => {
+        try {
+            await signinUser(user, password);
+        } catch (err) {
+            alert("Credenciais inválidas");
+        }
     };
+
+    const onForgotPasswordClicked = () => console.log("esqueceu a senha");
+    const onGoToSignupPageClicked = () =>  navigation.navigate("Register");
 
     return (
         <Wrapper>
-            <KeyboardAvoidingView>
-                <View style={styles.view}>
-                    <PrimaryTitle>Login</PrimaryTitle>
+            <View style={styles.container}>
+                <PrimaryTitle style={styles.title}>Login</PrimaryTitle>
 
-                    <Input
-                        placeholder="Usuário"
-                        value={user}
-                        onChangeText={setUser}
-                    />
+                <Input
+                    placeholder="Usuário"
+                    value={user}
+                    onChangeText={setUser}
+                    keyboardType="email-address"
+                />
+                <Input
+                    placeholder="Senha"
+                    onChangeText={setPassword}
+                    value={password}
+                    secureTextEntry={true}
+                />
+                <Button title="Login" fullWidth onPress={onFormSubmitted} />
 
-                    <Input
-                        placeholder="Senha"
-                        onChangeText={setPassword}
-                        value={password}
-                    />
-
-                    <Button title="Login" onPress={onFormSubmit} />
-
-                    <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 50 }}>
-                        <View style={{ flexDirection: "row", alignItems: "center" }}>
-                            <Text>Lembrar de Mim?</Text>
-                            <Switch
-                                onValueChange={setIsActive}
-                                value={isActive}
-                            />
-                        </View>
-                        <Anchor onPress={() => console.log("esqueceu a senha")}>Esqueceu a senha?</Anchor>
+                <View style={styles.userHelpersBox}>
+                    <View style={styles.userHelpersRememberMeBox}>
+                        <Text style={styles.userHelpersRememberMeText}>
+                            Lembrar de Mim?
+                        </Text>
+                        <Switch onValueChange={setRememberMe} value={rememberMe} />
                     </View>
 
-                    <View style={{flexDirection:"row", justifyContent: "space-evenly"}}>
-                        <Text>Não possui uma conta?</Text><Anchor onPress={() => console.log("registrar")}>registre-se aqui</Anchor>
+                    <View>
+                        <Anchor onPress={onForgotPasswordClicked}>
+                            Esqueceu a senha?
+                        </Anchor>
                     </View>
                 </View>
-            </KeyboardAvoidingView>
+
+                <View style={styles.signupBox}>
+                    <Text style={styles.signupText}>
+                        <Text>Não possui uma conta?  </Text>
+                        <Anchor onPress={onGoToSignupPageClicked}>
+                            registre-se aqui
+                        </Anchor>
+                    </Text>
+                </View>
+            </View>
         </Wrapper>
     );
 }

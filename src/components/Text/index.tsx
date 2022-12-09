@@ -1,8 +1,6 @@
 import { Text as T } from 'react-native';
 import styles from './styles';
 
-export function Text({ children }) {
-    return (
-        <T style={styles.text}>{children}</T>
-    );
+export function Text({ style = null, children }) {
+    return <T style={{ ...styles.text, ...style }}>{children}</T>
 }

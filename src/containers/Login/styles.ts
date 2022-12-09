@@ -1,9 +1,32 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-    view: {
-        marginTop: 100,
-        maxWidth: "90%",
+    container: {
         flex: 1,
+        justifyContent: "center",
+        paddingHorizontal: "10%",
+    },
+    title: {
+        marginBottom: "15%"
+    },
+    userHelpersBox: { 
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: "15%"
+    },
+    userHelpersRememberMeBox: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    userHelpersRememberMeText: {
+        fontWeight: "bold",
+    },
+    signupBox: {
+        flexDirection: "row",
+        alignSelf: "center"
+    },
+    signupText: {
+        fontSize: 11
     }
 });

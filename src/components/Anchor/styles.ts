@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
-import { DefaultStyles } from "../../styles";
+import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     link: {
-        color: DefaultStyles.SECONDARY_COLOR,
+        color: DefaultStyles.ANCHOR_COLOR,
     }
 });

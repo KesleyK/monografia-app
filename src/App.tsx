@@ -1,5 +1,5 @@
-import { Login } from "./containers";
+import { Routes } from "./routes/setup";
 
 export default function App() {
-    return <Login />;
+    return <Routes />;
 }

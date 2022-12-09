@@ -1,15 +1,20 @@
 import { StyleSheet } from 'react-native'
-import { DefaultStyles } from '../../styles';
+import { DefaultStyles } from '../../styles/global';
 
 export default StyleSheet.create({
     button: {
         backgroundColor: DefaultStyles.PRIMARY_COLOR,
-        width: "100%",
-        height: 50,
+        paddingVertical: 12,
         borderRadius: 5,
-        marginTop: 25,
-        marginBottom: 25,
         alignItems: "center",
         justifyContent: "center",
+        alignSelf: "center",
     },
+    fullWidthButton: {
+        width: "100%"
+    },
+    title: {
+        textTransform: "uppercase",
+        fontWeight: "bold"
+    }
 });

@@ -3,9 +3,21 @@ import { Text, TouchableOpacity } from "react-native";
 import styles from "./styles";
 
 export function Button(props) {
+    let buttonStyle = {
+        ...styles.button,
+        ...props.style
+    };
+
+    if (props.fullWidth) {
+        buttonStyle = {
+            ...buttonStyle,
+            ...styles.fullWidthButton
+        }
+    }
+
     return (
-        <TouchableOpacity style={styles.button} onPress={props.onPress}>
-            <Text style={{textTransform: "uppercase", fontWeight: "bold"}}>{props.title}</Text>
+        <TouchableOpacity style={buttonStyle} onPress={props.onPress}>
+            <Text style={styles.title}>{props.title}</Text>
         </TouchableOpacity>
     );
 }
