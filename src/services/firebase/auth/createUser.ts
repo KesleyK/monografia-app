@@ -5,6 +5,10 @@ import { db } from '../../../config/firebase'
 
 export async function createUser(user: IUser, password: string) {
     const auth = getAuth();
-    await createUserWithEmailAndPassword(auth, user.email, password);
-    await addDoc(collection(db, "users"), user);
+    try {
+        await createUserWithEmailAndPassword(auth, user.email, password);
+        await addDoc(collection(db, "users"), user);
+    } catch (err) {
+        alert("Ocorreu um erro inesperado: " + err);
+    }
 }

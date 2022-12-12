@@ -43,7 +43,7 @@ export function Login({ navigation }) {
                     value={password}
                     secureTextEntry={true}
                 />
-                <Button title="Login" fullWidth onPress={onFormSubmitted} />
+                <Button title="Login" fullWidth onPress={onFormSubmitted} style={{marginTop: 15, marginBottom: 15}} />
 
                 <View style={styles.userHelpersBox}>
                     <View style={styles.userHelpersRememberMeBox}>

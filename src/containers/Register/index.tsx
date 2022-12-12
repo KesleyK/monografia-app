@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { Anchor, Button, DatePicker, Input, PrimaryTitle, Text, Wrapper } from "../../components";
+import { Anchor, Button, DatePicker, Dropdown, Input, PrimaryTitle, Text, Wrapper } from "../../components";
 import { EducationalBackground } from "../../models/enum/EducationalBackground";
 import { IUser } from "../../models/IUser";
 import { createUser } from "../../services/firebase/auth/createUser";
@@ -10,7 +10,7 @@ export function Register({ navigation }) {
     const [user, setUser] = useState("");
     const [email, setEmail] = useState("");
     const [date, setDate] = useState(new Date());
-    const [educationalBackground, setEducationalBackground] = useState(EducationalBackground.HIGH_COMPLETE);
+    const [educationalBackground, setEducationalBackground] = useState(null);
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
@@ -31,7 +31,7 @@ export function Register({ navigation }) {
                 <PrimaryTitle style={styles.title}>Registrar conta</PrimaryTitle>
 
                 <Input
-                    placeholder="Usuário"
+                    placeholder="Nome Completo"
                     value={user}
                     onChangeText={setUser}
                 />
@@ -39,7 +39,7 @@ export function Register({ navigation }) {
                 <Input
                     placeholder="E-mail"
                     onChangeText={setEmail}
-                    value={email}
+                    value={email.trim()}
                 />
 
                 <DatePicker
@@ -50,10 +50,10 @@ export function Register({ navigation }) {
                     }}
                 />
 
-                <Input
-                    placeholder="Formação Acadêmica"
-                    onChangeText={setEducationalBackground}
-                    value={educationalBackground}
+                <Dropdown
+                    placeholder={"Formação Acadêmica"}
+                    setSelected={setEducationalBackground}
+                    values={Object.values(EducationalBackground)}
                 />
 
                 <Input
@@ -68,7 +68,7 @@ export function Register({ navigation }) {
                     value={passwordConfirmation}
                 />
 
-                <Button title="Login" fullWidth onPress={onFormSubmit} />
+                <Button title="Cadastrar" fullWidth onPress={onFormSubmit} style={{marginTop: 15}}/>
 
                 <View style={styles.signinText}>
                     <Text>Já possui uma conta? </Text><Anchor onPress={() => navigation.navigate("Login")}>faça login</Anchor>
