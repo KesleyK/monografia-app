@@ -3,6 +3,7 @@ import { ScrollView, View } from "react-native";
 import Foundation from "react-native-vector-icons/Foundation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Wrapper, PrimaryTitle, SearchBar, Text } from "../../components";
+import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 
 import styles from "./styles";
 
@@ -37,11 +38,20 @@ const mockPersonsRank = [
     {
         name: "user 4",
         points: "15"
-    },
-]
+    }
+];
 
 export function Home() {
     const [searchPhrase, setSearchPhrase] = useState("");
+
+    const topicsList = mockTopics
+        .filter((topic) => verifyStringInclusion(normalizeString(topic.name), normalizeString(searchPhrase)))
+        .map((topic, index) => (
+            <View style={styles.topicsCard} key={index}>
+                <Foundation name={topic.icon} size={40} color="white" />
+                <Text style={styles.topicName}>{topic.name}</Text>
+            </View>
+        ));
 
     return (
         <Wrapper>
@@ -49,11 +59,7 @@ export function Home() {
                 <View style={styles.container}>
                     <PrimaryTitle style={styles.title}>Bem-vindo!</PrimaryTitle>
 
-                    <SearchBar
-                        style={styles.searchBar}
-                        searchPhrase={searchPhrase}
-                        setSearchPhrase={setSearchPhrase}
-                    />
+                    <SearchBar style={styles.searchBar} searchPhrase={searchPhrase} setSearchPhrase={setSearchPhrase} />
 
                     <View style={styles.topicsBox}>
                         <PrimaryTitle style={styles.smallTitle} small>
@@ -61,12 +67,7 @@ export function Home() {
                         </PrimaryTitle>
 
                         <View style={styles.topicsList}>
-                            {mockTopics.map((topic, index) => (
-                                <View style={styles.topicsCard} key={index}>
-                                    <Foundation name={topic.icon} size={40} color="white" />
-                                    <Text style={styles.topicName}>{topic.name}</Text>
-                                </View>
-                            ))}
+                            {topicsList.length ? topicsList : <Text>Nenhum tópico encontrado</Text>}
                         </View>
                     </View>
 
@@ -78,7 +79,12 @@ export function Home() {
                         {mockPersonsRank.map((person, index) => (
                             <View style={styles.rankingCard} key={index}>
                                 <View style={styles.rankingCardLeftBox}>
-                                    <Ionicons style={styles.rankingCardIcon} name="ios-person-circle-sharp" size={40} color="white" />
+                                    <Ionicons
+                                        style={styles.rankingCardIcon}
+                                        name="ios-person-circle-sharp"
+                                        size={40}
+                                        color="white"
+                                    />
                                     <Text>{person.name}</Text>
                                 </View>
 
@@ -86,7 +92,7 @@ export function Home() {
                                     <Text>{person.points}</Text>
                                 </View>
                             </View>
-                        ))}                        
+                        ))}
                     </View>
                 </View>
             </ScrollView>

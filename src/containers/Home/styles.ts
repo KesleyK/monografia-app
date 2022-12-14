@@ -16,16 +16,16 @@ export default StyleSheet.create({
         marginBottom: "8%"
     },
     topicsBox: {
-        marginBottom: "20%"
+        marginBottom: "10%"
     },
     topicsList: {
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "center"
     },
     topicsCard: {
         alignItems: "center",
         width: "33%",
-        padding: "2%"
+        padding: "3%"
     },
     topicName: {
         fontSize: 12,
