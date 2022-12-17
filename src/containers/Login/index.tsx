@@ -41,7 +41,7 @@ export function Login({ navigation }) {
                     placeholder="Senha"
                     onChangeText={setPassword}
                     value={password}
-                    secureTextEntry={true}
+                    secureTextEntry
                 />
                 <Button title="Login" fullWidth onPress={onFormSubmitted} style={{marginTop: 15, marginBottom: 15}} />
 
