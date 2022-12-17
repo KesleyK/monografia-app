@@ -3,6 +3,7 @@ import { ScrollView, View } from "react-native";
 import Foundation from "react-native-vector-icons/Foundation";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { Wrapper, PrimaryTitle, SearchBar, Text } from "../../components";
+import { UserCardSimple } from "../../components/UserCardSimple";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 
 import styles from "./styles";
@@ -77,21 +78,7 @@ export function Home() {
                         </PrimaryTitle>
 
                         {mockPersonsRank.map((person, index) => (
-                            <View style={styles.rankingCard} key={index}>
-                                <View style={styles.rankingCardLeftBox}>
-                                    <Ionicons
-                                        style={styles.rankingCardIcon}
-                                        name="ios-person-circle-sharp"
-                                        size={40}
-                                        color="white"
-                                    />
-                                    <Text>{person.name}</Text>
-                                </View>
-
-                                <View>
-                                    <Text>{person.points}</Text>
-                                </View>
-                            </View>
+                            <UserCardSimple user={person} key={index}/>
                         ))}
                     </View>
                 </View>

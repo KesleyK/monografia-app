@@ -20,6 +20,7 @@ export function Register({ navigation }) {
             email,
             birthDate: date,
             educationalBackground,
+            points: 0
         };
 
         if (password !== passwordConfirmation) {
@@ -43,7 +44,7 @@ export function Register({ navigation }) {
 
                 <Input
                     placeholder="E-mail"
-                    onChangeText={() => setEmail(email.trim())}
+                    onChangeText={setEmail}
                     value={email}
                     keyboardType={"email-address"}
                 />
