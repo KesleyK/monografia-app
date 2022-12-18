@@ -12,8 +12,8 @@ export default StyleSheet.create({
     },
     cardButton: {
         marginTop: "10%",
-        paddingHorizontal: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        width: "90%"
     },
     logout: {
         marginTop: "10%",

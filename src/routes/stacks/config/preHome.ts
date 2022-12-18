@@ -1,4 +1,4 @@
-import { PreHome } from "../../../containers";
+import { AccountSettings, ChangePassword, PreHome } from "../../../containers";
 import { BottomTabNavigator } from "../bottomTabNavigator";
 
 export default {
@@ -16,6 +16,16 @@ export default {
         {
             name: "BottomTabNavigator",
             component: BottomTabNavigator,
+            options: {}
+        },
+        {
+            name: "AccountSettings",
+            component: AccountSettings,
+            options: {}
+        },
+        {
+            name: "ChangePassword",
+            component: ChangePassword,
             options: {}
         }
     ]

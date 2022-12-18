@@ -5,7 +5,7 @@ import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo"
 import { signoutUser } from "../../services/firebase/auth/signoutUser";
 import styles from "./styles";
 
-export function AccountSettings() {
+export function AccountSettings({ navigation }) {
     const [user, setUser] = useState(null);
     
     useEffect(() => {
@@ -23,7 +23,7 @@ export function AccountSettings() {
                     <UserCardComplete user={user}/>
 
                     <Button style={styles.cardButton} title="Editar Dados Pessoais" onPress={() => console.log("update user")} />
-                    <Button style={styles.cardButton} title="Alterar Senha" onPress={() => console.log("update password")} />
+                    <Button style={styles.cardButton} title="Alterar Senha" onPress={() => navigation.navigate("ChangePassword")} />
 
                     <Anchor style={styles.logout} onPress={signoutUser}>Logout</Anchor>
                 </Card>
