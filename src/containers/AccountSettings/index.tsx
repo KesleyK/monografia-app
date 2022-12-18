@@ -22,7 +22,7 @@ export function AccountSettings({ navigation }) {
                 <Card>
                     <UserCardComplete user={user}/>
 
-                    <Button style={styles.cardButton} title="Editar Dados Pessoais" onPress={() => console.log("update user")} />
+                    <Button style={styles.cardButton} title="Editar Dados Pessoais" onPress={() => navigation.navigate("UpdateProfile")} />
                     <Button style={styles.cardButton} title="Alterar Senha" onPress={() => navigation.navigate("ChangePassword")} />
 
                     <Anchor style={styles.logout} onPress={signoutUser}>Logout</Anchor>
