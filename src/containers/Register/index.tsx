@@ -14,15 +14,21 @@ export function Register({ navigation }) {
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-    const onFormSubmit = () => {
+    const onFormSubmit = async () => {
         const formData: IUser = {
             name: user,
             email,
             birthDate: date,
             educationalBackground,
+            points: 0
         };
 
-        createUser(formData, password);
+        if (password !== passwordConfirmation) {
+            alert("Confirmação de senha divergente!");
+            return;
+        }
+
+        await createUser(formData, password);
     };
 
     return (
@@ -39,7 +45,8 @@ export function Register({ navigation }) {
                 <Input
                     placeholder="E-mail"
                     onChangeText={setEmail}
-                    value={email.trim()}
+                    value={email}
+                    keyboardType={"email-address"}
                 />
 
                 <DatePicker
@@ -60,12 +67,14 @@ export function Register({ navigation }) {
                     placeholder="Senha"
                     onChangeText={setPassword}
                     value={password}
+                    secureTextEntry
                 />
 
                 <Input
                     placeholder="Confirmar Senha"
                     onChangeText={setPasswordConfirmation}
                     value={passwordConfirmation}
+                    secureTextEntry
                 />
 
                 <Button title="Cadastrar" fullWidth onPress={onFormSubmit} style={{marginTop: 15}}/>

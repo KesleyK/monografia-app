@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     container: {
-        marginTop: "25%",
+        marginTop: "10%",
         marginHorizontal: "8%"
     },
     cardTitle: {
@@ -12,7 +12,11 @@ export default StyleSheet.create({
     },
     cardButton: {
         marginTop: "10%",
-        paddingHorizontal: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        width: "90%"
+    },
+    logout: {
+        marginTop: "10%",
+        textAlign: "center"
     }
 });

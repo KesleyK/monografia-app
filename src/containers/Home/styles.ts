@@ -31,20 +31,5 @@ export default StyleSheet.create({
         fontSize: 12,
         textAlign: "center",
         marginTop: "5%"
-    },
-    rankingCard: {
-        padding: "2%",
-        marginBottom: "2%",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center"
-    },
-    rankingCardLeftBox: {
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center"
-    },
-    rankingCardIcon: {
-        marginRight: "2%"
     }
 });

@@ -5,4 +5,5 @@ export interface IUser {
     email: string;
     educationalBackground: EducationalBackground;
     birthDate: Date;
+    points: Number;
 }
