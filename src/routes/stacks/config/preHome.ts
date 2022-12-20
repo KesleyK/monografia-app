@@ -11,7 +11,7 @@ export default {
         {
             name: "PreHome",
             component: PreHome,
-            options: {},
+            options: {}
         },
         {
             name: "BottomTabNavigator",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextInput, View} from "react-native";
+import { TextInput, View } from "react-native";
 import { Feather, Entypo } from "@expo/vector-icons";
 
 import styles from "./styles";
@@ -15,19 +15,9 @@ export function SearchBar({ style, searchPhrase, setSearchPhrase }) {
             />
 
             {searchPhrase.length ? (
-                <Entypo
-                    name="cross"
-                    size={20}
-                    color="black"
-                    onPress={() => setSearchPhrase("")}
-                />
+                <Entypo name="cross" size={20} color="black" onPress={() => setSearchPhrase("")} />
             ) : (
-                <Feather
-                    name="search"
-                    size={20}
-                    color="black"
-                    style={styles.searchIcon}
-                />
+                <Feather name="search" size={20} color="black" style={styles.searchIcon} />
             )}
         </View>
     );

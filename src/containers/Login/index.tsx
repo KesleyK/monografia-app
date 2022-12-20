@@ -24,48 +24,32 @@ export function Login({ navigation }) {
     };
 
     const onForgotPasswordClicked = () => console.log("esqueceu a senha");
-    const onGoToSignupPageClicked = () =>  navigation.navigate("Register");
+    const onGoToSignupPageClicked = () => navigation.navigate("Register");
 
     return (
         <Wrapper>
             <View style={styles.container}>
                 <PrimaryTitle style={styles.title}>Login</PrimaryTitle>
 
-                <Input
-                    placeholder="Usuário"
-                    value={user}
-                    onChangeText={setUser}
-                    keyboardType="email-address"
-                />
-                <Input
-                    placeholder="Senha"
-                    onChangeText={setPassword}
-                    value={password}
-                    secureTextEntry
-                />
-                <Button title="Login" fullWidth onPress={onFormSubmitted} style={{marginTop: 15, marginBottom: 15}} />
+                <Input placeholder="Usuário" value={user} onChangeText={setUser} keyboardType="email-address" />
+                <Input placeholder="Senha" onChangeText={setPassword} value={password} secureTextEntry />
+                <Button title="Login" fullWidth onPress={onFormSubmitted} style={{ marginTop: 15, marginBottom: 15 }} />
 
                 <View style={styles.userHelpersBox}>
                     <View style={styles.userHelpersRememberMeBox}>
-                        <Text style={styles.userHelpersRememberMeText}>
-                            Lembrar de Mim?
-                        </Text>
+                        <Text style={styles.userHelpersRememberMeText}>Lembrar de Mim?</Text>
                         <Switch onValueChange={setRememberMe} value={rememberMe} />
                     </View>
 
                     <View>
-                        <Anchor onPress={onForgotPasswordClicked}>
-                            Esqueceu a senha?
-                        </Anchor>
+                        <Anchor onPress={onForgotPasswordClicked}>Esqueceu a senha?</Anchor>
                     </View>
                 </View>
 
                 <View style={styles.signupBox}>
                     <Text style={styles.signupText}>
-                        <Text>Não possui uma conta?  </Text>
-                        <Anchor onPress={onGoToSignupPageClicked}>
-                            registre-se aqui
-                        </Anchor>
+                        <Text>Não possui uma conta? </Text>
+                        <Anchor onPress={onGoToSignupPageClicked}>registre-se aqui</Anchor>
                     </Text>
                 </View>
             </View>

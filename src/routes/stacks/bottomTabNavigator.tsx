@@ -14,8 +14,8 @@ export function BottomTabNavigator() {
                     options={{
                         ...screen.options,
                         tabBarIcon: ({ color, size }) => (
-                          <MaterialCommunityIcons name={screen.icon} color={color} size={size} />
-                        ),
+                            <MaterialCommunityIcons name={screen.icon} color={color} size={size} />
+                        )
                     }}
                     name={screen.name}
                     component={screen.component}

@@ -9,7 +9,7 @@ export function DatePicker(props) {
         DateTimePickerAndroid.open({
             value: props.date,
             onChange: props.onChange,
-            is24Hour: true,
+            is24Hour: true
         });
     };
 

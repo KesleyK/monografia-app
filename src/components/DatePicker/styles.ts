@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { DefaultStyles } from '../../styles/global';
+import { StyleSheet } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     picker: {
@@ -9,9 +9,9 @@ export default StyleSheet.create({
         borderRadius: 5,
         paddingLeft: 23,
         marginBottom: 10,
-        justifyContent: "center",
+        justifyContent: "center"
     },
     placeholder: {
-        color: DefaultStyles.PRIMARY_COLOR,
+        color: DefaultStyles.PRIMARY_COLOR
     }
 });

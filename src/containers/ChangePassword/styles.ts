@@ -4,7 +4,7 @@ export default StyleSheet.create({
     view: {
         flex: 1,
         justifyContent: "center",
-        paddingHorizontal: "10%",
+        paddingHorizontal: "10%"
     },
     title: {
         marginBottom: "15%"

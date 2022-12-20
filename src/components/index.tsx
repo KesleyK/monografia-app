@@ -6,7 +6,7 @@ export * from "./Dropdown";
 export * from "./Input";
 export * from "./KeyboardAvoidingView";
 export * from "./PrimaryTitle";
-export * from "./SearchBar"
+export * from "./SearchBar";
 export * from "./SecondaryTitle";
 export * from "./Text";
 export * from "./UserCardSimple";

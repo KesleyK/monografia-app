@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { DefaultStyles } from '../../styles/global';
+import { StyleSheet } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     inputBox: {
@@ -9,7 +9,7 @@ export default StyleSheet.create({
         borderRadius: 5,
         paddingLeft: 23,
         marginBottom: 10,
-        textAlignVertical: "center",
+        textAlignVertical: "center"
     },
     placeholder: {
         color: DefaultStyles.PRIMARY_COLOR

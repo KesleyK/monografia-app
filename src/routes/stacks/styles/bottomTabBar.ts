@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-    tabBar: { 
+    tabBar: {
         position: "absolute",
         marginHorizontal: "10%",
         marginBottom: "7%",

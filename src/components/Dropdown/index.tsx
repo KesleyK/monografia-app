@@ -1,7 +1,7 @@
 import { SelectList } from "react-native-dropdown-select-list";
 import styles from "./styles";
 
-export function Dropdown({setSelected, values, placeholder, searchEnabled = false}) {
+export function Dropdown({ setSelected, values, placeholder, searchEnabled = false }) {
     return (
         <SelectList
             boxStyles={styles.inputBox}

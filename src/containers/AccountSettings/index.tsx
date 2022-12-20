@@ -7,7 +7,7 @@ import styles from "./styles";
 
 export function AccountSettings({ navigation }) {
     const [user, setUser] = useState(null);
-    
+
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
             setUser(userInfo);
@@ -20,12 +20,22 @@ export function AccountSettings({ navigation }) {
                 <PrimaryTitle style={{ marginBottom: "10%" }}>Configurações</PrimaryTitle>
 
                 <Card>
-                    <UserCardComplete user={user}/>
+                    <UserCardComplete user={user} />
 
-                    <Button style={styles.cardButton} title="Editar Dados Pessoais" onPress={() => navigation.navigate("UpdateProfile")} />
-                    <Button style={styles.cardButton} title="Alterar Senha" onPress={() => navigation.navigate("ChangePassword")} />
+                    <Button
+                        style={styles.cardButton}
+                        title="Editar Dados Pessoais"
+                        onPress={() => navigation.navigate("UpdateProfile")}
+                    />
+                    <Button
+                        style={styles.cardButton}
+                        title="Alterar Senha"
+                        onPress={() => navigation.navigate("ChangePassword")}
+                    />
 
-                    <Anchor style={styles.logout} onPress={signoutUser}>Logout</Anchor>
+                    <Anchor style={styles.logout} onPress={signoutUser}>
+                        Logout
+                    </Anchor>
                 </Card>
             </View>
         </Wrapper>

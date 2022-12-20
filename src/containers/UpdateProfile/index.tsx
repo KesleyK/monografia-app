@@ -11,7 +11,7 @@ export function UpdateProfile({ navigation }) {
     const [date, setDate] = useState(new Date());
     const [educationalBackground, setEducationalBackground] = useState(null);
     const [user, setUser] = useState(null);
-    
+
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
             setUser(userInfo);
@@ -42,15 +42,15 @@ export function UpdateProfile({ navigation }) {
             <View style={styles.view}>
                 <PrimaryTitle style={styles.title}>Alterar Senha</PrimaryTitle>
 
-                <Input
-                    placeholder="Nome Completo"
-                    value={name}
-                    onChangeText={setName}
-                />
+                <Input placeholder="Nome Completo" value={name} onChangeText={setName} />
 
                 <DatePicker
                     date={date}
-                    placeholder={date?.toDateString() === new Date().toDateString() ? "Data de Nascimento" : date.toLocaleDateString('pt-BR')}
+                    placeholder={
+                        date?.toDateString() === new Date().toDateString()
+                            ? "Data de Nascimento"
+                            : date.toLocaleDateString("pt-BR")
+                    }
                     onChange={(event, selectedDate) => {
                         setDate(selectedDate);
                     }}
@@ -62,7 +62,7 @@ export function UpdateProfile({ navigation }) {
                     values={Object.values(EducationalBackground)}
                 />
 
-                <Button title="Salvar" fullWidth onPress={onFormSubmit} style={{marginTop: 15}}/>
+                <Button title="Salvar" fullWidth onPress={onFormSubmit} style={{ marginTop: 15 }} />
             </View>
         </Wrapper>
     );

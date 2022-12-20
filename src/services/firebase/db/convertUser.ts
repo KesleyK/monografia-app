@@ -9,7 +9,9 @@ export function convertUser(firestoreSnapshot: DocumentSnapshot<DocumentData>): 
     return {
         name: firestoreData.name,
         email: firestoreData.email,
-        educationalBackground: Object.values(EducationalBackground).find((s) => s === firestoreData.educationalBackground),
+        educationalBackground: Object.values(EducationalBackground).find(
+            (s) => s === firestoreData.educationalBackground
+        ),
         birthDate: getDateFromSeconds(firestoreData.birthDate.seconds),
         points: firestoreData.points
     };

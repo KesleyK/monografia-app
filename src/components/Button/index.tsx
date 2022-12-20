@@ -12,7 +12,7 @@ export function Button(props) {
         buttonStyle = {
             ...buttonStyle,
             ...styles.fullWidthButton
-        }
+        };
     }
 
     return (

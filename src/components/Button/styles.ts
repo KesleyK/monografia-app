@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { DefaultStyles } from '../../styles/global';
+import { StyleSheet } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     button: {
@@ -8,7 +8,7 @@ export default StyleSheet.create({
         borderRadius: 5,
         alignItems: "center",
         justifyContent: "center",
-        alignSelf: "center",
+        alignSelf: "center"
     },
     fullWidthButton: {
         width: "100%"

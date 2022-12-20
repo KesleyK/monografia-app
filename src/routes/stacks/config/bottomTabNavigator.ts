@@ -3,7 +3,7 @@ import { Home, AccountSettings } from "../../../containers";
 import styles from "../styles/bottomTabBar";
 
 const defaultOptions = {
-    tabBarShowLabel: false,
+    tabBarShowLabel: false
 };
 
 export default {

@@ -16,16 +16,16 @@ export function ChangePassword({ navigation }) {
             setPasswordConfirmation("");
             return;
         }
-        
+
         try {
             await reauthenticate(currentPassword);
         } catch (err) {
-            alert("Senha incorreta!")
+            alert("Senha incorreta!");
             return;
         }
-        
+
         if (password === currentPassword) {
-            alert("Nova senha igual a atual!")
+            alert("Nova senha igual a atual!");
             setPassword("");
             setPasswordConfirmation("");
             return;
@@ -54,12 +54,7 @@ export function ChangePassword({ navigation }) {
                     secureTextEntry
                 />
 
-                <Input
-                    placeholder="Nova Senha"
-                    onChangeText={setPassword}
-                    value={password}
-                    secureTextEntry
-                />
+                <Input placeholder="Nova Senha" onChangeText={setPassword} value={password} secureTextEntry />
 
                 <Input
                     placeholder="Confirmar Nova Senha"
@@ -68,7 +63,7 @@ export function ChangePassword({ navigation }) {
                     secureTextEntry
                 />
 
-                <Button title="Salvar" fullWidth onPress={onFormSubmit} style={{marginTop: 15}}/>
+                <Button title="Salvar" fullWidth onPress={onFormSubmit} style={{ marginTop: 15 }} />
             </View>
         </Wrapper>
     );

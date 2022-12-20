@@ -36,22 +36,17 @@ export function Register({ navigation }) {
             <View style={styles.view}>
                 <PrimaryTitle style={styles.title}>Registrar conta</PrimaryTitle>
 
-                <Input
-                    placeholder="Nome Completo"
-                    value={user}
-                    onChangeText={setUser}
-                />
+                <Input placeholder="Nome Completo" value={user} onChangeText={setUser} />
 
-                <Input
-                    placeholder="E-mail"
-                    onChangeText={setEmail}
-                    value={email}
-                    keyboardType={"email-address"}
-                />
+                <Input placeholder="E-mail" onChangeText={setEmail} value={email} keyboardType={"email-address"} />
 
                 <DatePicker
                     date={date}
-                    placeholder={date?.toDateString() === new Date().toDateString() ? "Data de Nascimento" : date.toLocaleDateString('pt-BR')}
+                    placeholder={
+                        date?.toDateString() === new Date().toDateString()
+                            ? "Data de Nascimento"
+                            : date.toLocaleDateString("pt-BR")
+                    }
                     onChange={(event, selectedDate) => {
                         setDate(selectedDate);
                     }}
@@ -63,12 +58,7 @@ export function Register({ navigation }) {
                     values={Object.values(EducationalBackground)}
                 />
 
-                <Input
-                    placeholder="Senha"
-                    onChangeText={setPassword}
-                    value={password}
-                    secureTextEntry
-                />
+                <Input placeholder="Senha" onChangeText={setPassword} value={password} secureTextEntry />
 
                 <Input
                     placeholder="Confirmar Senha"
@@ -77,10 +67,11 @@ export function Register({ navigation }) {
                     secureTextEntry
                 />
 
-                <Button title="Cadastrar" fullWidth onPress={onFormSubmit} style={{marginTop: 15}}/>
+                <Button title="Cadastrar" fullWidth onPress={onFormSubmit} style={{ marginTop: 15 }} />
 
                 <View style={styles.signinText}>
-                    <Text>Já possui uma conta? </Text><Anchor onPress={() => navigation.navigate("Login")}>faça login</Anchor>
+                    <Text>Já possui uma conta? </Text>
+                    <Anchor onPress={() => navigation.navigate("Login")}>faça login</Anchor>
                 </View>
             </View>
         </Wrapper>

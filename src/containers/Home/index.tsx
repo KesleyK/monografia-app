@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import Foundation from "react-native-vector-icons/Foundation";
-import Ionicons from "react-native-vector-icons/Ionicons";
-import { Wrapper, PrimaryTitle, SearchBar, Text } from "../../components";
-import { UserCardSimple } from "../../components/UserCardSimple";
+import { Wrapper, PrimaryTitle, SearchBar, Text, Anchor, UserCardSimple } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 
 import styles from "./styles";
@@ -63,9 +61,11 @@ export function Home() {
                     <SearchBar style={styles.searchBar} searchPhrase={searchPhrase} setSearchPhrase={setSearchPhrase} />
 
                     <View style={styles.topicsBox}>
-                        <PrimaryTitle style={styles.smallTitle} small>
-                            Tópicos
-                        </PrimaryTitle>
+                        <View style={{ ...styles.smallTitle, flexDirection: "row", alignItems: "center" }}>
+                            <PrimaryTitle small>Tópicos</PrimaryTitle>
+
+                            <Anchor style={{ marginLeft: "1%", fontSize: 30, color: "#FFF" }}>&#187;</Anchor>
+                        </View>
 
                         <View style={styles.topicsList}>
                             {topicsList.length ? topicsList : <Text>Nenhum tópico encontrado</Text>}
@@ -73,12 +73,34 @@ export function Home() {
                     </View>
 
                     <View>
-                        <PrimaryTitle style={styles.smallTitle} small>
-                            Ranking
-                        </PrimaryTitle>
+                        <View
+                            style={{
+                                ...styles.smallTitle,
+                                flexDirection: "row",
+                                alignItems: "center",
+                                backgroundColor: "green"
+                            }}
+                        >
+                            <PrimaryTitle style={{ backgroundColor: "red" }} small>
+                                Ranking
+                            </PrimaryTitle>
+
+                            <Anchor
+                                style={{
+                                    marginLeft: "1%",
+                                    fontSize: 30,
+                                    color: "#FFF",
+                                    backgroundColor: "blue",
+                                    verticalAlign: "middle",
+                                    height: 0
+                                }}
+                            >
+                                &#8594;{" "}
+                            </Anchor>
+                        </View>
 
                         {mockPersonsRank.map((person, index) => (
-                            <UserCardSimple user={person} key={index}/>
+                            <UserCardSimple user={person} key={index} />
                         ))}
                     </View>
                 </View>

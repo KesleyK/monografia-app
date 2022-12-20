@@ -4,12 +4,12 @@ export default StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        paddingHorizontal: "10%",
+        paddingHorizontal: "10%"
     },
     title: {
         marginBottom: "15%"
     },
-    userHelpersBox: { 
+    userHelpersBox: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
@@ -17,10 +17,10 @@ export default StyleSheet.create({
     },
     userHelpersRememberMeBox: {
         flexDirection: "row",
-        alignItems: "center",
+        alignItems: "center"
     },
     userHelpersRememberMeText: {
-        fontWeight: "bold",
+        fontWeight: "bold"
     },
     signupBox: {
         flexDirection: "row",
