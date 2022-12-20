@@ -9,8 +9,11 @@ export default StyleSheet.create({
     title: {
         marginBottom: "20%"
     },
-    smallTitle: {
-        marginBottom: "6%"
+    secondaryTitleContainer: {
+        marginBottom: "6%",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between"
     },
     searchBar: {
         marginBottom: "8%"
