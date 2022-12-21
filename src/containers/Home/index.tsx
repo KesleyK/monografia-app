@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import Foundation from "react-native-vector-icons/Foundation";
+import AntDesign from "react-native-vector-icons/AntDesign";
 import { Wrapper, PrimaryTitle, SearchBar, Text, Anchor, UserCardSimple } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 
@@ -61,10 +62,10 @@ export function Home() {
                     <SearchBar style={styles.searchBar} searchPhrase={searchPhrase} setSearchPhrase={setSearchPhrase} />
 
                     <View style={styles.topicsBox}>
-                        <View style={{ ...styles.smallTitle, flexDirection: "row", alignItems: "center" }}>
+                        <View style={styles.secondaryTitleContainer}>
                             <PrimaryTitle small>Tópicos</PrimaryTitle>
 
-                            <Anchor style={{ marginLeft: "1%", fontSize: 30, color: "#FFF" }}>&#187;</Anchor>
+                            <AntDesign name="arrowsalt" size={12} color="white" />
                         </View>
 
                         <View style={styles.topicsList}>
@@ -73,30 +74,10 @@ export function Home() {
                     </View>
 
                     <View>
-                        <View
-                            style={{
-                                ...styles.smallTitle,
-                                flexDirection: "row",
-                                alignItems: "center",
-                                backgroundColor: "green"
-                            }}
-                        >
-                            <PrimaryTitle style={{ backgroundColor: "red" }} small>
-                                Ranking
-                            </PrimaryTitle>
+                        <View style={styles.secondaryTitleContainer}>
+                            <PrimaryTitle small>Ranking</PrimaryTitle>
 
-                            <Anchor
-                                style={{
-                                    marginLeft: "1%",
-                                    fontSize: 30,
-                                    color: "#FFF",
-                                    backgroundColor: "blue",
-                                    verticalAlign: "middle",
-                                    height: 0
-                                }}
-                            >
-                                &#8594;{" "}
-                            </Anchor>
+                            <AntDesign name="arrowsalt" size={12} color="white" />
                         </View>
 
                         {mockPersonsRank.map((person, index) => (

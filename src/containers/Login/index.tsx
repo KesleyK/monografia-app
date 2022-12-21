@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Switch, View } from "react-native";
 import { Button, Input, PrimaryTitle, Text, Wrapper, Anchor } from "../../components";
+import { useRequest } from "../../services/firebase/hooks/useRequest";
 import { signinUser } from "../../services/firebase/auth/signinUser";
 import styles from "./styles";
 
@@ -15,16 +16,11 @@ export function Login({ navigation }) {
     const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
 
-    const onFormSubmitted = async () => {
-        try {
-            await signinUser(user, password);
-        } catch (err) {
-            alert("Credenciais inválidas");
-        }
-    };
-
+    const onFormSubmit = async () => await signinUser(user, password);
     const onForgotPasswordClicked = () => console.log("esqueceu a senha");
     const onGoToSignupPageClicked = () => navigation.navigate("Register");
+
+    const [doRequest, responseComponent] = useRequest({ request: onFormSubmit });
 
     return (
         <Wrapper>
@@ -33,7 +29,7 @@ export function Login({ navigation }) {
 
                 <Input placeholder="Usuário" value={user} onChangeText={setUser} keyboardType="email-address" />
                 <Input placeholder="Senha" onChangeText={setPassword} value={password} secureTextEntry />
-                <Button title="Login" fullWidth onPress={onFormSubmitted} style={{ marginTop: 15, marginBottom: 15 }} />
+                <Button title="Login" fullWidth onPress={doRequest} style={styles.loginButton} />
 
                 <View style={styles.userHelpersBox}>
                     <View style={styles.userHelpersRememberMeBox}>
@@ -53,6 +49,8 @@ export function Login({ navigation }) {
                     </Text>
                 </View>
             </View>
+
+            {responseComponent}
         </Wrapper>
     );
 }

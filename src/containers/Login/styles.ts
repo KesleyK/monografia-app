@@ -9,6 +9,9 @@ export default StyleSheet.create({
     title: {
         marginBottom: "15%"
     },
+    loginButton: {
+        marginVertical: "5%"
+    },
     userHelpersBox: {
         flexDirection: "row",
         justifyContent: "space-between",
