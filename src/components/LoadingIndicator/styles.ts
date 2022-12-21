@@ -1,20 +1,24 @@
 import { StyleSheet } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 
 const styles = StyleSheet.create({
     iOSBackdrop: {
-        backgroundColor: "#000000",
         opacity: 0.3
     },
     androidBackdrop: {
-        backgroundColor: "#232f34",
         opacity: 0.32
     },
     backdrop: {
+        backgroundColor: DefaultStyles.BACKGROUND_COLOR,
         position: "absolute",
         top: 0,
         left: 0,
         right: 0,
         bottom: 0
+    },
+    visibleBackdrop: {
+        backgroundColor: DefaultStyles.BACKGROUND_COLOR,
+        opacity: 1
     },
     modalContainer: {
         flex: 1,

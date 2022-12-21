@@ -3,14 +3,16 @@ import { watchAuthStateChanged } from "../services/firebase/auth/watchAuthStateC
 
 export function useAuthentication() {
     const [user, setUser] = useState();
+    const [handshakeAccomplished, setHandshakeAccomplished] = useState(false);
 
     function onAuthStateChange(newUserState) {
         setUser(newUserState);
+        setHandshakeAccomplished(true);
     }
 
     useEffect(() => {
         return watchAuthStateChanged(onAuthStateChange);
     }, []);
 
-    return { user };
+    return { user, handshakeAccomplished };
 }

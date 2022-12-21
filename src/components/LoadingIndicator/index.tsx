@@ -4,13 +4,17 @@ import { DefaultStyles } from "../../styles/global";
 
 import styles from "./styles";
 
-export function LoadingIndicator() {
+export function LoadingIndicator({ visibleBackdrop = false }) {
+    const pressableStyle = [Platform.OS === "ios" ? styles.iOSBackdrop : styles.androidBackdrop, styles.backdrop];
+
+    if (visibleBackdrop) {
+        pressableStyle.push(styles.visibleBackdrop);
+    }
+
     return (
         <View>
             <Modal transparent={true}>
-                <Pressable
-                    style={[Platform.OS === "ios" ? styles.iOSBackdrop : styles.androidBackdrop, styles.backdrop]}
-                />
+                <Pressable style={pressableStyle} />
                 <View style={styles.modalContainer}>
                     <ActivityIndicator color={DefaultStyles.ANCHOR_COLOR} />
                 </View>
