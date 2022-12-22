@@ -8,6 +8,7 @@ export * from "./Input";
 export * from "./KeyboardAvoidingView";
 export * from "./LoadingIndicator";
 export * from "./PrimaryTitle";
+export * from "./PrimaryTitleGoBack";
 export * from "./SearchBar";
 export * from "./SecondaryTitle";
 export * from "./Text";

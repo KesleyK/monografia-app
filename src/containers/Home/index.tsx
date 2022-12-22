@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
-import Foundation from "react-native-vector-icons/Foundation";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { Wrapper, PrimaryTitle, SearchBar, Text, Anchor, UserCardSimple } from "../../components";
+import Foundation from "react-native-vector-icons/Foundation";
+import { PrimaryTitle, SearchBar, Text, UserCardSimple, Wrapper } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 
+import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./styles";
 
 const mockTopics = [
@@ -41,7 +42,7 @@ const mockPersonsRank = [
     }
 ];
 
-export function Home() {
+export function Home({ navigation }) {
     const [searchPhrase, setSearchPhrase] = useState("");
 
     const topicsList = mockTopics
@@ -62,11 +63,11 @@ export function Home() {
                     <SearchBar style={styles.searchBar} searchPhrase={searchPhrase} setSearchPhrase={setSearchPhrase} />
 
                     <View style={styles.topicsBox}>
-                        <View style={styles.secondaryTitleContainer}>
+                        <TouchableOpacity style={styles.secondaryTitleContainer} onPress={() => navigation.navigate("Topics")}>
                             <PrimaryTitle small>Tópicos</PrimaryTitle>
 
                             <AntDesign name="arrowsalt" size={12} color="white" />
-                        </View>
+                        </TouchableOpacity>
 
                         <View style={styles.topicsList}>
                             {topicsList.length ? topicsList : <Text>Nenhum tópico encontrado</Text>}

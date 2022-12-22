@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Button, DatePicker, Dropdown, Input, PrimaryTitle, Wrapper } from "../../components";
+import { Button, DatePicker, Dropdown, Input, PrimaryTitleGoBack, Wrapper } from "../../components";
 import { EducationalBackground } from "../../models/enum/EducationalBackground";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import { updateUserProfile } from "../../services/firebase/auth/updateUserProfile";
@@ -29,7 +29,7 @@ export function UpdateProfile({ navigation }) {
         try {
             await updateUserProfile(user);
         } catch (err) {
-            alert("Erro ao alterar dados!");
+            alert("Erro ao alterar dados! " + err);
             return;
         }
 
@@ -40,7 +40,9 @@ export function UpdateProfile({ navigation }) {
     return (
         <Wrapper>
             <View style={styles.view}>
-                <PrimaryTitle style={styles.title}>Alterar Senha</PrimaryTitle>
+                <PrimaryTitleGoBack style={styles.title} onPress={() => navigation.goBack()}>
+                    Alterar Dados Pessoais
+                </PrimaryTitleGoBack>
 
                 <Input placeholder="Nome Completo" value={name} onChangeText={setName} />
 
