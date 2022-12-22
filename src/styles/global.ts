@@ -3,5 +3,7 @@ export enum DefaultStyles {
     SECONDARY_COLOR = "#727272",
     BACKGROUND_COLOR = "#2B2B2B",
     CARD_COLOR = "#363E40",
-    ANCHOR_COLOR = "#30A7C1"
+    ANCHOR_COLOR = "#30A7C1",
+    ERROR_COLOR = "#F86262",
+    ERROR_COLOR_LIGHT = "#F1CBCB"
 }

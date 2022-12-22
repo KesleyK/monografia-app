@@ -3,33 +3,51 @@ import { Switch, View } from "react-native";
 import { Button, Input, PrimaryTitle, Text, Wrapper, Anchor } from "../../components";
 import { useRequest } from "../../services/firebase/hooks/useRequest";
 import { signinUser } from "../../services/firebase/auth/signinUser";
+import { ILoginFormValues, loginInitialValues, loginSchema } from "../../schemas/login";
+import { Formik } from "formik";
 import styles from "./styles";
 
-/*
-    TODO:
-        1 - KeyboardAvoidingView is breaking the layout. We have to fix it before using
-        2 - On a small device, "userHelpersBox" won't match the layout. We have to fix it
-*/
-
 export function Login({ navigation }) {
-    const [user, setUser] = useState("");
-    const [password, setPassword] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
+    const [doRequest, responseComponent] = useRequest();
 
-    const onFormSubmit = async () => await signinUser(user, password);
     const onForgotPasswordClicked = () => console.log("esqueceu a senha");
     const onGoToSignupPageClicked = () => navigation.navigate("Register");
-
-    const [doRequest, responseComponent] = useRequest({ request: onFormSubmit });
+    const onFormSubmit = ({ email, password }: ILoginFormValues) => {
+        doRequest({ handler: async () => await signinUser(email, password) });
+    };
 
     return (
         <Wrapper>
             <View style={styles.container}>
                 <PrimaryTitle style={styles.title}>Login</PrimaryTitle>
 
-                <Input placeholder="Usuário" value={user} onChangeText={setUser} keyboardType="email-address" />
-                <Input placeholder="Senha" onChangeText={setPassword} value={password} secureTextEntry />
-                <Button title="Login" fullWidth onPress={doRequest} style={styles.loginButton} />
+                <Formik
+                    initialValues={loginInitialValues}
+                    validationSchema={loginSchema}
+                    onSubmit={onFormSubmit}
+                    validateOnChange={false}
+                >
+                    {({ handleChange, handleSubmit, values, errors }) => (
+                        <View>
+                            <Input
+                                placeholder="E-mail"
+                                value={values.email}
+                                keyboardType="email-address"
+                                onChangeText={handleChange("email")}
+                                error={errors.email}
+                            />
+                            <Input
+                                placeholder="Senha"
+                                onChangeText={handleChange("password")}
+                                value={values.password}
+                                secureTextEntry
+                                error={errors.password}
+                            />
+                            <Button title="Login" fullWidth onPress={handleSubmit} style={styles.loginButton} />
+                        </View>
+                    )}
+                </Formik>
 
                 <View style={styles.userHelpersBox}>
                     <View style={styles.userHelpersRememberMeBox}>

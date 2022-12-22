@@ -3,18 +3,18 @@ import { ErrorAlert, LoadingIndicator } from "../../../components";
 import { FirebaseErrorCode } from "../enum/errorCode";
 
 interface IRequest {
-    request: () => any;
+    handler: () => any;
     onSuccess?: (data) => any;
 }
 
-export function useRequest({ request, onSuccess }: IRequest) {
+export function useRequest() {
     const [responseComponent, setResponseComponent] = useState(null);
 
-    const doRequest = async () => {
+    const doRequest = async ({ handler, onSuccess }: IRequest) => {
         try {
             setResponseComponent(<LoadingIndicator />);
 
-            const response = await request();
+            const response = await handler();
             if (onSuccess) onSuccess(response);
         } catch (err) {
             const parsedFirebaseError = FirebaseErrorCode[err.code] ?? FirebaseErrorCode["default/error-message"];
