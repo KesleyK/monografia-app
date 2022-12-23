@@ -4,7 +4,7 @@ import { getDateFromSeconds } from "../../../helpers/dateUtils";
 import { EducationalBackground } from "../../../models/enum/EducationalBackground";
 import { IUser } from "../../../models/IUser";
 
-export default class UsersCollection {
+export default abstract class UsersCollection {
     private static collectionName = "users";
     
     static get(id: string): Promise<DocumentSnapshot<DocumentData>> {
@@ -16,7 +16,7 @@ export default class UsersCollection {
     }
 
     static put(id: string, userInfo: IUser): Promise<void> {
-        return setDoc(doc(collection(db, this.collectionName), id), userInfo, { merge: true })
+        return setDoc(doc(collection(db, this.collectionName), id), userInfo, { merge: true });
     }
     
     static convert(firestoreSnapshot: DocumentSnapshot<DocumentData>): IUser {
