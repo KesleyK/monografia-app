@@ -9,6 +9,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./styles";
 import TopicsCollection from "../../services/firebase/db/topics";
 import UsersCollection from "../../services/firebase/db/users";
+import { parseCollection } from "../../helpers/collectionUtils";
 
 export function Home({ navigation }) {
     const TOPICS_LIMIT = 3;
@@ -17,16 +18,6 @@ export function Home({ navigation }) {
     const [searchPhrase, setSearchPhrase] = useState("");
     const [topics, setTopics] = useState([]);
     const [people, setPeople] = useState([]);
-
-    const parseCollection = (info) => {
-        const arr = [];
-
-        info.forEach((doc) => {
-            arr.push({ id: doc.id, ...doc.data() });
-        });
-
-        return arr;
-    }
 
     useEffect(() => {
         TopicsCollection.getAll().then((topicsInfo) => {
