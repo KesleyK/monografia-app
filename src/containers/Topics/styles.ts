@@ -12,13 +12,17 @@ export default StyleSheet.create({
     searchBar: {
         marginBottom: "8%"
     },
+    flatList: {
+        paddingBottom: "20%"
+    },
     cardContainer: {
         flex: 1,
         padding: 8
     },
     card: {
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        height: 200
     },
     cardTitle: {
         textAlign: "center"
