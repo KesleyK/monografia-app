@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { Button, Input, PrimaryTitle, Wrapper } from "../../components";
+import { Button, Input, PrimaryTitleGoBack, Wrapper } from "../../components";
 import { reauthenticate, resetPassword } from "../../services/firebase/auth/resetPassword";
 import styles from "./styles";
 
@@ -45,7 +45,7 @@ export function ChangePassword({ navigation }) {
     return (
         <Wrapper>
             <View style={styles.view}>
-                <PrimaryTitle style={styles.title}>Alterar Senha</PrimaryTitle>
+                <PrimaryTitleGoBack style={styles.title} onPress={() => navigation.goBack()}>Alterar Senha</PrimaryTitleGoBack>
 
                 <Input
                     placeholder="Senha Antiga"
