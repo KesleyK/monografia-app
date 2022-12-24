@@ -50,7 +50,10 @@ export function Home({ navigation }) {
                     <SearchBar style={styles.searchBar} searchPhrase={searchPhrase} setSearchPhrase={setSearchPhrase} />
 
                     <View style={styles.topicsBox}>
-                        <TouchableOpacity style={styles.secondaryTitleContainer} onPress={() => navigation.navigate("Topics")}>
+                        <TouchableOpacity
+                            style={styles.secondaryTitleContainer}
+                            onPress={() => navigation.navigate("Topics")}
+                        >
                             <PrimaryTitle small>Tópicos</PrimaryTitle>
 
                             <AntDesign name="arrowsalt" size={12} color="white" />

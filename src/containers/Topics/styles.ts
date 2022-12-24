@@ -12,21 +12,15 @@ export default StyleSheet.create({
     searchBar: {
         marginBottom: "8%"
     },
-    topicsList: {
-        justifyContent: "space-evenly",
-        alignItems: "stretch"
+    cardContainer: {
+        flex: 1,
+        padding: 8
     },
-    topicsCard: {
-        flexDirection: "column",
-        marginBottom: "10%",
-        alignItems: "center",
-        padding: "3%",
-        width: 150 // TODO: Responsiveness...
+    card: {
+        justifyContent: "center",
+        alignItems: "center"
     },
-    topicName: {
-        fontSize: 12,
-        textAlign: "center",
-        marginTop: "5%",
-        width: "80%"
+    cardTitle: {
+        textAlign: "center"
     }
 });
