@@ -58,12 +58,10 @@ export function Topics({ navigation }) {
                 <Button
                     title={"Teste"}
                     onPress={async () => {
-                        console.log("hmm");
                         await TopicsCollection.testMass({ name: "Ciência de Dados", icon: "graph-bar" });
                         await TopicsCollection.testMass({ name: "Computação em Nuvem", icon: "cloud" });
                         await TopicsCollection.testMass({ name: "Aprendizado de Máquina", icon: "graph-bar" });
                         await TopicsCollection.testMass({ name: "Linguagens de Programação", icon: "book" });
-                        console.log("massa de teste criada");
                     }}
                 />
             </View>
