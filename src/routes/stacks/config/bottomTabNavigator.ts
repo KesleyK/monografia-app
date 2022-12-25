@@ -1,4 +1,6 @@
-import { Home, AccountSettings } from "../../../containers";
+import { Home } from "../../../containers";
+import { AccountStack } from "../account";
+import { ChatStack } from "../chat";
 
 import styles from "../styles/bottomTabBar";
 
@@ -16,14 +18,20 @@ export default {
     },
     screens: [
         {
+            name: "ChatStack",
+            component: ChatStack,
+            options: defaultOptions,
+            icon: "message-text"
+        },
+        {
             name: "Home",
             component: Home,
             options: defaultOptions,
             icon: "home"
         },
         {
-            name: "AccountSettings",
-            component: AccountSettings,
+            name: "AccountStack",
+            component: AccountStack,
             options: defaultOptions,
             icon: "account-settings"
         }

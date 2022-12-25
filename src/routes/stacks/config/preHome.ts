@@ -1,5 +1,4 @@
-import { AccountSettings, ChangePassword, Home, PreHome, Ranking, UpdateProfile } from "../../../containers";
-import { Topics } from "../../../containers/Topics";
+import { AccountSettings, ChangePassword, Chat, Home, PreHome, Ranking, Topics, UpdateProfile } from "../../../containers";
 import { BottomTabNavigator } from "../bottomTabNavigator";
 
 export default {
@@ -17,21 +16,6 @@ export default {
         {
             name: "BottomTabNavigator",
             component: BottomTabNavigator,
-            options: {}
-        },
-        {
-            name: "AccountSettings",
-            component: AccountSettings,
-            options: {}
-        },
-        {
-            name: "UpdateProfile",
-            component: UpdateProfile,
-            options: {}
-        },
-        {
-            name: "ChangePassword",
-            component: ChangePassword,
             options: {}
         },
         {
