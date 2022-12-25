@@ -1,4 +1,4 @@
-import { AccountSettings, ChangePassword, Home, PreHome, UpdateProfile } from "../../../containers";
+import { AccountSettings, ChangePassword, Home, PreHome, Ranking, UpdateProfile } from "../../../containers";
 import { Topics } from "../../../containers/Topics";
 import { BottomTabNavigator } from "../bottomTabNavigator";
 
@@ -37,6 +37,11 @@ export default {
         {
             name: "Topics",
             component: Topics,
+            options: {}
+        },
+        {
+            name: "Ranking",
+            component: Ranking,
             options: {}
         }
     ]
