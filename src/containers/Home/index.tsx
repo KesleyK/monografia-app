@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Foundation from "react-native-vector-icons/Foundation";
 import { PrimaryTitle, SearchBar, Text, UserCardSimple, Wrapper } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 
-import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./styles";
 import TopicsCollection from "../../services/firebase/db/topics";
 import UsersCollection from "../../services/firebase/db/users";
@@ -65,11 +64,16 @@ export function Home({ navigation }) {
                     </View>
 
                     <View>
-                        <View style={styles.secondaryTitleContainer}>
+                        <TouchableOpacity
+                            style={styles.secondaryTitleContainer}
+                            onPress={() => navigation.navigate("Ranking", {
+                                platform: "global" // TODO
+                            })}
+                        >
                             <PrimaryTitle small>Ranking</PrimaryTitle>
 
                             <AntDesign name="arrowsalt" size={12} color="white" />
-                        </View>
+                        </TouchableOpacity>
 
                         {people.slice(0, RANKING_LIMIT).map((person, index) => (
                             <UserCardSimple user={person} key={index} />
