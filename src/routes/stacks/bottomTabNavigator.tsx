@@ -7,7 +7,7 @@ const Tab = createBottomTabNavigator();
 
 export function BottomTabNavigator() {
     return (
-        <Tab.Navigator screenOptions={config.navigator.screenOptions}>
+        <Tab.Navigator initialRouteName="Home" screenOptions={config.navigator.screenOptions}>
             {config.screens.map((screen) => (
                 <Tab.Screen
                     key={screen.name}
