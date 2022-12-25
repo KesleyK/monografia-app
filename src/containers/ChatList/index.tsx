@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { PrimaryTitleGoBack, UserCardSimple, Wrapper } from "../../components";
 import { parseCollection } from "../../helpers/collectionUtils";
 import UsersCollection from "../../services/firebase/db/users";
 import styles from "./styles";
 
-export function Ranking({route, navigation}) {
-    const { platform } = route.params; // TODO
+export function ChatList({ navigation }) {
     const [people, setPeople] = useState([]);
 
     useEffect(() => {
@@ -14,18 +13,18 @@ export function Ranking({route, navigation}) {
             setPeople(parseCollection(usersInfo));
         });
     }, []);
-
+    
     return (
         <Wrapper>
             <ScrollView>
                 <View style={styles.container}>
                     <PrimaryTitleGoBack style={styles.title} onPress={() => navigation.goBack()}>
-                        Ranking
+                        Mensagens
                     </PrimaryTitleGoBack>
 
                     {people.map((person, index) => (
-                        <TouchableOpacity key={index} onPress={() => console.log("TODO")}>
-                            <UserCardSimple user={person} />
+                        <TouchableOpacity key={index} onPress={() => navigation.navigate("Chat", { userId: person.id })}>
+                            <UserCardSimple user={person} chat />
                         </TouchableOpacity>
                     ))}
                 </View>

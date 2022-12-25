@@ -17,7 +17,9 @@ export function AccountSettings({ navigation }) {
     return (
         <Wrapper>
             <View style={styles.container}>
-                <PrimaryTitleGoBack style={{ marginBottom: "10%" }} onPress={() => navigation.goBack()}>Configurações</PrimaryTitleGoBack>
+                <PrimaryTitleGoBack style={{ marginBottom: "10%" }} onPress={() => navigation.goBack()}>
+                    Configurações
+                </PrimaryTitleGoBack>
 
                 <Card>
                     <UserCardComplete user={user} />

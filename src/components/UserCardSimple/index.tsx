@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Text } from "../Text";
 import styles from "./styles";
 
-export function UserCardSimple({ user }) {
+export function UserCardSimple({ user, chat = false }) {
     return (
         <View style={styles.user}>
             <View style={styles.userLeftBox}>
@@ -12,7 +12,8 @@ export function UserCardSimple({ user }) {
             </View>
 
             <View>
-                <Text>{user?.points}</Text>
+                { chat ? <Text>Chat</Text> : <Text>{user?.points}</Text>}
+                
             </View>
         </View>
     );
