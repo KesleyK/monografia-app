@@ -1,4 +1,4 @@
-import { AccountSettings, ChangePassword, Chat, Home, PreHome, Ranking, Topics, UpdateProfile } from "../../../containers";
+import { PreHome, Ranking, Topics } from "../../../containers";
 import { BottomTabNavigator } from "../bottomTabNavigator";
 
 export default {

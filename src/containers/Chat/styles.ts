@@ -5,18 +5,24 @@ export default StyleSheet.create({
         marginTop: "10%",
         marginHorizontal: "8%"
     },
-    cardTitle: {
-        fontWeight: "bold",
-        fontSize: 18,
-        marginBottom: 10
+    messagesContainer: {
+        height: "90%"
     },
-    cardButton: {
-        marginTop: "10%",
-        borderRadius: 10,
-        width: "90%"
+    messageInputBox: {
+        borderRadius: 15,
+        position: "absolute",
+        marginHorizontal: "10%",
+        marginBottom: "7%",
+        backgroundColor: "#555",
+        alignSelf: "center",
+        top: "80%",
+        width: "90%",
+        height: "17%"
     },
-    logout: {
-        marginTop: "10%",
-        textAlign: "center"
+    messageInput: {
+        height: "100%",
+        padding: 8,
+        textAlignVertical: "top",
+        color: "white"
     }
 });

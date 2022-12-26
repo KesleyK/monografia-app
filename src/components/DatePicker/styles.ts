@@ -12,6 +12,6 @@ export default StyleSheet.create({
         justifyContent: "center"
     },
     placeholder: {
-        color: DefaultStyles.PRIMARY_COLOR
+        color: DefaultStyles.CARD_COLOR
     }
 });

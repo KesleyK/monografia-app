@@ -12,7 +12,8 @@ export default StyleSheet.create({
         height: 50,
         borderRadius: 5,
         paddingLeft: 23,
-        textAlignVertical: "center"
+        textAlignVertical: "center",
+        color: DefaultStyles.PRIMARY_COLOR
     },
     inputOnError: {
         color: "#000",

@@ -7,6 +7,7 @@ export * from "./ErrorAlert";
 export * from "./Input";
 export * from "./KeyboardAvoidingView";
 export * from "./LoadingIndicator";
+export * from "./Notifications";
 export * from "./PrimaryTitle";
 export * from "./PrimaryTitleGoBack";
 export * from "./SearchBar";
