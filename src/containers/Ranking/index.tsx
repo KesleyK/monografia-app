@@ -24,7 +24,7 @@ export function Ranking({route, navigation}) {
                     </PrimaryTitleGoBack>
 
                     {people.map((person, index) => (
-                        <TouchableOpacity key={index} onPress={() => console.log("TODO")}>
+                        <TouchableOpacity key={index} onPress={() => navigation.navigate("Chat", {userId: person.id})}>
                             <UserCardSimple user={person} />
                         </TouchableOpacity>
                     ))}

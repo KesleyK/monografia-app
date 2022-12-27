@@ -21,11 +21,9 @@ export function ChatList({ navigation }) {
                     <PrimaryTitle style={styles.title}>Mensagens</PrimaryTitle>
 
                     {people.map((person, index) => (
-                        <TouchableOpacity
-                            key={index}
-                            onPress={() => navigation.navigate("Chat", { userId: person.id })}
-                        >
-                            <UserCardSimple user={person} chat />
+                        <TouchableOpacity key={index} onPress={() => navigation.navigate("Chat", { userId: person.id })}>
+                            <UserCardSimple user={person} chat messages={index} />
+                            {/* TODO: Change messages index parameter for number of messages */}
                         </TouchableOpacity>
                     ))}
                 </View>

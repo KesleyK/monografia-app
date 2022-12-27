@@ -1,4 +1,4 @@
-import { AccountSettings, ChangePassword, Chat, Home, PreHome, Ranking, Topics, UpdateProfile } from "../../../containers";
+import { Chat, PreHome, Ranking, Topics } from "../../../containers";
 import { BottomTabNavigator } from "../bottomTabNavigator";
 
 export default {
@@ -26,6 +26,11 @@ export default {
         {
             name: "Ranking",
             component: Ranking,
+            options: {}
+        },
+        {
+            name: "Chat",
+            component: Chat,
             options: {}
         }
     ]

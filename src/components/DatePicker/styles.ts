@@ -16,7 +16,7 @@ export default StyleSheet.create({
         backgroundColor: DefaultStyles.ERROR_COLOR
     },
     placeholder: {
-        color: DefaultStyles.PRIMARY_COLOR
+        color: DefaultStyles.CARD_COLOR
     },
     errorText: {
         position: "absolute",
