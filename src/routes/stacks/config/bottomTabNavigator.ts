@@ -18,12 +18,6 @@ export default {
     },
     screens: [
         {
-            name: "ChatStack",
-            component: ChatStack,
-            options: defaultOptions,
-            icon: "message-text"
-        },
-        {
             name: "Home",
             component: Home,
             options: defaultOptions,
@@ -34,6 +28,16 @@ export default {
             component: AccountStack,
             options: defaultOptions,
             icon: "account-settings"
+        },
+        {
+            name: "ChatStack",
+            component: ChatStack,
+            options: {
+                ...defaultOptions,
+                tabBarStyle: { display: "none" }
+            },
+            hideTabBar: true,
+            icon: "message-text"
         }
     ]
 };

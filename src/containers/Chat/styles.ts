@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     container: {
@@ -6,7 +7,8 @@ export default StyleSheet.create({
         marginHorizontal: "8%"
     },
     messagesContainer: {
-        height: "90%"
+        height: "90%",
+        paddingBottom: "30%"
     },
     messageInputBox: {
         borderRadius: 15,
@@ -15,14 +17,28 @@ export default StyleSheet.create({
         marginBottom: "7%",
         backgroundColor: "#555",
         alignSelf: "center",
-        top: "80%",
-        width: "90%",
-        height: "17%"
+        bottom: 5,
+        width: "95%",
+        maxHeight: 150,
+        flexDirection: "row",
+        justifyContent: "space-between"
     },
     messageInput: {
-        height: "100%",
-        padding: 8,
+        paddingHorizontal: 8,
+        paddingVertical: 5,
         textAlignVertical: "top",
-        color: "white"
+        color: "white",
+        paddingRight: 50
+    },
+    send: {
+        position: "absolute",
+        right: 3,
+        bottom: 3,
+        backgroundColor: DefaultStyles.ANCHOR_COLOR,
+        borderRadius: 100,
+        width: 40,
+        height: 40,
+        alignItems: "center",
+        justifyContent: "center"
     }
 });
