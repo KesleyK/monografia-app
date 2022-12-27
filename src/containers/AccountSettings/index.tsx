@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Anchor, Button, Card, PrimaryTitleGoBack, UserCardComplete, Wrapper } from "../../components";
+import { Anchor, Button, Card, PrimaryTitle, UserCardComplete, Wrapper } from "../../components";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import { signoutUser } from "../../services/firebase/auth/signoutUser";
 import styles from "./styles";
@@ -17,9 +17,7 @@ export function AccountSettings({ navigation }) {
     return (
         <Wrapper>
             <View style={styles.container}>
-                <PrimaryTitleGoBack style={{ marginBottom: "10%" }} onPress={() => navigation.goBack()}>
-                    Configurações
-                </PrimaryTitleGoBack>
+                <PrimaryTitle style={{ marginBottom: "10%" }}>Configurações</PrimaryTitle>
 
                 <Card>
                     <UserCardComplete user={user} />
