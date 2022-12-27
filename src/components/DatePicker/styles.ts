@@ -11,7 +11,19 @@ export default StyleSheet.create({
         marginBottom: 10,
         justifyContent: "center"
     },
+    pickerOnError: {
+        color: "#000",
+        backgroundColor: DefaultStyles.ERROR_COLOR
+    },
     placeholder: {
         color: DefaultStyles.PRIMARY_COLOR
+    },
+    errorText: {
+        position: "absolute",
+        bottom: 2,
+        left: 6,
+        fontSize: 10,
+        color: DefaultStyles.ERROR_COLOR_LIGHT,
+        fontWeight: "bold"
     }
 });

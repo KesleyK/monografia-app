@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
-import { PrimaryTitleGoBack, UserCardSimple, Wrapper } from "../../components";
+import { PrimaryTitle, UserCardSimple, Wrapper } from "../../components";
 import { parseCollection } from "../../helpers/collectionUtils";
 import UsersCollection from "../../services/firebase/db/users";
 import styles from "./styles";
@@ -13,17 +13,18 @@ export function ChatList({ navigation }) {
             setPeople(parseCollection(usersInfo));
         });
     }, []);
-    
+
     return (
         <Wrapper>
             <ScrollView>
                 <View style={styles.container}>
-                    <PrimaryTitleGoBack style={styles.title} onPress={() => navigation.goBack()}>
-                        Mensagens
-                    </PrimaryTitleGoBack>
+                    <PrimaryTitle style={styles.title}>Mensagens</PrimaryTitle>
 
                     {people.map((person, index) => (
-                        <TouchableOpacity key={index} onPress={() => navigation.navigate("Chat", { userId: person.id })}>
+                        <TouchableOpacity
+                            key={index}
+                            onPress={() => navigation.navigate("Chat", { userId: person.id })}
+                        >
                             <UserCardSimple user={person} chat />
                         </TouchableOpacity>
                     ))}
