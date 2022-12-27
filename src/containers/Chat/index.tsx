@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { FlatList, TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { Card, Input, Message, PrimaryTitleGoBack, Wrapper } from "../../components";
 import { extractFirstName } from "../../helpers/stringManagement";
@@ -24,7 +24,7 @@ const mockMessages = [
 
 export function Chat({ route, navigation }) {
     const { userId } = route.params;
-    const scrollViewRef = useRef() as MutableRefObject<ScrollView>;
+    const flatListRef = useRef<FlatList>(null);
 
     const [msg, setMsg] = useState("");
     const [user, setUser] = useState(null);
@@ -43,22 +43,20 @@ export function Chat({ route, navigation }) {
                 </PrimaryTitleGoBack>
 
                 <Card style={styles.messagesContainer}>
-                    <ScrollView
-                        ref={scrollViewRef}
-                        onContentSizeChange={() => scrollViewRef.current.scrollToEnd({ animated: true })}
-                    >
-                        {mockMessages.map((message, index) => {
-                            return (
-                                <Message
-                                    key={index}
-                                    style={{ marginBottom: 10 }}
-                                    sent={message.sent}
-                                >
-                                    {message.message}
-                                </Message>
-                            );
-                        })}
-                    </ScrollView>
+                    <FlatList
+                        ref={flatListRef}
+                        onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
+
+                        data={mockMessages}
+                        renderItem={({ item }) => (
+                            <Message
+                                style={{ marginBottom: 10 }}
+                                sent={item.sent}
+                            >
+                                {item.message}
+                            </Message>)
+                        }
+                    />
                 </Card>
 
                 <View style={styles.messageInputBox}>
