@@ -1,45 +1,67 @@
 import { Ionicons } from "@expo/vector-icons";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import { Card, Input, Message, PrimaryTitleGoBack, Wrapper } from "../../components";
 import { extractFirstName } from "../../helpers/stringManagement";
+import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
+import ChatCollection from "../../services/firebase/db/chat";
 import UsersCollection from "../../services/firebase/db/users";
 import styles from "./styles";
-
-const mockMessages = [
-    {
-        sent: true,
-        message: "Oi, não estou conseguindo resolver o desafio 1 de python",
-    },
-    {
-        sent: true,
-        message: "Poderia me ajudar?",
-    },
-    {
-        sent: false,
-        message: "Opa, posso ajudar sim, qual a dúvida?"
-    }
-]
 
 export function Chat({ route, navigation }) {
     const { userId } = route.params;
     const flatListRef = useRef<FlatList>(null);
 
-    const [msg, setMsg] = useState("");
-    const [user, setUser] = useState(null);
+    const [message, setMessage] = useState("");
+    const [currentUser, setCurrentUser] = useState(null);
+    const [destination, setDestination] = useState(null);
+    const [chat, setChat] = useState(null);
+    const [msgs, setMsgs] = useState([]);
+
+    useEffect(() => {
+        retrieveUserInfo().then((userInfo) => {
+            setCurrentUser(userInfo);
+        });
+    }, [retrieveUserInfo]);
 
     useEffect(() => {
         UsersCollection.get(userId).then((userInfo) => {
-            setUser(UsersCollection.convert(userInfo));
-        });
+            setDestination(UsersCollection.convert(userInfo));
+        })
     }, []);
+
+    useEffect(() => {
+        if (currentUser) {
+            ChatCollection.find(currentUser.email, userId).then(setChat);
+        }
+    }, [currentUser, userId]);
+
+    useEffect(() => {
+        let unsubscribe;
+        if (chat) {
+            unsubscribe = ChatCollection.listener(chat.id, (document) => {
+                ChatCollection.readMessages(chat.id, currentUser.email);
+                setMsgs(document.data().msgs);
+            });
+        }
+
+        return () => unsubscribe?.();
+    }, [chat?.id]);
+
+    const onSendMessage = () => {
+        if (message === "") {
+            return;
+        }
+
+        ChatCollection.sendMessage(chat.id, message, currentUser.email);
+        setMessage("");
+    };
 
     return (
         <Wrapper>
             <View style={styles.container}>
                 <PrimaryTitleGoBack style={{ marginBottom: "10%" }} onPress={() => navigation.goBack()}>
-                    Conversa com {extractFirstName(user?.name)}
+                    Conversa com {extractFirstName(destination?.name)}
                 </PrimaryTitleGoBack>
 
                 <Card style={styles.messagesContainer}>
@@ -47,13 +69,13 @@ export function Chat({ route, navigation }) {
                         ref={flatListRef}
                         onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
 
-                        data={mockMessages}
+                        data={msgs}
                         renderItem={({ item }) => (
                             <Message
                                 style={{ marginBottom: 10 }}
-                                sent={item.sent}
+                                sent={item.from === currentUser?.email}
                             >
-                                {item.message}
+                                {item.msg}
                             </Message>)
                         }
                     />
@@ -64,17 +86,10 @@ export function Chat({ route, navigation }) {
                         placeholder={"Digite uma mensagem..."}
                         style={styles.messageInput}
                         multiline
-                        onChangeText={setMsg}
-                        value={msg}
+                        onChangeText={setMessage}
+                        value={message}
                     />
-                    <TouchableOpacity style={styles.send} onPress={() => {
-                        if (msg === "") {
-                            return;
-                        }
-
-                        mockMessages.push({ sent: true, message: msg });
-                        setMsg("");
-                    }} >
+                    <TouchableOpacity style={styles.send} onPress={onSendMessage} >
                         <Ionicons name={"send"} size={25} color="white" />
                     </TouchableOpacity>
                 </View>
