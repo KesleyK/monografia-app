@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Anchor, Button, Card, PrimaryTitle, UserCardComplete, Wrapper } from "../../components";
@@ -7,12 +8,13 @@ import styles from "./styles";
 
 export function AccountSettings({ navigation }) {
     const [user, setUser] = useState(null);
+    const isFocused = useIsFocused();
 
     useEffect(() => {
-        retrieveUserInfo().then((userInfo) => {
+        isFocused && retrieveUserInfo().then((userInfo) => {
             setUser(userInfo);
         });
-    }, [retrieveUserInfo]);
+    }, [isFocused, retrieveUserInfo]);
 
     return (
         <Wrapper>
