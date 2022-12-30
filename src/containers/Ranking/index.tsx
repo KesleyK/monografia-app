@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
-import { PrimaryTitleGoBack, UserCardSimple, Wrapper } from "../../components";
+import { LoadingIndicator, PrimaryTitleGoBack, UserCardSimple, Wrapper } from "../../components";
 import { parseCollection } from "../../helpers/collectionUtils";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ChatCollection from "../../services/firebase/db/chat";
@@ -37,7 +37,7 @@ export function Ranking({route, navigation}) {
                         Ranking
                     </PrimaryTitleGoBack>
 
-                    {people.map((person, index) => (
+                    {people.length === 0 ? <LoadingIndicator/> : people.map((person, index) => (
                         <TouchableOpacity key={index} onPress={() => onChatWith(person.id)}>
                             <UserCardSimple user={person} />
                         </TouchableOpacity>

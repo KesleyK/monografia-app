@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, View, TouchableOpacity } from "react-native";
 import Foundation from "react-native-vector-icons/Foundation";
-import { Button, Card, PrimaryTitleGoBack, SearchBar, Text, Wrapper } from "../../components";
+import { Button, Card, LoadingIndicator, PrimaryTitleGoBack, SearchBar, Text, Wrapper } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 import styles from "./styles";
 import TopicsCollection from "../../services/firebase/db/topics";
@@ -10,6 +10,7 @@ import { ITopic } from "../../models/ITopic";
 export function Topics({ navigation }) {
     const [searchPhrase, setSearchPhrase] = useState("");
     const [topics, setTopics] = useState([]);
+    const [requestDone, setRequestDone] = useState(false);
 
     useEffect(() => {
         TopicsCollection.getAll().then((topicsInfo) => {
@@ -21,12 +22,24 @@ export function Topics({ navigation }) {
             });
 
             setTopics(arrTopics);
+            setRequestDone(true);
         });
     }, []);
 
     const topicsList = topics?.filter((topic) => {
         return verifyStringInclusion(normalizeString(topic.name), normalizeString(searchPhrase));
     });
+
+    const onRender = ({ item }) => (
+        <View style={styles.cardContainer}>
+            <TouchableOpacity>
+                <Card style={styles.card}>
+                    <Foundation name={item.icon} size={80} color="white" />
+                    <Text style={styles.cardTitle}>{item.name}</Text>
+                </Card>
+            </TouchableOpacity>
+        </View>
+    );
 
     return (
         <Wrapper>
@@ -37,23 +50,16 @@ export function Topics({ navigation }) {
 
                 <SearchBar style={styles.searchBar} searchPhrase={searchPhrase} setSearchPhrase={setSearchPhrase} />
 
-                <FlatList
-                    ListEmptyComponent={() => <Text>Nenhum Tópico Encontrado!</Text>}
-                    contentContainerStyle={styles.flatList}
-                    data={topicsList}
-                    keyExtractor={(topic) => topic.id}
-                    numColumns={2}
-                    renderItem={({ item }) => (
-                        <View style={styles.cardContainer}>
-                            <TouchableOpacity>
-                                <Card style={styles.card}>
-                                    <Foundation name={item.icon} size={80} color="white" />
-                                    <Text style={styles.cardTitle}>{item.name}</Text>
-                                </Card>
-                            </TouchableOpacity>
-                        </View>
-                    )}
-                />
+                {!requestDone ? <LoadingIndicator /> :
+                    <FlatList
+                        ListEmptyComponent={() => <Text>Nenhum Tópico Encontrado!</Text>}
+                        contentContainerStyle={styles.flatList}
+                        data={topicsList}
+                        keyExtractor={(topic) => topic.id}
+                        numColumns={2}
+                        renderItem={onRender}
+                    />
+                }
 
                 <Button
                     title={"Teste"}
