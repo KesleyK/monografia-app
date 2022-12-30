@@ -1,6 +1,5 @@
-import { Chat, PreHome, Ranking } from "../../../containers";
+import { Chat, PreHome, Ranking, Topic, TopicList } from "../../../containers";
 import { BottomTabNavigator } from "../bottomTabNavigator";
-import { TopicStack } from "../topic";
 
 export default {
     navigator: {
@@ -20,8 +19,13 @@ export default {
             options: {}
         },
         {
-            name: "TopicStack",
-            component: TopicStack,
+            name: "TopicList",
+            component: TopicList,
+            options: {}
+        },
+        {
+            name: "Topic",
+            component: Topic,
             options: {}
         },
         {

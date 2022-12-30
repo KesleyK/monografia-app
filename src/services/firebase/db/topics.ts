@@ -13,7 +13,7 @@ export default abstract class TopicsCollection {
         return getDocs(collection(db, this.collectionName));
     }
 
-    static testMass(data: ITopic) {
+    static createTestData(data: ITopic) {
         return setDoc(doc(collection(db, this.collectionName)), data);
     }
 }

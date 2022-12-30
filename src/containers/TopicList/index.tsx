@@ -1,11 +1,12 @@
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { FlatList, View, TouchableOpacity } from "react-native";
-import Foundation from "react-native-vector-icons/Foundation";
+import { FlatList, TouchableOpacity, View } from "react-native";
 import { Button, Card, LoadingIndicator, PrimaryTitleGoBack, SearchBar, Text, Wrapper } from "../../components";
+import { parseCollection } from "../../helpers/collectionUtils";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
-import styles from "./styles";
 import TopicsCollection from "../../services/firebase/db/topics";
-import { ITopic } from "../../models/ITopic";
+import createTopics from "../../temp/createTopics";
+import styles from "./styles";
 
 export function TopicList({ navigation }) {
     const [searchPhrase, setSearchPhrase] = useState("");
@@ -14,14 +15,7 @@ export function TopicList({ navigation }) {
 
     useEffect(() => {
         TopicsCollection.getAll().then((topicsInfo) => {
-            const arrTopics = [];
-
-            topicsInfo.forEach((doc) => {
-                const info = doc.data();
-                arrTopics.push({ id: doc.id, name: info?.name, icon: info?.icon });
-            });
-
-            setTopics(arrTopics);
+            setTopics(parseCollection(topicsInfo));
             setRequestDone(true);
         });
     }, []);
@@ -32,9 +26,9 @@ export function TopicList({ navigation }) {
 
     const onRender = ({ item }) => (
         <View style={styles.cardContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Topic", item)}>
                 <Card style={styles.card}>
-                    <Foundation name={item.icon} size={80} color="white" />
+                    <MaterialCommunityIcons name={item.icon} size={80} color="white" />
                     <Text style={styles.cardTitle}>{item.name}</Text>
                 </Card>
             </TouchableOpacity>
@@ -62,14 +56,8 @@ export function TopicList({ navigation }) {
                 }
 
                 <Button
-                    title={"Teste"}
-                    onPress={async () => {
-                        await TopicsCollection.testMass({ name: "Ciência de Dados", icon: "graph-bar" });
-                        await TopicsCollection.testMass({ name: "Computação em Nuvem", icon: "cloud" });
-                        await TopicsCollection.testMass({ name: "Aprendizado de Máquina", icon: "graph-bar" });
-                        await TopicsCollection.testMass({ name: "Linguagens de Programação", icon: "book" });
-                        console.log("massa de teste criada");
-                    }}
+                    title={"Test"}
+                    onPress={createTopics}
                 />
             </View>
         </Wrapper>
