@@ -7,7 +7,7 @@ import styles from "./styles";
 import TopicsCollection from "../../services/firebase/db/topics";
 import { ITopic } from "../../models/ITopic";
 
-export function Topics({ navigation }) {
+export function TopicList({ navigation }) {
     const [searchPhrase, setSearchPhrase] = useState("");
     const [topics, setTopics] = useState([]);
     const [requestDone, setRequestDone] = useState(false);

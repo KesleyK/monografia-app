@@ -51,7 +51,7 @@ export function Home({ navigation }) {
                     <View style={styles.topicsBox}>
                         <TouchableOpacity
                             style={styles.secondaryTitleContainer}
-                            onPress={() => navigation.navigate("Topics")}
+                            onPress={() => navigation.navigate("TopicList")}
                         >
                             <PrimaryTitle small>Tópicos</PrimaryTitle>
 
