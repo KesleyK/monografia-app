@@ -5,7 +5,7 @@ import { Button, Card, LoadingIndicator, PrimaryTitleGoBack, SearchBar, Text, Wr
 import { parseCollection } from "../../helpers/collectionUtils";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 import TopicsCollection from "../../services/firebase/db/topics";
-import createTopics from "../../temp/createTopics";
+import createTopics from "../../helpers/test/createTopics";
 import styles from "./styles";
 
 export function TopicList({ navigation }) {

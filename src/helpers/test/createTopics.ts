@@ -1,4 +1,4 @@
-import TopicsCollection from "../services/firebase/db/topics";
+import TopicsCollection from "../../services/firebase/db/topics";
 
 export default async () => {
     await TopicsCollection.createTestData({
@@ -100,6 +100,6 @@ export default async () => {
             },
         ]
     });
-    
+
     console.log("massa de teste criada");
 }
