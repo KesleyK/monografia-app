@@ -5,10 +5,10 @@ import Foundation from "react-native-vector-icons/Foundation";
 import { PrimaryTitle, SearchBar, Text, UserCardSimple, Wrapper } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 
-import styles from "./styles";
+import { parseCollection } from "../../helpers/collectionUtils";
 import TopicsCollection from "../../services/firebase/db/topics";
 import UsersCollection from "../../services/firebase/db/users";
-import { parseCollection } from "../../helpers/collectionUtils";
+import styles from "./styles";
 
 export function Home({ navigation }) {
     const TOPICS_LIMIT = 3;

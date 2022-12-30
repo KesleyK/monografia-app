@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useRef, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
-import { Card, Input, Message, PrimaryTitleGoBack, Wrapper } from "../../components";
+import { Card, Input, Message, PrimaryTitleGoBack, Wrapper, Text, LoadingIndicator } from "../../components";
 import { extractFirstName } from "../../helpers/stringManagement";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ChatCollection from "../../services/firebase/db/chat";
@@ -17,6 +17,7 @@ export function Chat({ route, navigation }) {
     const [destination, setDestination] = useState(null);
     const [chat, setChat] = useState(null);
     const [msgs, setMsgs] = useState([]);
+    const [requestDone, setRequestDone] = useState(false);
 
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
@@ -42,6 +43,7 @@ export function Chat({ route, navigation }) {
             unsubscribe = ChatCollection.listener(chat.id, (document) => {
                 ChatCollection.readMessages(chat.id, currentUser.email);
                 setMsgs(document.data().msgs);
+                setRequestDone(true);
             });
         }
 
@@ -57,6 +59,15 @@ export function Chat({ route, navigation }) {
         setMessage("");
     };
 
+    const onRender = ({ item }) => (
+        <Message
+            style={{ marginBottom: 10 }}
+            sent={item.from === currentUser?.email}
+        >
+            {item.msg}
+        </Message>
+    );
+
     return (
         <Wrapper>
             <View style={styles.container}>
@@ -65,20 +76,24 @@ export function Chat({ route, navigation }) {
                 </PrimaryTitleGoBack>
 
                 <Card style={styles.messagesContainer}>
-                    <FlatList
-                        ref={flatListRef}
-                        onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
+                    {
+                        requestDone ?
+                            <FlatList
+                                ref={flatListRef}
+                                onContentSizeChange={() => flatListRef.current.scrollToEnd({ animated: true })}
+                                ListEmptyComponent={() => (
+                                    <Text style={styles.noMessagesFound}>
+                                        Inicie a conversa com {destination?.name} enviando
+                                        uma mensagem na caixa de texto abaixo
+                                    </Text>
+                                )}
+                                data={msgs}
+                                renderItem={onRender}
+                            />
+                            :
+                            <LoadingIndicator />
+                    }
 
-                        data={msgs}
-                        renderItem={({ item }) => (
-                            <Message
-                                style={{ marginBottom: 10 }}
-                                sent={item.from === currentUser?.email}
-                            >
-                                {item.msg}
-                            </Message>)
-                        }
-                    />
                 </Card>
 
                 <View style={styles.messageInputBox}>

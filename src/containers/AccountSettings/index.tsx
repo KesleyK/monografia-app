@@ -1,7 +1,7 @@
 import { useIsFocused } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Anchor, Button, Card, PrimaryTitle, UserCardComplete, Wrapper } from "../../components";
+import { Anchor, Button, Card, LoadingIndicator, PrimaryTitle, UserCardComplete, Wrapper } from "../../components";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import { signoutUser } from "../../services/firebase/auth/signoutUser";
 import styles from "./styles";
@@ -22,7 +22,9 @@ export function AccountSettings({ navigation }) {
                 <PrimaryTitle style={{ marginBottom: "10%" }}>Configurações</PrimaryTitle>
 
                 <Card>
-                    <UserCardComplete user={user} />
+                    {!user ? <LoadingIndicator /> :
+                        <UserCardComplete user={user} />
+                    }
 
                     <Button
                         style={styles.cardButton}

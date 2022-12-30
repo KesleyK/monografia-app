@@ -10,6 +10,9 @@ export default StyleSheet.create({
         height: "90%",
         paddingBottom: "30%"
     },
+    noMessagesFound: {
+        color: DefaultStyles.SECONDARY_COLOR
+    },
     messageInputBox: {
         borderRadius: 15,
         position: "absolute",

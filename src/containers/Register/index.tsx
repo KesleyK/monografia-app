@@ -22,8 +22,12 @@ import styles from "./styles";
 export function Register({ navigation }) {
     const [doRequest, responseComponent] = useRequest();
 
-    const onFormSubmit = async (formData: IRegisterFormValues) =>
-        doRequest({ handler: async () => await createUser(formData as IUser, formData.password) });
+    const onFormSubmit = async (formData: IRegisterFormValues) => {
+        const user = {...formData};
+        delete user.password;
+        delete user.passwordConfirmation;
+        doRequest({ handler: async () => await createUser(user as IUser, formData.password) });
+    }
 
     return (
         <Wrapper>
