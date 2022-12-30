@@ -7,5 +7,6 @@ export * from "./Login";
 export * from "./PreHome";
 export * from "./Ranking";
 export * from "./Register";
+export * from "./Topic";
 export * from "./TopicList";
 export * from "./UpdateProfile";
