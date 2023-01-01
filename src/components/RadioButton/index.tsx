@@ -2,7 +2,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Text } from "../Text";
 import styles from "./styles";
 
-export function RadioButton({ selected = false, onPress, name }) {
+export function RadioButton({ selected = false, onPress, content }) {
     let style = styles.selectionBox;
 
     if (selected) {
@@ -15,7 +15,7 @@ export function RadioButton({ selected = false, onPress, name }) {
     return (
         <TouchableOpacity style={styles.item} onPress={onPress}>
             <View style={style} />
-            <Text>{name}</Text>
+            <Text>{content}</Text>
         </TouchableOpacity>
     );
 }

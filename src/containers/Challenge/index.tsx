@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { View } from "react-native";
-import { Card, PrimaryTitleGoBack, RadioSelect, Wrapper } from "../../components";
+import { Image, ScrollView, View } from "react-native";
+import { Card, PrimaryTitleGoBack, RadioSelect, Wrapper, Text } from "../../components";
 import styles from "./styles";
 
 const mockChoices = [
     "Teste 1",
     "teste 2",
-    "ultimo"
+    <Image style={{width: 20, height: 20}} source={require("../../../assets/icon.png")}/>
 ];
 
 export function Challenge({ route, navigation }) {
@@ -15,23 +15,24 @@ export function Challenge({ route, navigation }) {
 
     return (
         <Wrapper>
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <PrimaryTitleGoBack style={styles.title} onPress={() => navigation.goBack()}>
                     Desafio {subject.name}
                 </PrimaryTitleGoBack>
 
                 <Card style={styles.body}>
-
+                <Text><Image style={{width: 20, height: 20}} source={require("../../../assets/icon.png")}/>Ok</Text>
                 </Card>
 
                 <Card style={styles.answer}>
                     <RadioSelect
                         title={"Escolha a alternativa correta"}
                         data={mockChoices}
-                        onSelection={(option) => setSelection(option)}
+                        onSelection={setSelection}
+                        value={selection}
                     />
                 </Card>
-            </View>
+            </ScrollView>
         </Wrapper>
     );
 }

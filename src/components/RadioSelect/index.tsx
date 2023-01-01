@@ -4,9 +4,7 @@ import { RadioButton } from "../RadioButton";
 import { Text } from "../Text";
 import styles from "./styles";
 
-export function RadioSelect({ data = [], style = {}, title = null as string, onSelection }) {
-    const [selected, setSelected] = useState(-1);
-
+export function RadioSelect({ data = [], style = {}, title = null as string, onSelection, value }) {
     return (
         <View style={style}>
             {!title ? null :
@@ -15,12 +13,9 @@ export function RadioSelect({ data = [], style = {}, title = null as string, onS
             {data.map((item, index) => (
                 <RadioButton
                     key={index}
-                    onPress={() => {
-                        setSelected(index);
-                        onSelection(index);
-                    }}
-                    selected={selected === index}
-                    name={item}
+                    onPress={() => onSelection(index)}
+                    selected={value === index}
+                    content={item}
                 />
             ))}
         </View>
