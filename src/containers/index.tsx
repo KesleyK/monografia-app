@@ -1,4 +1,5 @@
 export * from "./AccountSettings";
+export * from "./Challenge";
 export * from "./ChangePassword";
 export * from "./Chat";
 export * from "./ChatList";

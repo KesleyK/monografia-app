@@ -33,8 +33,8 @@ export function Home({ navigation }) {
     const topicsList = topics
         .filter((topic) => verifyStringInclusion(normalizeString(topic.name), normalizeString(searchPhrase)))
         .map((topic, index) => (
-            <TouchableOpacity style={styles.topicClickable} onPress={() => navigation.navigate("Topic", topic)}>
-                <View style={styles.topicsCard} key={index}>
+            <TouchableOpacity style={styles.topicClickable} onPress={() => navigation.navigate("Topic", topic)} key={index}>
+                <View style={styles.topicsCard}>
                     <MaterialCommunityIcons name={topic.icon} size={40} color="white" />
                     <Text style={styles.topicName}>{topic.name}</Text>
                 </View>

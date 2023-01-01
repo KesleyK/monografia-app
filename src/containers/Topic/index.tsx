@@ -24,7 +24,7 @@ export function Topic({ route, navigation }) {
                     <Button
                         style={styles.cardButton}
                         title="Acessar Desafios"
-                        onPress={() => console.log("desafios")} />
+                        onPress={() => navigation.navigate("Challenge", item)} />
                 </Card>
             </View>
         );

@@ -7,5 +7,11 @@ export default StyleSheet.create({
     },
     title: {
         marginBottom: "10%"
+    },
+    body: {
+        marginBottom: "10%"
+    },
+    answer: {
+
     }
 });
