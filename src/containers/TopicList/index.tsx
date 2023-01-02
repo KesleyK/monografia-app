@@ -1,11 +1,10 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
-import { Button, Card, LoadingIndicator, PrimaryTitleGoBack, SearchBar, Text, Wrapper } from "../../components";
+import { Card, LoadingIndicator, PrimaryTitleGoBack, SearchBar, Text, Wrapper } from "../../components";
 import { parseCollection } from "../../helpers/collectionUtils";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 import TopicsCollection from "../../services/firebase/db/topics";
-import createTopics from "../../helpers/test/createTopics";
 import styles from "./styles";
 
 export function TopicList({ navigation }) {
@@ -54,11 +53,6 @@ export function TopicList({ navigation }) {
                         renderItem={onRender}
                     />
                 }
-
-                <Button
-                    title={"Test"}
-                    onPress={createTopics}
-                />
             </View>
         </Wrapper>
     );

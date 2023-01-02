@@ -24,11 +24,12 @@ export function Topic({ route, navigation }) {
                     <Button
                         style={styles.cardButton}
                         title="Acessar Desafios"
-                        onPress={() => navigation.navigate("Challenge", item)} />
+                        onPress={() => navigation.navigate("Challenge", {challenges: item.challenges, current: 0})} />
                 </Card>
             </View>
         );
     }
+    
     return (
         <Wrapper>
             <View style={styles.container}>

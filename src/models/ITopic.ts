@@ -1,4 +1,3 @@
-import { IChallenge } from "./IChallenge";
 
 export interface ITopic {
     name: string;
@@ -6,6 +5,6 @@ export interface ITopic {
     subtopics: {
         name: string;
         description: string;
-        challenges: IChallenge[];
+        challenges: string[];
     }[];
 }

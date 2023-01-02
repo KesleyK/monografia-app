@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { PrimaryTitle, SearchBar, Text, UserCardSimple, Wrapper } from "../../components";
+import { Button, PrimaryTitle, SearchBar, Text, UserCardSimple, Wrapper } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { parseCollection } from "../../helpers/collectionUtils";
+import createChallenges from "../../helpers/test/createChallenges";
+import createTopics from "../../helpers/test/createTopics";
 import TopicsCollection from "../../services/firebase/db/topics";
 import UsersCollection from "../../services/firebase/db/users";
 import styles from "./styles";
@@ -81,6 +83,9 @@ export function Home({ navigation }) {
                             <UserCardSimple user={person} key={index} />
                         ))}
                     </View>
+
+                    <Button title={"remove later"} onPress={createChallenges} />
+                    <Button title={"remove later"} onPress={createTopics} />
                 </View>
             </ScrollView>
         </Wrapper>

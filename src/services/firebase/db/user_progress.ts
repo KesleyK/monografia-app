@@ -1,9 +1,9 @@
 import { collection, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, QuerySnapshot, setDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
-import { IChallenge } from "../../../models/IChallenge";
+import { IUserProgress } from "../../../models/IUserProgress";
 
-export default abstract class ChallengesCollection {
-    private static collectionName = "challenges";
+export default abstract class UserProgressCollection {
+    private static collectionName = "user_progress";
 
     static get(id: string = null): Promise<DocumentSnapshot<DocumentData>> {
         return getDoc(doc(db, this.collectionName, id));
@@ -13,7 +13,7 @@ export default abstract class ChallengesCollection {
         return getDocs(collection(db, this.collectionName));
     }
 
-    static createTestData(data: IChallenge) {
+    static createTestData(data: IUserProgress) {
         return setDoc(doc(collection(db, this.collectionName)), data);
     }
 }

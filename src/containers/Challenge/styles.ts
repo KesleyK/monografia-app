@@ -12,6 +12,15 @@ export default StyleSheet.create({
         marginBottom: "10%"
     },
     answer: {
-
+        marginBottom: "1%"
+    },
+    links: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: "10%"
+    },
+    button: {
+        width: "100%",
+        marginBottom: "10%"
     }
 });
