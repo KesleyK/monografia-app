@@ -2,18 +2,19 @@ import { collection, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, Query
 import { db } from "../../../config/firebase";
 import { ITopic } from "../../../models/ITopic";
 
-export default abstract class TopicsCollection {
-    private static collectionName = "topics";
+export default class TopicsCollection {
+    private static readonly collectionName = "topics";
+    private static readonly ref = collection(db, this.collectionName);
 
     static get(id: string = null): Promise<DocumentSnapshot<DocumentData>> {
-        return getDoc(doc(db, this.collectionName, id));
+        return getDoc(doc(this.ref, id));
     }
 
     static getAll(): Promise<QuerySnapshot<DocumentData>> {
-        return getDocs(collection(db, this.collectionName));
+        return getDocs(this.ref);
     }
 
     static createTestData(data: ITopic) {
-        return setDoc(doc(collection(db, this.collectionName)), data);
+        return setDoc(doc(this.ref), data);
     }
 }

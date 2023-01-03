@@ -4,23 +4,24 @@ import { getDateFromSeconds } from "../../../helpers/dateUtils";
 import { EducationalBackground } from "../../../models/enum/EducationalBackground";
 import { IUser } from "../../../models/IUser";
 
-export default abstract class UsersCollection {
-    private static collectionName = "users";
+export default class UsersCollection {
+    private static readonly collectionName = "users";
+    private static readonly ref = collection(db, this.collectionName);
     
     static get(id: string): Promise<DocumentSnapshot<DocumentData>> {
-        return getDoc(doc(db, this.collectionName, id));
+        return getDoc(doc(this.ref, id));
     }
 
     static getAll(): Promise<QuerySnapshot<DocumentData>> {
-        return getDocs(collection(db, this.collectionName));
+        return getDocs(this.ref);
     }
 
     static post(id: string, userInfo: IUser): Promise<void> {
-        return setDoc(doc(collection(db, this.collectionName), id), userInfo);
+        return setDoc(doc(this.ref, id), userInfo);
     }
 
     static put(id: string, userInfo: IUser): Promise<void> {
-        return setDoc(doc(collection(db, this.collectionName), id), userInfo, { merge: true });
+        return setDoc(doc(this.ref, id), userInfo, { merge: true });
     }
     
     static convert(firestoreSnapshot: DocumentSnapshot<DocumentData>): IUser {
