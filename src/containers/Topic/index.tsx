@@ -15,6 +15,7 @@ export function Topic({ route, navigation }) {
     const [requestDone, setRequestDone] = useState(false);
     const [user, setUser] = useState(null);
     const [progresses, setProgresses] = useState([]);
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
@@ -31,7 +32,7 @@ export function Topic({ route, navigation }) {
             setProgresses(reports);
             setRequestDone(true);
         });
-    }, [user]);
+    }, [isFocused, user]);
 
     const getProgress = ({ challenges }) => {
         const total = challenges?.length || 0;

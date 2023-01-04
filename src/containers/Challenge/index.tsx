@@ -3,6 +3,7 @@ import { ScrollView, View } from "react-native";
 import { Anchor, Button, Card, PrimaryTitleGoBack, RadioSelect, Text, Wrapper } from "../../components";
 import ChallengeReportsCollection from "../../services/firebase/db/challengeReports";
 import ChallengesCollection from "../../services/firebase/db/challenges";
+import UsersCollection from "../../services/firebase/db/users";
 import { useRequest } from "../../services/firebase/hooks/useRequest";
 import styles from "./styles";
 
@@ -52,12 +53,17 @@ export function Challenge({ route, navigation }) {
     };
 
     const answerChallenge = async () => {
+        const answeredCorrectly = selection.toString() === challenge.correct;
         ChallengeReportsCollection.post({
             userId: subject.userId,
             challengeId: challenge.id,
-            answer: index,
-            answeredCorrectly: selection === 0 // TODO
+            answer: selection.toString(),
+            answeredCorrectly
         });
+
+        if (answeredCorrectly) {
+            UsersCollection.acquirePoints(subject.userId, challenge.points);
+        }
 
         nextChallenge();
     };

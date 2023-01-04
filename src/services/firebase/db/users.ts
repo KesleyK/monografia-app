@@ -1,4 +1,4 @@
-import { collection, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, QuerySnapshot, setDoc } from "firebase/firestore";
+import { collection, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, increment, QuerySnapshot, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import { getDateFromSeconds } from "../../../helpers/dateUtils";
 import { EducationalBackground } from "../../../models/enum/EducationalBackground";
@@ -22,6 +22,12 @@ export default class UsersCollection {
 
     static put(id: string, userInfo: IUser): Promise<void> {
         return setDoc(doc(this.ref, id), userInfo, { merge: true });
+    }
+
+    static acquirePoints(id: string, points: number) {
+        return updateDoc(doc(this.ref, id), {
+            points: increment(points),
+        });
     }
     
     static convert(firestoreSnapshot: DocumentSnapshot<DocumentData>): IUser {
