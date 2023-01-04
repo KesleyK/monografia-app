@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
-import { Anchor, Button, Card, ErrorAlert, PrimaryTitleGoBack, RadioSelect, Text, Wrapper } from "../../components";
+import { Anchor, Button, Card, PrimaryTitleGoBack, RadioSelect, Text, Wrapper } from "../../components";
+import ChallengeReportsCollection from "../../services/firebase/db/challengeReports";
 import ChallengesCollection from "../../services/firebase/db/challenges";
 import { useRequest } from "../../services/firebase/hooks/useRequest";
 import styles from "./styles";
@@ -21,24 +22,24 @@ export function Challenge({ route, navigation }) {
         }
 
         ChallengesCollection.get(subject.challenges[index]).then((item) => {
-            setChallenge(item.data());
+            setChallenge({id: item.id, ...item.data()});
         });
     }, [index]);
 
-    const previousChallenge = () => {
-        doRequest(
-            {
-                handler: () => {
-                    if (index <= 0) {
-                        throw new Error();
-                    }
 
-                    setIndex(index - 1);
+    const previousChallenge = () => doRequest(
+        {
+            handler: () => {
+                if (index <= 0) {
+                    throw new Error();
                 }
-            },
-            "Não existe desafio anterior!"
-        );
-    }
+
+                setSelection(-1);
+                setIndex(index - 1);
+            }
+        },
+        "Não existe desafio anterior!"
+    );
 
     const nextChallenge = () => {
         if (index >= totalChallenges - 1) {
@@ -46,8 +47,20 @@ export function Challenge({ route, navigation }) {
             return;
         }
 
+        setSelection(-1);
         setIndex(index + 1);
-    }
+    };
+
+    const answerChallenge = async () => {
+        ChallengeReportsCollection.post({
+            userId: subject.userId,
+            challengeId: challenge.id,
+            answer: index,
+            answeredCorrectly: selection === 0 // TODO
+        });
+
+        nextChallenge();
+    };
 
     return (
         <Wrapper>
@@ -78,10 +91,7 @@ export function Challenge({ route, navigation }) {
                     <Button
                         style={styles.button}
                         title={"Responder"}
-                        onPress={() => {
-                            //TODO: update user progress
-                            nextChallenge();
-                        }}
+                        onPress={answerChallenge}
                         disabled={selection === -1}
                         disabledMessage={"Favor, marcar uma alternativa"}
                     />

@@ -1,35 +1,69 @@
+import { useIsFocused } from "@react-navigation/native";
+import { setPersistence } from "firebase/auth/react-native";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Button, Card, LoadingIndicator, PrimaryTitleGoBack, Text, Wrapper } from "../../components";
 import { ProgressBar } from "../../components/ProgressBar";
 import { ITopic } from "../../models/ITopic";
+import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
+import ChallengeReportsCollection from "../../services/firebase/db/challengeReports";
 import styles from "./styles";
 
 export function Topic({ route, navigation }) {
     const topic = route.params as ITopic;
     const [requestDone, setRequestDone] = useState(false);
+    const [user, setUser] = useState(null);
+    const [progresses, setProgresses] = useState([]);
 
     useEffect(() => {
-        setRequestDone(true);
+        retrieveUserInfo().then((userInfo) => {
+            setUser(userInfo);
+        });
     }, []);
 
+    useEffect(() => {
+        if (!user) {
+            return;
+        }
+
+        ChallengeReportsCollection.findByTopic(user.email, topic).then((reports) => {
+            setProgresses(reports);
+            setRequestDone(true);
+        });
+    }, [user]);
+
+    const getProgress = ({ challenges }) => {
+        const total = challenges?.length || 0;
+        let progress = 0;
+
+        for (const challenge of challenges) {
+            if (progresses.map(({challengeId}) => challengeId).includes(challenge)) {
+                progress++;
+            }
+        }
+
+        return [progress, total];
+    };
+
     const onRenderSubtopic = ({ item }) => {
+        const [progress, total] = getProgress(item);
+
         return (
             <View style={styles.cardContainer}>
                 <Card>
                     <Text style={styles.cardTitle}>{item.name}</Text>
                     <Text>{item.description}</Text>
-                    <ProgressBar style={styles.progressBar} total={10} progress={5} subject={"desafios concluídos"} />
+                    <ProgressBar style={styles.progressBar} total={total} progress={progress} subject={"desafios concluídos"} />
                     <Button
                         style={styles.cardButton}
                         title="Acessar Desafios"
-                        onPress={() => navigation.navigate("Challenge", {challenges: item.challenges, current: 0})} />
+                        onPress={() => navigation.navigate("Challenge", { challenges: item.challenges, current: 0, userId: user.email })} />
                 </Card>
             </View>
         );
-    }
-    
+    };
+
     return (
         <Wrapper>
             <View style={styles.container}>
