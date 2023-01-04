@@ -16,6 +16,8 @@ export function Challenge({ route, navigation }) {
     const [selection, setSelection] = useState(-1);
     const [challenge, setChallenge] = useState(null);
     const [index, setIndex] = useState(subject.current);
+    const [disabled, setDisabled] = useState(false);
+    const [correct, setCorrect] = useState(null);
 
     useEffect(() => {
         if (index === null) {
@@ -23,10 +25,16 @@ export function Challenge({ route, navigation }) {
         }
 
         ChallengesCollection.get(subject.challenges[index]).then((item) => {
-            setChallenge({id: item.id, ...item.data()});
+            setChallenge({ id: item.id, ...item.data() });
+
+            const report = subject.reports.find(({ challengeId }) => item.id === challengeId);
+            if (report) {
+                setSelection(report.answer);
+                setCorrect(item.data().correct);
+                setDisabled(true);
+            }
         });
     }, [index]);
-
 
     const previousChallenge = () => doRequest(
         {
@@ -85,7 +93,8 @@ export function Challenge({ route, navigation }) {
                             title={"Escolha a alternativa correta:"}
                             data={challenge?.selection}
                             onSelection={setSelection}
-                            value={selection}
+                            value={Number(selection)}
+                            correctOption={Number(correct)}
                         />
                     </Card>
                     <View style={styles.links}>
@@ -98,8 +107,8 @@ export function Challenge({ route, navigation }) {
                         style={styles.button}
                         title={"Responder"}
                         onPress={answerChallenge}
-                        disabled={selection === -1}
-                        disabledMessage={"Favor, marcar uma alternativa"}
+                        disabled={disabled || selection === -1}
+                        disabledMessage={selection !== -1 ? "Não é possível responder novamente!" : "Favor, marcar uma alternativa"}
                     />
                 </View>
             </ScrollView>
