@@ -16,5 +16,7 @@ export default StyleSheet.create({
     title: {
         textTransform: "uppercase",
         fontWeight: "bold"
+    }, disabled: {
+        backgroundColor: DefaultStyles.SECONDARY_COLOR
     }
 });

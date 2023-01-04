@@ -1,4 +1,4 @@
-import { Chat, PreHome, Ranking, Topics } from "../../../containers";
+import { Challenge, Chat, PreHome, Ranking, Topic, TopicList } from "../../../containers";
 import { BottomTabNavigator } from "../bottomTabNavigator";
 
 export default {
@@ -19,8 +19,18 @@ export default {
             options: {}
         },
         {
-            name: "Topics",
-            component: Topics,
+            name: "TopicList",
+            component: TopicList,
+            options: {}
+        },
+        {
+            name: "Topic",
+            component: Topic,
+            options: {}
+        },
+        {
+            name: "Challenge",
+            component: Challenge,
             options: {}
         },
         {

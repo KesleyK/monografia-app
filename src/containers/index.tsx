@@ -1,4 +1,5 @@
 export * from "./AccountSettings";
+export * from "./Challenge";
 export * from "./ChangePassword";
 export * from "./Chat";
 export * from "./ChatList";
@@ -7,5 +8,6 @@ export * from "./Login";
 export * from "./PreHome";
 export * from "./Ranking";
 export * from "./Register";
-export * from "./Topics";
+export * from "./Topic";
+export * from "./TopicList";
 export * from "./UpdateProfile";

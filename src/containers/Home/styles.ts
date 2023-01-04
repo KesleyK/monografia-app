@@ -25,10 +25,12 @@ export default StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center"
     },
-    topicsCard: {
-        alignItems: "center",
+    topicClickable: {
         width: "33%",
         padding: "3%"
+    },
+    topicsCard: {
+        alignItems: "center",
     },
     topicName: {
         fontSize: 12,
