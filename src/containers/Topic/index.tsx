@@ -39,7 +39,7 @@ export function Topic({ route, navigation }) {
         let progress = 0;
 
         for (const challenge of challenges) {
-            if (progresses.map(({challengeId}) => challengeId).includes(challenge)) {
+            if (progresses.map(({ challengeId }) => challengeId).includes(challenge)) {
                 progress++;
             }
         }
@@ -55,11 +55,22 @@ export function Topic({ route, navigation }) {
                 <Card>
                     <Text style={styles.cardTitle}>{item.name}</Text>
                     <Text>{item.description}</Text>
-                    <ProgressBar style={styles.progressBar} total={total} progress={progress} subject={"desafios concluídos"} />
+                    <ProgressBar
+                        style={styles.progressBar}
+                        total={total}
+                        progress={progress}
+                        subject={"desafios concluídos"}
+                    />
+
                     <Button
                         style={styles.cardButton}
                         title="Acessar Desafios"
-                        onPress={() => navigation.navigate("Challenge", { challenges: item.challenges, current: 0, userId: user.email })} />
+                        onPress={() => navigation.navigate("Challenge", {
+                            challenges: item.challenges,
+                            current: 0,
+                            userId: user.email,
+                            reports: progresses
+                        })} />
                 </Card>
             </View>
         );
@@ -68,7 +79,9 @@ export function Topic({ route, navigation }) {
     return (
         <Wrapper>
             <View style={styles.container}>
-                <PrimaryTitleGoBack style={styles.title} onPress={() => navigation.goBack()}>{topic.name}</PrimaryTitleGoBack>
+                <PrimaryTitleGoBack style={styles.title} onPress={() => navigation.goBack()}>
+                    {topic.name}
+                </PrimaryTitleGoBack>
 
                 {!requestDone ? <LoadingIndicator /> :
                     <FlatList

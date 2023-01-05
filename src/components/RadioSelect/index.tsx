@@ -4,7 +4,14 @@ import { RadioButton } from "../RadioButton";
 import { Text } from "../Text";
 import styles from "./styles";
 
-export function RadioSelect({ data = [], style = {}, title = null as string, onSelection, value }) {
+export function RadioSelect({
+    data = [],
+    style = {},
+    title = null as string,
+    onSelection,
+    value,
+    correctOption = -1
+}) {
     return (
         <View style={style}>
             {!title ? null :
@@ -16,6 +23,7 @@ export function RadioSelect({ data = [], style = {}, title = null as string, onS
                     onPress={() => onSelection(index)}
                     selected={value === index}
                     content={item}
+                    correct={index === correctOption}
                 />
             ))}
         </View>

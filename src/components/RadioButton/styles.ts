@@ -18,5 +18,11 @@ export default StyleSheet.create({
     },
     selected: {
         backgroundColor: RADIO_COLOR
+    },
+    correctBox: {
+        borderColor: "green"
+    },
+    correctText: {
+        color: "green"
     }
 });
