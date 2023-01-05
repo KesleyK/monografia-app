@@ -27,7 +27,7 @@ export function Home({ navigation }) {
     }, []);
 
     useEffect(() => {
-        UsersCollection.getAll().then((usersInfo) => {
+        UsersCollection.find(10).then((usersInfo) => {
             setPeople(parseCollection(usersInfo));
         });
     }, []);
