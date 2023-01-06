@@ -44,21 +44,21 @@ export function AccountSettings({ navigation }) {
                     <View style={styles.bottomLinksContainer}>
                         <Anchor
                             style={styles.bottomLink}
-                            onPress={async () => await Linking.openURL("https://www.example.org")}
+                            onPress={async () => await Linking.openURL("https://pedenite.github.io/monografia-pages/ajuda.html")}
                         >
                             Ajuda
                         </Anchor>
                         <Anchor
                             style={styles.bottomLink}
-                            onPress={async () => await Linking.openURL("https://www.example.org")}
+                            onPress={async () => await Linking.openURL("https://pedenite.github.io/monografia-pages/faqs.html")}
                         >
                             FAQ
                         </Anchor>
                         <Anchor
                             style={styles.bottomLink}
-                            onPress={async () => await Linking.openURL("https://www.example.org")}
+                            onPress={async () => await Linking.openURL("https://pedenite.github.io/monografia-pages/")}
                         >
-                            Política e Privacidade
+                            Política de Privacidade
                         </Anchor>
                     </View>
                 </Card>
