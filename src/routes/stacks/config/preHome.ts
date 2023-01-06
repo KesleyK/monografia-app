@@ -1,4 +1,4 @@
-import { Challenge, Chat, PreHome, Ranking, Topic, TopicList } from "../../../containers";
+import { Challenge, ChallengeFeedback, Chat, PreHome, Ranking, Topic, TopicList } from "../../../containers";
 import { BottomTabNavigator } from "../bottomTabNavigator";
 
 export default {
@@ -31,6 +31,11 @@ export default {
         {
             name: "Challenge",
             component: Challenge,
+            options: {}
+        },
+        {
+            name: "ChallengeFeedback",
+            component: ChallengeFeedback,
             options: {}
         },
         {
