@@ -1,6 +1,6 @@
 import { useIsFocused } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Linking, View } from "react-native";
 import { Anchor, Button, Card, LoadingIndicator, PrimaryTitle, UserCardComplete, Wrapper } from "../../components";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import { signoutUser } from "../../services/firebase/auth/signoutUser";
@@ -40,6 +40,27 @@ export function AccountSettings({ navigation }) {
                     <Anchor style={styles.logout} onPress={signoutUser}>
                         Logout
                     </Anchor>
+
+                    <View style={styles.bottomLinksContainer}>
+                        <Anchor
+                            style={styles.bottomLink}
+                            onPress={async () => await Linking.openURL("https://pedenite.github.io/monografia-pages/ajuda.html")}
+                        >
+                            Ajuda
+                        </Anchor>
+                        <Anchor
+                            style={styles.bottomLink}
+                            onPress={async () => await Linking.openURL("https://pedenite.github.io/monografia-pages/faqs.html")}
+                        >
+                            FAQ
+                        </Anchor>
+                        <Anchor
+                            style={styles.bottomLink}
+                            onPress={async () => await Linking.openURL("https://pedenite.github.io/monografia-pages/")}
+                        >
+                            Política de Privacidade
+                        </Anchor>
+                    </View>
                 </Card>
             </View>
         </Wrapper>

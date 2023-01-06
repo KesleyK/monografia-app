@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     container: {
@@ -18,5 +19,14 @@ export default StyleSheet.create({
     logout: {
         marginTop: "10%",
         textAlign: "center"
+    },
+    bottomLinksContainer: {
+        marginTop: "40%",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between"
+    },
+    bottomLink: {
+        color: DefaultStyles.SECONDARY_COLOR
     }
 });
