@@ -1,32 +1,44 @@
-import React from "react";
-import { View } from "react-native";
 import { Formik } from "formik";
+import React, { useState } from "react";
+import { Linking, View } from "react-native";
 import {
     Anchor,
     Button,
     DatePicker,
     Dropdown,
-    Input,
-    LoadingIndicator,
-    PrimaryTitle,
+    Input, PrimaryTitle,
     Text,
     Wrapper
 } from "../../components";
+import { CheckBox } from "../../components/CheckBox";
 import { EducationalBackground } from "../../models/enum/EducationalBackground";
 import { IUser } from "../../models/IUser";
+import { IRegisterFormValues, registerInitialValues, registerSchema } from "../../schemas/register";
 import { createUser } from "../../services/firebase/auth/createUser";
 import { useRequest } from "../../services/firebase/hooks/useRequest";
-import { IRegisterFormValues, registerSchema, registerInitialValues } from "../../schemas/register";
 import styles from "./styles";
 
 export function Register({ navigation }) {
     const [doRequest, responseComponent] = useRequest();
+    const [policyAccepted, acceptPolicy] = useState(false);
 
     const onFormSubmit = async (formData: IRegisterFormValues) => {
-        const user = {...formData};
+        const user = { ...formData };
         delete user.password;
         delete user.passwordConfirmation;
         doRequest({ handler: async () => await createUser(user as IUser, formData.password) });
+    }
+
+    const getPoliciesLink = () => {
+        return (
+            <Anchor
+                onPress={async () => {
+                    await Linking.openURL("https://pedenite.github.io/monografia-pages/");
+                }}
+            >
+                Políticas de Privacidade
+            </Anchor>
+        );
     }
 
     return (
@@ -83,7 +95,20 @@ export function Register({ navigation }) {
                                 error={errors.passwordConfirmation}
                             />
 
-                            <Button title="Cadastrar" fullWidth onPress={handleSubmit} style={{ marginTop: 15 }} />
+                            <CheckBox
+                                value={policyAccepted}
+                                onValueChange={acceptPolicy}
+                            >
+                                Confirmo que li e aceito as {getPoliciesLink()} do aplicativo.
+                            </CheckBox>
+
+                            <Button
+                                title="Cadastrar"
+                                fullWidth
+                                onPress={handleSubmit}
+                                style={{ marginTop: 15 }}
+                                disabled={!policyAccepted}
+                            />
                         </View>
                     )}
                 </Formik>

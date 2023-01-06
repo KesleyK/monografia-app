@@ -107,7 +107,7 @@ export function Challenge({ route, navigation }) {
                         style={styles.button}
                         title={"Responder"}
                         onPress={answerChallenge}
-                        disabled={disabled || selection === -1}
+                        softDisabled={disabled || selection === -1}
                         disabledMessage={selection !== -1 ? "Não é possível responder novamente!" : "Favor, marcar uma alternativa"}
                     />
                 </View>

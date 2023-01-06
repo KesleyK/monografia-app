@@ -8,6 +8,7 @@ export function Button({
     onPress,
     title,
     disabled = false,
+    softDisabled = false,
     disabledMessage = "Ação bloqueada" 
 }) {
     let buttonStyle = {
@@ -22,7 +23,7 @@ export function Button({
         };
     }
 
-    if (disabled) {
+    if (disabled || softDisabled) {
         buttonStyle = {
             ...buttonStyle,
             ...styles.disabled
@@ -34,7 +35,7 @@ export function Button({
     }
 
     return (
-        <TouchableOpacity style={buttonStyle} onPress={onPress} >
+        <TouchableOpacity style={buttonStyle} onPress={onPress} disabled={disabled} >
             <Text style={styles.title}>{title}</Text>
         </TouchableOpacity>
     );
