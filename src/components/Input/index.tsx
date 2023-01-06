@@ -4,7 +4,7 @@ import { DefaultStyles } from "../../styles/global";
 import styles from "./styles";
 
 export function Input(props) {
-    let inputStyle = { ...styles.input };
+    let inputStyle = props.style || styles.input;
     let errorComponent;
 
     if (props.error) {
@@ -17,12 +17,13 @@ export function Input(props) {
             <TextInput
                 style={inputStyle}
                 placeholder={props.placeholder}
-                placeholderTextColor={DefaultStyles.PRIMARY_COLOR}
+                placeholderTextColor={DefaultStyles.CARD_COLOR}
                 onChangeText={props.onChangeText}
                 value={props.value}
                 autoCapitalize={props.autoCapitalize ?? "none"}
                 keyboardType={props.keyboardType ?? "default"}
                 secureTextEntry={props.secureTextEntry}
+                multiline={props.multiline}
             />
             {errorComponent}
         </View>

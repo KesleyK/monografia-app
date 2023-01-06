@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import Foundation from "react-native-vector-icons/Foundation";
-import { PrimaryTitle, SearchBar, Text, UserCardSimple, Wrapper } from "../../components";
+import { Button, PrimaryTitle, SearchBar, Text, UserCardSimple, Wrapper } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 
-import styles from "./styles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { parseCollection } from "../../helpers/collectionUtils";
+import createChallenges from "../../helpers/test/createChallenges";
+import createTopics from "../../helpers/test/createTopics";
 import TopicsCollection from "../../services/firebase/db/topics";
 import UsersCollection from "../../services/firebase/db/users";
-import { parseCollection } from "../../helpers/collectionUtils";
+import styles from "./styles";
 
 export function Home({ navigation }) {
     const TOPICS_LIMIT = 3;
@@ -25,7 +27,7 @@ export function Home({ navigation }) {
     }, []);
 
     useEffect(() => {
-        UsersCollection.getAll().then((usersInfo) => {
+        UsersCollection.find(10).then((usersInfo) => {
             setPeople(parseCollection(usersInfo));
         });
     }, []);
@@ -33,10 +35,12 @@ export function Home({ navigation }) {
     const topicsList = topics
         .filter((topic) => verifyStringInclusion(normalizeString(topic.name), normalizeString(searchPhrase)))
         .map((topic, index) => (
-            <View style={styles.topicsCard} key={index}>
-                <Foundation name={topic.icon} size={40} color="white" />
-                <Text style={styles.topicName}>{topic.name}</Text>
-            </View>
+            <TouchableOpacity style={styles.topicClickable} onPress={() => navigation.navigate("Topic", topic)} key={index}>
+                <View style={styles.topicsCard}>
+                    <MaterialCommunityIcons name={topic.icon} size={40} color="white" />
+                    <Text style={styles.topicName}>{topic.name}</Text>
+                </View>
+            </TouchableOpacity>
         ))
         .slice(0, TOPICS_LIMIT);
 
@@ -51,7 +55,7 @@ export function Home({ navigation }) {
                     <View style={styles.topicsBox}>
                         <TouchableOpacity
                             style={styles.secondaryTitleContainer}
-                            onPress={() => navigation.navigate("Topics")}
+                            onPress={() => navigation.navigate("TopicList")}
                         >
                             <PrimaryTitle small>Tópicos</PrimaryTitle>
 
@@ -79,6 +83,9 @@ export function Home({ navigation }) {
                             <UserCardSimple user={person} key={index} />
                         ))}
                     </View>
+
+                    <Button title={"remove later"} onPress={createChallenges} />
+                    <Button title={"remove later"} onPress={createTopics} />
                 </View>
             </ScrollView>
         </Wrapper>

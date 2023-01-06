@@ -1,22 +1,47 @@
 import { StyleSheet } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     container: {
         marginTop: "10%",
         marginHorizontal: "8%"
     },
-    cardTitle: {
-        fontWeight: "bold",
-        fontSize: 18,
-        marginBottom: 10
+    messagesContainer: {
+        height: "90%",
+        paddingBottom: "30%"
     },
-    cardButton: {
-        marginTop: "10%",
-        borderRadius: 10,
-        width: "90%"
+    noMessagesFound: {
+        color: DefaultStyles.SECONDARY_COLOR
     },
-    logout: {
-        marginTop: "10%",
-        textAlign: "center"
+    messageInputBox: {
+        borderRadius: 15,
+        position: "absolute",
+        marginHorizontal: "10%",
+        marginBottom: "7%",
+        backgroundColor: "#555",
+        alignSelf: "center",
+        bottom: 5,
+        width: "95%",
+        maxHeight: 150,
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    messageInput: {
+        paddingHorizontal: 8,
+        paddingVertical: 5,
+        textAlignVertical: "top",
+        color: "white",
+        paddingRight: 50
+    },
+    send: {
+        position: "absolute",
+        right: 3,
+        bottom: 3,
+        backgroundColor: DefaultStyles.ANCHOR_COLOR,
+        borderRadius: 100,
+        width: 40,
+        height: 40,
+        alignItems: "center",
+        justifyContent: "center"
     }
 });

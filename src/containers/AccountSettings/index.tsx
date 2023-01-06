@@ -1,28 +1,30 @@
+import { useIsFocused } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { Linking, View } from "react-native";
-import { Anchor, Button, Card, PrimaryTitleGoBack, UserCardComplete, Wrapper } from "../../components";
+import { Anchor, Button, Card, LoadingIndicator, PrimaryTitle, UserCardComplete, Wrapper } from "../../components";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import { signoutUser } from "../../services/firebase/auth/signoutUser";
 import styles from "./styles";
 
 export function AccountSettings({ navigation }) {
     const [user, setUser] = useState(null);
+    const isFocused = useIsFocused();
 
     useEffect(() => {
-        retrieveUserInfo().then((userInfo) => {
+        isFocused && retrieveUserInfo().then((userInfo) => {
             setUser(userInfo);
         });
-    }, [retrieveUserInfo]);
+    }, [isFocused, retrieveUserInfo]);
 
     return (
         <Wrapper>
             <View style={styles.container}>
-                <PrimaryTitleGoBack style={{ marginBottom: "10%" }} onPress={() => navigation.goBack()}>
-                    Configurações
-                </PrimaryTitleGoBack>
+                <PrimaryTitle style={{ marginBottom: "10%" }}>Configurações</PrimaryTitle>
 
                 <Card>
-                    <UserCardComplete user={user} />
+                    {!user ? <LoadingIndicator /> :
+                        <UserCardComplete user={user} />
+                    }
 
                     <Button
                         style={styles.cardButton}
