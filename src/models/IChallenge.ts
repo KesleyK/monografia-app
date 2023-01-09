@@ -7,4 +7,5 @@ export interface IChallenge {
     selection?: string[];
     correct: string;
     points: number;
+    category?: string;
 }

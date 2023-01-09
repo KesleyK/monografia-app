@@ -47,6 +47,10 @@ export function Topic({ route, navigation }) {
         return [progress, total];
     };
 
+    const filterReportsForSubtopic = (subtopic, report) => (
+        subtopic.challenges.includes(report.challengeId)
+    );
+
     const onRenderSubtopic = ({ item }) => {
         const [progress, total] = getProgress(item);
 
@@ -69,7 +73,7 @@ export function Topic({ route, navigation }) {
                             challenges: item.challenges,
                             current: 0,
                             userId: user.email,
-                            reports: progresses
+                            reports: progresses.filter((report) => filterReportsForSubtopic(item, report))
                         })} />
                 </Card>
             </View>

@@ -75,33 +75,28 @@ export default async () => {
         subtopics: [
             {
                 name: "Input e Output",
-                description: "Aqui você encontra uma série de perguntas relacionadas ao tópico",
-                challenges: challengeIds
+                description: "Resolva desafios acerta da entrada e saída de dados padrão da linguagem Python",
+                challenges: challenges.filter(({category}) => category === "io").map(({id}) => id)
             },
             {
                 name: "Operadores",
-                description: "Aqui você encontra uma série de perguntas relacionadas ao tópico",
-                challenges: challengeIds
+                description: "Aqui você encontra uma série de perguntas relacionadas aos operadores existentes na linguagem Python",
+                challenges: challenges.filter(({category}) => category === "ops").map(({id}) => id)
             },
             {
                 name: "Condicionais",
-                description: "Aqui você encontra uma série de perguntas relacionadas ao tópico",
-                challenges: challengeIds
+                description: "Aqui você encontra uma série de perguntas relacionadas às condicionais",
+                challenges: challenges.filter(({category}) => category === "ifelse").map(({id}) => id)
             },
             {
                 name: "Loops",
-                description: "Aqui você encontra uma série de perguntas relacionadas ao tópico",
-                challenges: challengeIds
+                description: "Aqui você encontra uma série de perguntas relacionadas às estruturas de loops do Python",
+                challenges: challenges.filter(({category}) => category === "loop").map(({id}) => id)
             },
             {
                 name: "Funções",
-                description: "Aqui você encontra uma série de perguntas relacionadas ao tópico",
-                challenges: challengeIds
-            },
-            {
-                name: "Final",
-                description: "Aqui você encontra uma série de perguntas relacionadas ao tópico",
-                challenges: challengeIds
+                description: "Aqui você encontra uma série de perguntas relacionadas à criação e uso de funções por meio da linguagem Python",
+                challenges: challenges.filter(({category}) => category === "func").map(({id}) => id)
             },
         ]
     });

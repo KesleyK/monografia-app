@@ -5,16 +5,26 @@ import styles from "./styles";
 export function ChallengeFeedback({ route, navigation }) {
     const { challenges, userId, reports, points } = route.params;
 
+    const getPointsEarned = (correct) => {
+        return correct.map(it => {
+            return points.find(point => point.id === it.challengeId)?.value;
+        });
+    };
+    
+    const getChallengePercentage = (challengeAmount: number) => {
+        const percentage = challengeAmount / challenges.length * 100;
+        return percentage.toFixed(2);
+    };
+
     const correct = reports.filter(it => it.answeredCorrectly);
+    const notAnswered = challenges.length - reports.length;
+    const errors = challenges.length - notAnswered - correct.length;
 
-    const pointsEarned = correct.map(it => {
-        return points.find(point => point.id === it.challengeId)?.value;
-    });
-
+    const pointsEarned = getPointsEarned(correct);
     const totalPoints = pointsEarned.reduce((sum, p) => sum + p, 0);
 
-    const notAnswered = challenges.length - reports.length;
-    const errors = challenges.length - notAnswered - correct.length
+    console.log(notAnswered, errors);
+    console.log(reports);
 
     return (
         <Wrapper>
@@ -25,12 +35,24 @@ export function ChallengeFeedback({ route, navigation }) {
                     <Card style={styles.generalFeedback}>
                         <View style={styles.generalFeedbackContainer}>
                             <View>
-                                <Text style={styles.textBold}>Taxa de acerto:</Text>
-                                <Text style={{...styles.rate, ...styles.correct}}>{correct.length}/{challenges.length} ({correct.length / challenges.length * 100}%)</Text>
-                                <Text style={styles.textBold}>Taxa de erro:</Text>
-                                <Text style={{...styles.rate, ...styles.incorrect}}>{errors}/{challenges.length} ({errors / challenges.length * 100}%)</Text>
-                                <Text style={styles.textBold}>Não respondidas:</Text>
-                                <Text style={styles.rate}>{notAnswered}/{challenges.length} ({notAnswered / challenges.length * 100}%)</Text>
+                                <Text style={styles.textBold}>
+                                    Taxa de acerto:
+                                </Text>
+                                <Text style={{ ...styles.rate, ...styles.correct }}>
+                                    {correct.length}/{challenges.length} ({getChallengePercentage(correct.length)}%)
+                                </Text>
+                                <Text style={styles.textBold}>
+                                    Taxa de erro:
+                                </Text>
+                                <Text style={{ ...styles.rate, ...styles.incorrect }}>
+                                    {errors}/{challenges.length} ({getChallengePercentage(errors)}%)
+                                </Text>
+                                <Text style={styles.textBold}>
+                                    Não respondidas:
+                                </Text>
+                                <Text style={styles.rate}>
+                                    {notAnswered}/{challenges.length} ({getChallengePercentage(notAnswered)}%)
+                                </Text>
                             </View>
                             <View style={styles.resultsContainer}>
                                 <Text style={styles.numberResults}>+{totalPoints}</Text>
