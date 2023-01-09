@@ -23,9 +23,6 @@ export function ChallengeFeedback({ route, navigation }) {
     const pointsEarned = getPointsEarned(correct);
     const totalPoints = pointsEarned.reduce((sum, p) => sum + p, 0);
 
-    console.log(notAnswered, errors);
-    console.log(reports);
-
     return (
         <Wrapper>
             <ScrollView>
