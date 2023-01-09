@@ -1,79 +1,125 @@
+import { Formik } from "formik";
 import React, { useState } from "react";
-import { View } from "react-native";
-import { Anchor, Button, DatePicker, Input, PrimaryTitle, Text, Wrapper } from "../../components";
+import { Linking, View } from "react-native";
+import {
+    Anchor,
+    Button,
+    DatePicker,
+    Dropdown,
+    Input, PrimaryTitle,
+    Text,
+    Wrapper
+} from "../../components";
+import { CheckBox } from "../../components/CheckBox";
 import { EducationalBackground } from "../../models/enum/EducationalBackground";
 import { IUser } from "../../models/IUser";
+import { IRegisterFormValues, registerInitialValues, registerSchema } from "../../schemas/register";
 import { createUser } from "../../services/firebase/auth/createUser";
+import { useRequest } from "../../services/firebase/hooks/useRequest";
 import styles from "./styles";
 
 export function Register({ navigation }) {
-    const [user, setUser] = useState("");
-    const [email, setEmail] = useState("");
-    const [date, setDate] = useState(new Date());
-    const [educationalBackground, setEducationalBackground] = useState(EducationalBackground.HIGH_COMPLETE);
-    const [password, setPassword] = useState("");
-    const [passwordConfirmation, setPasswordConfirmation] = useState("");
+    const [doRequest, responseComponent] = useRequest();
+    const [policyAccepted, acceptPolicy] = useState(false);
 
-    const onFormSubmit = () => {
-        const formData: IUser = {
-            name: user,
-            email,
-            birthDate: date,
-            educationalBackground,
-        };
+    const onFormSubmit = async (formData: IRegisterFormValues) => {
+        const user = { ...formData };
+        delete user.password;
+        delete user.passwordConfirmation;
+        doRequest({ handler: async () => await createUser(user as IUser, formData.password) });
+    }
 
-        createUser(formData, password);
-    };
+    const getPoliciesLink = () => {
+        return (
+            <Anchor
+                onPress={async () => {
+                    await Linking.openURL("https://pedenite.github.io/monografia-pages/");
+                }}
+            >
+                Políticas de Privacidade
+            </Anchor>
+        );
+    }
 
     return (
         <Wrapper>
             <View style={styles.view}>
                 <PrimaryTitle style={styles.title}>Registrar conta</PrimaryTitle>
 
-                <Input
-                    placeholder="Usuário"
-                    value={user}
-                    onChangeText={setUser}
-                />
+                <Formik initialValues={registerInitialValues} validationSchema={registerSchema} onSubmit={onFormSubmit}>
+                    {({ handleChange, handleSubmit, setFieldValue, values, errors }) => (
+                        <View>
+                            <Input
+                                placeholder="Nome Completo"
+                                value={values.name}
+                                onChangeText={handleChange("name")}
+                                error={errors.name}
+                            />
 
-                <Input
-                    placeholder="E-mail"
-                    onChangeText={setEmail}
-                    value={email}
-                />
+                            <Input
+                                placeholder="E-mail"
+                                onChangeText={handleChange("email")}
+                                value={values.email}
+                                keyboardType={"email-address"}
+                                error={errors.email}
+                            />
 
-                <DatePicker
-                    date={date}
-                    placeholder={date?.toDateString() === new Date().toDateString() ? "Data de Nascimento" : date.toLocaleDateString('pt-BR')}
-                    onChange={(event, selectedDate) => {
-                        setDate(selectedDate);
-                    }}
-                />
+                            <DatePicker
+                                date={values.birthDate}
+                                placeholder={values.birthDate?.toLocaleDateString("pt-BR") ?? "Data de Nascimento"}
+                                onChange={(_, selectedDate) => setFieldValue("birthDate", selectedDate)}
+                                error={errors.birthDate}
+                                maximumDate={new Date()}
+                            />
 
-                <Input
-                    placeholder="Formação Acadêmica"
-                    onChangeText={setEducationalBackground}
-                    value={educationalBackground}
-                />
+                            <Dropdown
+                                placeholder={"Formação Acadêmica"}
+                                setSelected={handleChange("educationalBackground")}
+                                values={Object.values(EducationalBackground)}
+                                error={errors.educationalBackground}
+                            />
 
-                <Input
-                    placeholder="Senha"
-                    onChangeText={setPassword}
-                    value={password}
-                />
+                            <Input
+                                placeholder="Senha"
+                                onChangeText={handleChange("password")}
+                                value={values.password}
+                                secureTextEntry
+                                error={errors.password}
+                            />
 
-                <Input
-                    placeholder="Confirmar Senha"
-                    onChangeText={setPasswordConfirmation}
-                    value={passwordConfirmation}
-                />
+                            <Input
+                                placeholder="Confirmar Senha"
+                                onChangeText={handleChange("passwordConfirmation")}
+                                value={values.passwordConfirmation}
+                                secureTextEntry
+                                error={errors.passwordConfirmation}
+                            />
 
-                <Button title="Login" fullWidth onPress={onFormSubmit} />
+                            <CheckBox
+                                value={policyAccepted}
+                                onValueChange={acceptPolicy}
+                            >
+                                Confirmo que li e aceito as {getPoliciesLink()} do aplicativo.
+                            </CheckBox>
+
+                            <Button
+                                title="Cadastrar"
+                                fullWidth
+                                onPress={handleSubmit}
+                                style={{ marginTop: 15 }}
+                                disabled={!policyAccepted}
+                            />
+                        </View>
+                    )}
+                </Formik>
 
                 <View style={styles.signinText}>
-                    <Text>Já possui uma conta? </Text><Anchor onPress={() => navigation.navigate("Login")}>faça login</Anchor>
+                    <Text>Já possui uma conta? </Text>
+                    <Anchor onPress={() => navigation.navigate("Login")}>faça login</Anchor>
                 </View>
             </View>
+
+            {responseComponent}
         </Wrapper>
     );
 }

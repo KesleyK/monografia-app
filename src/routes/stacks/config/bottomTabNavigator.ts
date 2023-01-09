@@ -1,9 +1,11 @@
-import { Home, AccountSettings } from "../../../containers";
+import { Home } from "../../../containers";
+import { AccountStack } from "../account";
+import { ChatStack } from "../chat";
 
 import styles from "../styles/bottomTabBar";
 
 const defaultOptions = {
-    tabBarShowLabel: false,
+    tabBarShowLabel: false
 };
 
 export default {
@@ -22,10 +24,20 @@ export default {
             icon: "home"
         },
         {
-            name: "AccountSettings",
-            component: AccountSettings,
+            name: "AccountStack",
+            component: AccountStack,
             options: defaultOptions,
             icon: "account-settings"
+        },
+        {
+            name: "ChatStack",
+            component: ChatStack,
+            options: {
+                ...defaultOptions,
+                tabBarStyle: { display: "none" }
+            },
+            hideTabBar: true,
+            icon: "message-text"
         }
     ]
 };

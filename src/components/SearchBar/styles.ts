@@ -6,12 +6,12 @@ export default StyleSheet.create({
         flexDirection: "row",
         backgroundColor: "#eee",
         borderRadius: 20,
-        alignItems: "center",
+        alignItems: "center"
     },
     input: {
         fontSize: 20,
         marginLeft: 10,
-        width: "90%",
+        width: "90%"
     },
     searchIcon: {
         marginLeft: -5

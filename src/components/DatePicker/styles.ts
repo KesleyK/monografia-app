@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { DefaultStyles } from '../../styles/global';
+import { StyleSheet } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     picker: {
@@ -9,9 +9,21 @@ export default StyleSheet.create({
         borderRadius: 5,
         paddingLeft: 23,
         marginBottom: 10,
-        justifyContent: "center",
+        justifyContent: "center"
+    },
+    pickerOnError: {
+        color: "#000",
+        backgroundColor: DefaultStyles.ERROR_COLOR
     },
     placeholder: {
-        color: DefaultStyles.PRIMARY_COLOR,
+        color: DefaultStyles.CARD_COLOR
+    },
+    errorText: {
+        position: "absolute",
+        bottom: 2,
+        left: 6,
+        fontSize: 10,
+        color: DefaultStyles.ERROR_COLOR_LIGHT,
+        fontWeight: "bold"
     }
 });

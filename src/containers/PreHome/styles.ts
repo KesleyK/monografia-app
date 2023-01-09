@@ -5,11 +5,6 @@ export default StyleSheet.create({
         marginTop: "25%",
         marginHorizontal: "8%"
     },
-    card: {
-        backgroundColor: "#363E40",
-        padding: 20,
-        borderRadius: 15
-    },
     cardTitle: {
         fontWeight: "bold",
         fontSize: 18,

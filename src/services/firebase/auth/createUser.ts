@@ -1,10 +1,11 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, sendEmailVerification } from "firebase/auth";
 import { IUser } from "../../../models/IUser";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from '../../../config/firebase'
+import UsersCollection from "../db/users";
 
 export async function createUser(user: IUser, password: string) {
     const auth = getAuth();
-    await createUserWithEmailAndPassword(auth, user.email, password);
-    await addDoc(collection(db, "users"), user);
+
+    const userCredential = await createUserWithEmailAndPassword(auth, user.email, password);
+    await sendEmailVerification(userCredential.user);
+    await UsersCollection.post(user.email, user);
 }
