@@ -74,7 +74,9 @@ export function Topic({ route, navigation }) {
                             current: 0,
                             userId: user.email,
                             reports: progresses.filter((report) => filterReportsForSubtopic(item, report))
-                        })} />
+                        })}
+                        disabled={item.challenges.length === 0}
+                    />
                 </Card>
             </View>
         );
