@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { View } from "react-native";
 import { RadioButton } from "../RadioButton";
 import { Text } from "../Text";
@@ -14,9 +13,7 @@ export function RadioSelect({
 }) {
     return (
         <View style={style}>
-            {!title ? null :
-                <Text style={styles.title}>{title}</Text>
-            }
+            {title && <Text style={styles.title}>{title}</Text>}
             {data.map((item, index) => (
                 <RadioButton
                     key={index}

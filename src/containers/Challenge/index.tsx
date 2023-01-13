@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
-import { Anchor, Button, Card, PrimaryTitleGoBack, RadioSelect, Text, Wrapper } from "../../components";
+import { Anchor, Button, Card, Input, PrimaryTitleGoBack, RadioSelect, Text, Wrapper } from "../../components";
+import { CheckBoxSelect } from "../../components/CheckBoxSelect";
+import { ChallengeType } from "../../models/enum/ChallengeType";
 import ChallengeReportsCollection from "../../services/firebase/db/challengeReports";
 import ChallengesCollection from "../../services/firebase/db/challenges";
 import UsersCollection from "../../services/firebase/db/users";
@@ -14,12 +16,12 @@ export function Challenge({ route, navigation }) {
 
     const [doRequest, responseComponent] = useRequest();
 
-    const [selection, setSelection] = useState(-1);
+    const [selection, setSelection] = useState(new Set());
     const [answeredPreviously, setAnsweredPreviously] = useState(false);
     const [challenge, setChallenge] = useState(null);
     const [index, setIndex] = useState(subject.current);
     const [disabled, setDisabled] = useState(false);
-    const [correct, setCorrect] = useState(null);
+    const [correct, setCorrect] = useState([]);
     const [points, setPoints] = useState([]);
 
     useEffect(() => {
@@ -29,11 +31,11 @@ export function Challenge({ route, navigation }) {
 
         ChallengesCollection.get(subject.challenges[index]).then((item) => {
             setChallenge({ id: item.id, ...item.data() });
-            setPoints([...points, {id: item.id, value: item.data().points}]);
+            setPoints([...points, { id: item.id, value: item.data().points }]);
 
             const report = answers.find(({ challengeId }) => item.id === challengeId);
             if (report) {
-                setSelection(report.answer);
+                setSelection(new Set(report.answer));
                 setAnsweredPreviously(true);
                 setCorrect(item.data().correct);
                 setDisabled(true);
@@ -48,9 +50,10 @@ export function Challenge({ route, navigation }) {
                     throw new Error();
                 }
 
-                setSelection(-1);
+                setSelection(new Set());
                 setAnsweredPreviously(false);
                 setIndex(index - 1);
+                setDisabled(false);
             }
         },
         "Não existe desafio anterior!"
@@ -66,17 +69,23 @@ export function Challenge({ route, navigation }) {
             });
         }
 
-        setSelection(-1);
+        setSelection(new Set());
         setAnsweredPreviously(false);
         setIndex(index + 1);
+        setDisabled(false);
     };
 
+    const isAnswerCorrect = () => {
+        return [...selection].toString() === [...challenge.correct].toString();
+    }
+
     const answerChallenge = async () => {
-        const answeredCorrectly = selection.toString() === challenge.correct;
+        console.log([...selection].toString(), [...challenge.correct].toString())
+        const answeredCorrectly = isAnswerCorrect();
         const answer = {
             userId: subject.userId,
             challengeId: challenge.id,
-            answer: selection.toString(),
+            answer: [...selection].map((it) => it.toString()),
             answeredCorrectly
         };
 
@@ -89,6 +98,53 @@ export function Challenge({ route, navigation }) {
 
         nextChallenge();
     };
+
+    const createAnswerBox = () => {
+        switch (challenge?.type) {
+            default:
+            case ChallengeType.RADIO:
+                return <RadioSelect
+                    title={"Escolha a alternativa correta:"}
+                    data={challenge?.selection}
+                    onSelection={(item) => setSelection(new Set([item]))} // TODO: usar novo state
+                    value={Number([...selection][0])}
+                    correctOption={answeredPreviously ? Number(correct[0]) : -1}
+                />;
+
+            case ChallengeType.CHECKBOX:
+                return <CheckBoxSelect
+                    title={"Escolha a(s) alternativa(s) correta(s):"}
+                    data={challenge?.selection}
+                    onSelection={setSelection}
+                    value={new Set([...selection].map((item) => Number(item)))}
+                    correctOptions={new Set(answeredPreviously ? [...correct].map((item) => Number(item)) : [])}
+                />;
+
+            case ChallengeType.INPUT:
+                console.log(answeredPreviously)
+                return (
+                    <View>
+                        {answeredPreviously && (isAnswerCorrect() ?
+                            <Text style={{ ...styles.correct, ...styles.textFeedbackReview }}>Resposta Correta!</Text>
+                            :
+                            <View>
+                                <Text style={styles.incorrect}>
+                                    Resposta Incorreta!
+                                </Text>
+                                <Text style={styles.textFeedbackReview}>
+                                    A resposta correta seria {[...challenge.correct].toString()}
+                                </Text>
+                            </View>
+                        )}
+                        <Input
+                            placeholder={"Digite sua resposta"}
+                            onChangeText={(text) => setSelection(new Set([text]))}
+                            value={[...selection][0]}
+                        />
+                    </View>
+                );
+        }
+    }
 
     return (
         <Wrapper>
@@ -103,13 +159,7 @@ export function Challenge({ route, navigation }) {
                     </Card>
 
                     <Card style={styles.answer}>
-                        <RadioSelect
-                            title={"Escolha a alternativa correta:"}
-                            data={challenge?.selection}
-                            onSelection={setSelection}
-                            value={Number(selection)}
-                            correctOption={answeredPreviously ? Number(correct) : -1}
-                        />
+                        {createAnswerBox()}
                     </Card>
                     <View style={styles.links}>
                         <Anchor onPress={previousChallenge}>Anterior</Anchor>
@@ -121,8 +171,8 @@ export function Challenge({ route, navigation }) {
                         style={styles.button}
                         title={"Responder"}
                         onPress={answerChallenge}
-                        softDisabled={disabled || selection === -1}
-                        disabledMessage={selection !== -1 ? "Não é possível responder novamente!" : "Favor, marcar uma alternativa"}
+                        softDisabled={disabled || selection.size === 0}
+                        disabledMessage={selection.size > 0 ? "Não é possível responder novamente!" : "Favor, marcar uma alternativa"}
                     />
                 </View>
             </ScrollView>

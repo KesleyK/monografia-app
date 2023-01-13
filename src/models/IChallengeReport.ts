@@ -1,6 +1,6 @@
 export interface IChallengeReport {
     userId: string;
     challengeId: string;
-    answer: string;
+    answer: string[];
     answeredCorrectly: boolean;
 }

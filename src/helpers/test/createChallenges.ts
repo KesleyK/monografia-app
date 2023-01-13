@@ -4,7 +4,7 @@ import ChallengesCollection from "../../services/firebase/db/challenges";
 export default async () => {
     await ChallengesCollection.createTestData({
         name: "Hello World",
-        body: "Insira no código a seguir, o techo que falta para que seja produzido o output Hello World:\n\n___(\"Hello World\")",
+        body: "Insira no código a seguir, o trecho que falta para que seja produzido o output Hello World:\n\n___(\"Hello World\")",
         type: ChallengeType.RADIO,
         selection: [
             "console.log",
@@ -13,7 +13,33 @@ export default async () => {
             "write",
             "say"
         ],
-        correct: "2",
+        correct: ["2"],
+        points: 10,
+        category: "io"
+    });
+
+    await ChallengesCollection.createTestData({
+        name: "Hello World",
+        body: "Insira no código a seguir, o trecho que falta para que seja produzido o output Hello World:\n\n___(\"Hello World\")",
+        type: ChallengeType.CHECKBOX,
+        selection: [
+            "console.log",
+            "produce",
+            "print",
+            "write",
+            "say"
+        ],
+        correct: ["2"],
+        points: 10,
+        category: "io"
+    });
+
+    await ChallengesCollection.createTestData({
+        name: "Hello World",
+        body: "Insira no código a seguir, o trecho que falta para que seja produzido o output Hello World:\n\n___(\"Hello World\")",
+        type: ChallengeType.INPUT,
+        selection: [],
+        correct: ["print"],
         points: 10,
         category: "io"
     });
@@ -28,7 +54,7 @@ export default async () => {
             "Atribui o valor digitado pelo usuário na variável",
             "Nenhuma das alternativas acima"
         ],
-        correct: "3",
+        correct: ["2"],
         points: 5,
         category: "io"
     });
@@ -43,7 +69,7 @@ export default async () => {
             "\"Sua idade é\", seguido pelo valor digitado pelo usuário",
             "Erro"
         ],
-        correct: "3",
+        correct: ["3"],
         points: 10,
         category: "io"
     });
@@ -59,7 +85,7 @@ export default async () => {
             "/",
             "*"
         ],
-        correct: "3",
+        correct: ["3"],
         points: 10,
         category: "ops"
     });
@@ -75,7 +101,7 @@ export default async () => {
             "2",
             "Nenhuma das alternativas acima"
         ],
-        correct: "2",
+        correct: ["2"],
         points: 10,
         category: "ops"
     });
@@ -90,7 +116,7 @@ export default async () => {
             "0",
             "Nenhuma das alternativas acima"
         ],
-        correct: "3",
+        correct: ["3"],
         points: 10,
         category: "ops"
     });
@@ -104,7 +130,7 @@ export default async () => {
             "não",
             "Erro"
         ],
-        correct: "1",
+        correct: ["1"],
         points: 10,
         category: "ifelse"
     });
@@ -120,7 +146,7 @@ export default async () => {
             "tres",
             "Erro"
         ],
-        correct: "0",
+        correct: ["0"],
         points: 10,
         category: "ifelse"
     });
@@ -136,7 +162,7 @@ export default async () => {
             "tres",
             "Erro"
         ],
-        correct: "0",
+        correct: ["0"],
         points: 10,
         category: "loop"
     });
