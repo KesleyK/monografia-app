@@ -22,5 +22,14 @@ export default StyleSheet.create({
     button: {
         width: "100%",
         marginBottom: "10%"
+    },
+    textFeedbackReview: {
+        marginBottom: "3%"
+    },
+    correct: {
+        color: "lightgreen"
+    },
+    incorrect: {
+        color: "salmon"
     }
 });
