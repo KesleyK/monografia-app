@@ -4,39 +4,12 @@ import ChallengesCollection from "../../services/firebase/db/challenges";
 export default async () => {
     await ChallengesCollection.createTestData({
         name: "Hello World",
-        body: "Insira no código a seguir, o trecho que falta para que seja produzido o output Hello World:\n\n___(\"Hello World\")",
-        type: ChallengeType.RADIO,
-        selection: [
-            "console.log",
-            "produce",
-            "print",
-            "write",
-            "say"
-        ],
-        correct: ["2"],
-        points: 10,
-        category: "io"
-    });
-
-    await ChallengesCollection.createTestData({
-        name: "Hello World",
-        body: "Insira no código a seguir, o trecho que falta para que seja produzido o output Hello World:\n\n___(\"Hello World\")",
-        type: ChallengeType.CHECKBOX,
-        selection: [
-            "console.log",
-            "produce",
-            "print",
-            "write",
-            "say"
-        ],
-        correct: ["2"],
-        points: 10,
-        category: "io"
-    });
-
-    await ChallengesCollection.createTestData({
-        name: "Hello World",
-        body: "Insira no código a seguir, o trecho que falta para que seja produzido o output Hello World:\n\n___(\"Hello World\")",
+        body: `Insira no código a seguir, o trecho que falta para que seja produzido o output Hello World:
+        
+\`\`\`        
+___("Hello World")
+\`\`\`
+`,
         type: ChallengeType.INPUT,
         selection: [],
         correct: ["print"],
@@ -46,7 +19,12 @@ export default async () => {
 
     await ChallengesCollection.createTestData({
         name: "input",
-        body: "O que faz o seguinte código?\n\nvalor = input()",
+        body: `O que faz o seguinte código?
+
+\`\`\`
+valor = input()
+\`\`\`
+`,
         type: ChallengeType.RADIO,
         selection: [
             "Atribui um valor pré-determinado à variável",
@@ -61,7 +39,13 @@ export default async () => {
 
     await ChallengesCollection.createTestData({
         name: "input",
-        body: "Qual será o output do código a seguir?\n\ninput(\"Digite a sua idade:\")\n\nprint(\"Sua idade é\", idade)",
+        body: `Qual será o output do código a seguir?
+        
+\`\`\`        
+input("Digite a sua idade:")
+print("Sua idade é", idade)
+\`\`\`
+`,
         type: ChallengeType.RADIO,
         selection: [
             "10",
@@ -92,7 +76,12 @@ export default async () => {
 
     await ChallengesCollection.createTestData({
         name: "Operação",
-        body: "Qual será o output do seguinte código?\n\nprint(10 * 5)",
+        body: `Qual será o output do seguinte código?
+
+\`\`\`        
+print(10 * 5)
+\`\`\`
+`,
         type: ChallengeType.RADIO,
         selection: [
             "15",
@@ -108,7 +97,13 @@ export default async () => {
 
     await ChallengesCollection.createTestData({
         name: "Operação",
-        body: "Qual será o valor da variável valor após a execução do seguinte código?\n\nvalor = 1\nvalor++",
+        body: `Qual será o valor da variável valor após a execução do seguinte código?
+
+\`\`\`
+valor = 1
+valor++
+\`\`\`
+`,
         type: ChallengeType.RADIO,
         selection: [
             "2",
@@ -123,7 +118,15 @@ export default async () => {
 
     await ChallengesCollection.createTestData({
         name: "If",
-        body: "Qual será o output do seguinte código Python?\n\nif 'a' == 'A':\n\tprint('sim')\nelse:\n\tprint('não')",
+        body: `Qual será o output do seguinte código Python?
+        
+\`\`\`        
+if 'a' == 'A':
+    print('sim')
+else:
+    print('não')
+\`\`\`    
+`,
         type: ChallengeType.RADIO,
         selection: [
             "sim",
@@ -137,7 +140,20 @@ export default async () => {
 
     await ChallengesCollection.createTestData({
         name: "elif",
-        body: "Qual será o output do seguinte código?\n\na = 2\nb = ''\n\nif(a == 1):\n\tb += 'um'\nelif(a == 2):\n\tb += 'dois'\nelif(a == 3):\n\tb += 'tres'",
+        body: `Qual será o output do seguinte código?
+
+\`\`\`
+a = 2
+b = ''
+
+if(a == 1):
+    b += 'um'
+elif(a == 2):
+    b += 'dois'
+elif(a == 3):
+    b += 'tres'
+\`\`\`
+`,
         type: ChallengeType.RADIO,
         selection: [
             "Em branco",
@@ -153,16 +169,24 @@ export default async () => {
 
     await ChallengesCollection.createTestData({
         name: "Loops",
-        body: "Quantas iterações do loop serão executadas no código abaixo?\n\nfor i in range(1, 5):\n\tprint(i)",
+        body: `Quantas iterações do loop serão executadas no código abaixo?
+
+\`\`\`
+for i in range(1, 5):
+    print(i)
+\`\`\`
+`,
         type: ChallengeType.RADIO,
         selection: [
-            "Em branco",
-            "um",
-            "dois",
-            "tres",
+            "Nenhuma",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
             "Erro"
         ],
-        correct: ["0"],
+        correct: ["4"],
         points: 10,
         category: "loop"
     });
