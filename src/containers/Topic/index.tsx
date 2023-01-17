@@ -17,6 +17,8 @@ export function Topic({ route, navigation }) {
     const [progresses, setProgresses] = useState([]);
     const isFocused = useIsFocused();
 
+    let shouldDisable = false;
+
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
             setUser(userInfo);
@@ -53,6 +55,9 @@ export function Topic({ route, navigation }) {
 
     const onRenderSubtopic = ({ item }) => {
         const [progress, total] = getProgress(item);
+        
+        const disabled = topic.isSequential && shouldDisable;
+        shouldDisable = progress < total;
 
         return (
             <View style={styles.cardContainer}>
@@ -68,14 +73,14 @@ export function Topic({ route, navigation }) {
 
                     <Button
                         style={styles.cardButton}
-                        title="Acessar Desafios"
+                        title={disabled ? "Bloqueado" : "Acessar Desafios"}
                         onPress={() => navigation.navigate("Challenge", {
                             challenges: item.challenges,
                             current: 0,
                             userId: user.email,
                             reports: progresses.filter((report) => filterReportsForSubtopic(item, report))
                         })}
-                        disabled={item.challenges.length === 0}
+                        disabled={item.challenges.length === 0 || disabled}
                     />
                 </Card>
             </View>
