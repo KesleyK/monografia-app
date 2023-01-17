@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
+import Markdown from 'react-native-markdown-package';
 import { Anchor, Button, Card, Input, PrimaryTitleGoBack, RadioSelect, Text, Wrapper } from "../../components";
 import { CheckBoxSelect } from "../../components/CheckBoxSelect";
+import { markdownStyle } from "../../helpers/markdownStyles";
 import { ChallengeType } from "../../models/enum/ChallengeType";
 import ChallengeReportsCollection from "../../services/firebase/db/challengeReports";
 import ChallengesCollection from "../../services/firebase/db/challenges";
@@ -80,7 +82,6 @@ export function Challenge({ route, navigation }) {
     }
 
     const answerChallenge = async () => {
-        console.log([...selection].toString(), [...challenge.correct].toString())
         const answeredCorrectly = isAnswerCorrect();
         const answer = {
             userId: subject.userId,
@@ -121,7 +122,6 @@ export function Challenge({ route, navigation }) {
                 />;
 
             case ChallengeType.INPUT:
-                console.log(answeredPreviously)
                 return (
                     <View>
                         {answeredPreviously && (isAnswerCorrect() ?
@@ -155,7 +155,9 @@ export function Challenge({ route, navigation }) {
                     </PrimaryTitleGoBack>
 
                     <Card style={styles.body}>
-                        <Text>{challenge?.body}</Text>
+                        <Markdown styles={markdownStyle}>
+                        {challenge?.body}
+                        </Markdown>
                     </Card>
 
                     <Card style={styles.answer}>
