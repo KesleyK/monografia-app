@@ -5,6 +5,13 @@ export default StyleSheet.create({
         marginTop: "25%",
         marginHorizontal: "8%"
     },
+    card: {
+        marginBottom: "5%"
+    },
+    cardTop:{
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
     cardTitle: {
         fontWeight: "bold",
         fontSize: 18,
@@ -14,5 +21,8 @@ export default StyleSheet.create({
         marginTop: "10%",
         paddingHorizontal: 10,
         borderRadius: 10
+    },
+    flatList: {
+        paddingBottom: "30%"
     }
 });
