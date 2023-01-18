@@ -12,7 +12,7 @@ export function verifyStringInclusion(completedStr: string, includedStr: string)
 }
 
 export function extractFirstName(name: string) {
-    name = name.trim();
+    name = name?.trim();
     if (!name) {
         return "";
     }

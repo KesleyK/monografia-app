@@ -11,7 +11,7 @@ import ChallengeReportsCollection from "../../services/firebase/db/challengeRepo
 import styles from "./styles";
 
 export function Topic({ route, navigation }) {
-    const topic = route.params as ITopic;
+    const { topic, participant } = route.params;
     const [requestDone, setRequestDone] = useState(false);
     const [user, setUser] = useState(null);
     const [progresses, setProgresses] = useState([]);
@@ -55,7 +55,7 @@ export function Topic({ route, navigation }) {
 
     const onRenderSubtopic = ({ item }) => {
         const [progress, total] = getProgress(item);
-        
+
         const disabled = topic.isSequential && shouldDisable;
         shouldDisable = progress < total;
 
@@ -78,7 +78,8 @@ export function Topic({ route, navigation }) {
                             challenges: item.challenges,
                             current: 0,
                             userId: user.email,
-                            reports: progresses.filter((report) => filterReportsForSubtopic(item, report))
+                            reports: progresses.filter((report) => filterReportsForSubtopic(item, report)),
+                            participant
                         })}
                         disabled={item.challenges.length === 0 || disabled}
                     />

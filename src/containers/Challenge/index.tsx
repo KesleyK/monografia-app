@@ -3,11 +3,11 @@ import { ScrollView, View } from "react-native";
 import Markdown from 'react-native-markdown-package';
 import { Anchor, Button, Card, Input, PrimaryTitleGoBack, RadioSelect, Text, Wrapper } from "../../components";
 import { CheckBoxSelect } from "../../components/CheckBoxSelect";
+import { earnPoints } from "../../helpers/collectionUtils";
 import { markdownStyle } from "../../helpers/markdownStyles";
 import { ChallengeType } from "../../models/enum/ChallengeType";
 import ChallengeReportsCollection from "../../services/firebase/db/challengeReports";
 import ChallengesCollection from "../../services/firebase/db/challenges";
-import UsersCollection from "../../services/firebase/db/users";
 import { useRequest } from "../../services/firebase/hooks/useRequest";
 import styles from "./styles";
 
@@ -45,6 +45,15 @@ export function Challenge({ route, navigation }) {
         });
     }, [index]);
 
+    const onGoToFeedback = () => {
+        navigation.navigate("ChallengeFeedback", {
+            challenges: subject.challenges,
+            userId: subject.userId,
+            reports: answers,
+            points
+        });
+    }
+
     const previousChallenge = () => doRequest(
         {
             handler: () => {
@@ -63,12 +72,7 @@ export function Challenge({ route, navigation }) {
 
     const nextChallenge = async () => {
         if (index >= totalChallenges - 1) {
-            return navigation.navigate("ChallengeFeedback", {
-                challenges: subject.challenges,
-                userId: subject.userId,
-                reports: answers,
-                points
-            });
+            return onGoToFeedback();
         }
 
         setSelection(new Set());
@@ -94,11 +98,19 @@ export function Challenge({ route, navigation }) {
         answers.push(answer);
 
         if (answeredCorrectly) {
-            UsersCollection.acquirePoints(subject.userId, challenge.points);
+            earnPoints(subject.userId, challenge.points, subject.participant?.id);
         }
 
         nextChallenge();
     };
+
+    const createFeedbackText = () => {
+        return answeredPreviously && (isAnswerCorrect() ?
+            <Text style={{ ...styles.correct, ...styles.textFeedbackReview }}>Resposta Correta!</Text>
+            :
+            <Text style={{ ...styles.incorrect, ...styles.textFeedbackReview }}>Resposta Incorreta!</Text>
+        );
+    }
 
     const createAnswerBox = () => {
         switch (challenge?.type) {
@@ -107,7 +119,7 @@ export function Challenge({ route, navigation }) {
                 return <RadioSelect
                     title={"Escolha a alternativa correta:"}
                     data={challenge?.selection}
-                    onSelection={(item) => setSelection(new Set([item]))} // TODO: usar novo state
+                    onSelection={(item) => setSelection(new Set([item]))}
                     value={Number([...selection][0])}
                     correctOption={answeredPreviously ? Number(correct[0]) : -1}
                 />;
@@ -124,18 +136,12 @@ export function Challenge({ route, navigation }) {
             case ChallengeType.INPUT:
                 return (
                     <View>
-                        {answeredPreviously && (isAnswerCorrect() ?
-                            <Text style={{ ...styles.correct, ...styles.textFeedbackReview }}>Resposta Correta!</Text>
-                            :
-                            <View>
-                                <Text style={styles.incorrect}>
-                                    Resposta Incorreta!
-                                </Text>
-                                <Text style={styles.textFeedbackReview}>
-                                    A resposta correta seria {[...challenge.correct].toString()}
-                                </Text>
-                            </View>
-                        )}
+                        {answeredPreviously && !isAnswerCorrect() &&
+                            <Text style={styles.textFeedbackReview}>
+                                A resposta correta é: <Text style={styles.correct}>{[...challenge.correct].toString()}</Text>
+                            </Text>
+                        }
+
                         <Input
                             placeholder={"Digite sua resposta"}
                             onChangeText={(text) => setSelection(new Set([text]))}
@@ -156,11 +162,12 @@ export function Challenge({ route, navigation }) {
 
                     <Card style={styles.body}>
                         <Markdown styles={markdownStyle}>
-                        {challenge?.body}
+                            {challenge?.body}
                         </Markdown>
                     </Card>
 
                     <Card style={styles.answer}>
+                        {createFeedbackText()}
                         {createAnswerBox()}
                     </Card>
                     <View style={styles.links}>
@@ -169,13 +176,25 @@ export function Challenge({ route, navigation }) {
                         <Anchor onPress={nextChallenge}>Próximo</Anchor>
                     </View>
 
-                    <Button
-                        style={styles.button}
-                        title={"Responder"}
-                        onPress={answerChallenge}
-                        softDisabled={disabled || selection.size === 0}
-                        disabledMessage={selection.size > 0 ? "Não é possível responder novamente!" : "Favor, marcar uma alternativa"}
-                    />
+                    <View style={styles.buttonsContainer}>
+                        <Button
+                            fullWidth
+                            title={"Responder"}
+                            onPress={answerChallenge}
+                            softDisabled={disabled || selection.size === 0}
+                            disabledMessage={selection.size > 0 ? 
+                                "Não é possível responder novamente!" : 
+                                "Favor, marcar uma alternativa"}
+                        />
+
+                        {answeredPreviously &&
+                            <Button
+                                fullWidth
+                                title={"Ir Para Feedback"}
+                                onPress={onGoToFeedback}
+                            />
+                        }
+                    </View>
                 </View>
             </ScrollView>
 

@@ -5,5 +5,6 @@ export enum DefaultStyles {
     CARD_COLOR = "#363E40",
     ANCHOR_COLOR = "#30A7C1",
     ERROR_COLOR = "#F86262",
-    ERROR_COLOR_LIGHT = "#F1CBCB"
+    ERROR_COLOR_LIGHT = "#F1CBCB",
+    SUCCESS_COLOR = "#5CB85C"
 }

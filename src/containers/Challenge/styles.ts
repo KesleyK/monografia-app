@@ -1,9 +1,10 @@
 import { StyleSheet } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     container: {
         paddingHorizontal: "7%",
-        paddingTop: "20%"
+        paddingTop: "10%"
     },
     title: {
         marginBottom: "10%"
@@ -19,17 +20,19 @@ export default StyleSheet.create({
         justifyContent: "space-between",
         marginBottom: "10%"
     },
-    button: {
-        width: "100%",
+    buttonsContainer: {
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: 110,
         marginBottom: "10%"
     },
     textFeedbackReview: {
         marginBottom: "3%"
     },
     correct: {
-        color: "lightgreen"
+        color: DefaultStyles.SUCCESS_COLOR
     },
     incorrect: {
-        color: "salmon"
+        color: DefaultStyles.ERROR_COLOR
     }
 });

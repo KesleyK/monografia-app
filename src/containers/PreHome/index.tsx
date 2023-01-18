@@ -1,9 +1,9 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
-import { Button, SecondaryTitle, Text, Wrapper } from "../../components";
+import { Button, LoadingIndicator, SecondaryTitle, Text, Wrapper } from "../../components";
 import { Card } from "../../components/Card";
-import { parseCollection } from "../../helpers/collectionUtils";
+import { isGlobalPlatform, parseCollection } from "../../helpers/collectionUtils";
 import { ParticipantStatus } from "../../models/enum/ParticipantStatus";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ParticipantsCollection from "../../services/firebase/db/participants";
@@ -15,6 +15,7 @@ export function PreHome({ navigation }) {
     const [user, setUser] = useState(null);
     const [teams, setTeams] = useState([]);
     const [participantOf, setParticipantOf] = useState([]);
+    const [requestDone, setRequestDone] = useState(false);
 
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
@@ -29,7 +30,7 @@ export function PreHome({ navigation }) {
 
         const getTeams = async () => {
             const global = await TeamsCollection.getMain();
-            const teamsParticipant = parseCollection(await ParticipantsCollection.find(user.email))
+            const teamsParticipant = parseCollection(await ParticipantsCollection.findByUser(user.email))
                 .filter((item) => item.status !== ParticipantStatus.DISABLED);
 
             const teamsInfo = teamsParticipant.length === 0 ? [] :
@@ -37,6 +38,7 @@ export function PreHome({ navigation }) {
 
             setParticipantOf(teamsParticipant);
             setTeams([...parseCollection(global), ...teamsInfo]);
+            setRequestDone(true);
         }
 
         getTeams();
@@ -52,11 +54,11 @@ export function PreHome({ navigation }) {
     }
 
     const onAccessArea = (team) => {
-        if (team.ownerId !== "main") {
+        if (!isGlobalPlatform(team)) {
             ParticipantsCollection.updateStatus(findParticipantforTeam(team.id)?.id, ParticipantStatus.ACCEPTED);
         }
 
-        navigation.navigate("BottomTabNavigator", { team: team.id });
+        navigation.navigate("BottomTabNavigator", { team });
     }
 
     const onRenderTeam = ({ item }) => {
@@ -64,7 +66,7 @@ export function PreHome({ navigation }) {
             <Card style={styles.card}>
                 <View style={styles.cardTop}>
                     <Text style={styles.cardTitle}>{item?.name}</Text>
-                    {item?.ownerId !== "main" &&
+                    {!isGlobalPlatform(item) &&
                         <TouchableOpacity onPress={() => exitTeam(item?.id)}>
                             <MaterialCommunityIcons name="trash-can-outline" size={30} color="white" />
                         </TouchableOpacity>
@@ -83,13 +85,15 @@ export function PreHome({ navigation }) {
             <View style={styles.container}>
                 <SecondaryTitle>Escolha a forma como deseja acessar a plataforma</SecondaryTitle>
 
-                <FlatList
-                    ListEmptyComponent={() => <Text>Quando você entrar em mais times, eles aparecerão aqui!</Text>}
-                    contentContainerStyle={styles.flatList}
-                    data={teams}
-                    numColumns={1}
-                    renderItem={onRenderTeam}
-                />
+                {!requestDone ? <LoadingIndicator /> :
+                    <FlatList
+                        ListEmptyComponent={() => <Text>Quando você entrar em mais times, eles aparecerão aqui!</Text>}
+                        contentContainerStyle={styles.flatList}
+                        data={teams}
+                        numColumns={1}
+                        renderItem={onRenderTeam}
+                    />
+                }
             </View>
         </Wrapper>
     );

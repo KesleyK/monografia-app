@@ -4,7 +4,7 @@ import { DefaultStyles } from "../../styles/global";
 export default StyleSheet.create({
     container: {
         paddingHorizontal: "7%",
-        paddingTop: "20%"
+        paddingTop: "10%"
     },
     title: {
         marginBottom: "10%"
@@ -25,10 +25,10 @@ export default StyleSheet.create({
         marginBottom: "5%"
     },
     correct: {
-        color: "lightgreen"
+        color: DefaultStyles.SUCCESS_COLOR
     },
     incorrect: {
-        color: "salmon"
+        color: DefaultStyles.ERROR_COLOR
     },
     reviewButton: {
         marginBottom: "5%"
@@ -41,18 +41,17 @@ export default StyleSheet.create({
     },
     resultsContainer: {
         alignSelf: "center",
-        backgroundColor: DefaultStyles.SECONDARY_COLOR,
+        backgroundColor: DefaultStyles.BACKGROUND_COLOR,
         borderRadius: 65,
         padding: 20
     },
     results: {
         fontSize: 24,
-        color: "lightgreen"
+        color: DefaultStyles.SUCCESS_COLOR
     },
     numberResults: {
-        
         textAlign: "center",
         fontSize: 36,
-        color: "lightgreen"
+        color: DefaultStyles.SUCCESS_COLOR
     }
 });
