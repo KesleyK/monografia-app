@@ -1,23 +1,13 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
-import { Card, LoadingIndicator, PrimaryTitleGoBack, SearchBar, Text, Wrapper } from "../../components";
-import { parseCollection } from "../../helpers/collectionUtils";
+import { Card, PrimaryTitleGoBack, SearchBar, Text, Wrapper } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
-import TopicsCollection from "../../services/firebase/db/topics";
 import styles from "./styles";
 
-export function TopicList({ navigation }) {
+export function TopicList({ route, navigation }) {
+    const { topics } = route.params;
     const [searchPhrase, setSearchPhrase] = useState("");
-    const [topics, setTopics] = useState([]);
-    const [requestDone, setRequestDone] = useState(false);
-
-    useEffect(() => {
-        TopicsCollection.getAll().then((topicsInfo) => {
-            setTopics(parseCollection(topicsInfo));
-            setRequestDone(true);
-        });
-    }, []);
 
     const topicsList = topics?.filter((topic) => {
         return verifyStringInclusion(normalizeString(topic.name), normalizeString(searchPhrase));
@@ -43,16 +33,14 @@ export function TopicList({ navigation }) {
 
                 <SearchBar style={styles.searchBar} searchPhrase={searchPhrase} setSearchPhrase={setSearchPhrase} />
 
-                {!requestDone ? <LoadingIndicator /> :
-                    <FlatList
-                        ListEmptyComponent={() => <Text>Nenhum Tópico Encontrado!</Text>}
-                        contentContainerStyle={styles.flatList}
-                        data={topicsList}
-                        keyExtractor={(topic) => topic.id}
-                        numColumns={2}
-                        renderItem={onRender}
-                    />
-                }
+                <FlatList
+                    ListEmptyComponent={() => <Text>Nenhum Tópico Encontrado!</Text>}
+                    contentContainerStyle={styles.flatList}
+                    data={topicsList}
+                    keyExtractor={(topic) => topic.id}
+                    numColumns={2}
+                    renderItem={onRender}
+                />
             </View>
         </Wrapper>
     );

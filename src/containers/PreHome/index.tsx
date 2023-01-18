@@ -56,7 +56,7 @@ export function PreHome({ navigation }) {
             ParticipantsCollection.updateStatus(findParticipantforTeam(team.id)?.id, ParticipantStatus.ACCEPTED);
         }
 
-        navigation.navigate("BottomTabNavigator", { team: team.id });
+        navigation.navigate("BottomTabNavigator", { team });
     }
 
     const onRenderTeam = ({ item }) => {

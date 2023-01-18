@@ -45,6 +45,15 @@ export function Challenge({ route, navigation }) {
         });
     }, [index]);
 
+    const onGoToFeedback = () => {
+        navigation.navigate("ChallengeFeedback", {
+            challenges: subject.challenges,
+            userId: subject.userId,
+            reports: answers,
+            points
+        });
+    }
+
     const previousChallenge = () => doRequest(
         {
             handler: () => {
@@ -63,12 +72,7 @@ export function Challenge({ route, navigation }) {
 
     const nextChallenge = async () => {
         if (index >= totalChallenges - 1) {
-            return navigation.navigate("ChallengeFeedback", {
-                challenges: subject.challenges,
-                userId: subject.userId,
-                reports: answers,
-                points
-            });
+            return onGoToFeedback();
         }
 
         setSelection(new Set());
@@ -100,6 +104,14 @@ export function Challenge({ route, navigation }) {
         nextChallenge();
     };
 
+    const createFeedbackText = () => {
+        return answeredPreviously && (isAnswerCorrect() ?
+            <Text style={{ ...styles.correct, ...styles.textFeedbackReview }}>Resposta Correta!</Text>
+            :
+            <Text style={{ ...styles.incorrect, ...styles.textFeedbackReview }}>Resposta Incorreta!</Text>
+        );
+    }
+
     const createAnswerBox = () => {
         switch (challenge?.type) {
             default:
@@ -124,18 +136,12 @@ export function Challenge({ route, navigation }) {
             case ChallengeType.INPUT:
                 return (
                     <View>
-                        {answeredPreviously && (isAnswerCorrect() ?
-                            <Text style={{ ...styles.correct, ...styles.textFeedbackReview }}>Resposta Correta!</Text>
-                            :
-                            <View>
-                                <Text style={styles.incorrect}>
-                                    Resposta Incorreta!
-                                </Text>
-                                <Text style={styles.textFeedbackReview}>
-                                    A resposta correta seria {[...challenge.correct].toString()}
-                                </Text>
-                            </View>
-                        )}
+                        {answeredPreviously && !isAnswerCorrect() &&
+                            <Text style={styles.textFeedbackReview}>
+                                A resposta correta é: <Text style={styles.correct}>{[...challenge.correct].toString()}</Text>
+                            </Text>
+                        }
+
                         <Input
                             placeholder={"Digite sua resposta"}
                             onChangeText={(text) => setSelection(new Set([text]))}
@@ -156,11 +162,12 @@ export function Challenge({ route, navigation }) {
 
                     <Card style={styles.body}>
                         <Markdown styles={markdownStyle}>
-                        {challenge?.body}
+                            {challenge?.body}
                         </Markdown>
                     </Card>
 
                     <Card style={styles.answer}>
+                        {createFeedbackText()}
                         {createAnswerBox()}
                     </Card>
                     <View style={styles.links}>
@@ -169,13 +176,25 @@ export function Challenge({ route, navigation }) {
                         <Anchor onPress={nextChallenge}>Próximo</Anchor>
                     </View>
 
-                    <Button
-                        style={styles.button}
-                        title={"Responder"}
-                        onPress={answerChallenge}
-                        softDisabled={disabled || selection.size === 0}
-                        disabledMessage={selection.size > 0 ? "Não é possível responder novamente!" : "Favor, marcar uma alternativa"}
-                    />
+                    <View style={styles.buttonsContainer}>
+                        <Button
+                            fullWidth
+                            title={"Responder"}
+                            onPress={answerChallenge}
+                            softDisabled={disabled || selection.size === 0}
+                            disabledMessage={selection.size > 0 ? 
+                                "Não é possível responder novamente!" : 
+                                "Favor, marcar uma alternativa"}
+                        />
+
+                        {answeredPreviously &&
+                            <Button
+                                fullWidth
+                                title={"Ir Para Feedback"}
+                                onPress={onGoToFeedback}
+                            />
+                        }
+                    </View>
                 </View>
             </ScrollView>
 

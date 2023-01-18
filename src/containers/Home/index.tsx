@@ -23,7 +23,11 @@ export function Home({ route, navigation }) {
     const [people, setPeople] = useState([]);
 
     useEffect(() => {
-        TopicsCollection.getAll().then((topicsInfo) => {
+        if (team.topics.length === 0) {
+            return;
+        }
+
+        TopicsCollection.getAll(team.topics).then((topicsInfo) => {
             setTopics(parseCollection(topicsInfo));
         });
     }, []);
@@ -58,7 +62,7 @@ export function Home({ route, navigation }) {
                     <View style={styles.topicsBox}>
                         <TouchableOpacity
                             style={styles.secondaryTitleContainer}
-                            onPress={() => navigation.navigate("TopicList")}
+                            onPress={() => navigation.navigate("TopicList", { topics })}
                         >
                             <PrimaryTitle small>Tópicos</PrimaryTitle>
 
