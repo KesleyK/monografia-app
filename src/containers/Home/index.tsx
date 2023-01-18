@@ -12,9 +12,11 @@ import TopicsCollection from "../../services/firebase/db/topics";
 import UsersCollection from "../../services/firebase/db/users";
 import styles from "./styles";
 
-export function Home({ navigation }) {
+export function Home({ route, navigation }) {
     const TOPICS_LIMIT = 3;
     const RANKING_LIMIT = 10;
+
+    const { team } = route.params;
 
     const [searchPhrase, setSearchPhrase] = useState("");
     const [topics, setTopics] = useState([]);
@@ -31,6 +33,7 @@ export function Home({ navigation }) {
             setPeople(parseCollection(usersInfo));
         });
     }, []);
+
 
     const topicsList = topics
         .filter((topic) => verifyStringInclusion(normalizeString(topic.name), normalizeString(searchPhrase)))
