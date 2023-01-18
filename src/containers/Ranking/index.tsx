@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { LoadingIndicator, PrimaryTitleGoBack, UserCardSimple, Wrapper } from "../../components";
-import { parseCollection } from "../../helpers/collectionUtils";
+import { createRanking } from "../../helpers/collectionUtils";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ChatCollection from "../../services/firebase/db/chat";
-import UsersCollection from "../../services/firebase/db/users";
 import styles from "./styles";
 
 export function Ranking({route, navigation}) {
-    const { platform } = route.params; // TODO
+    const { team } = route.params;
     const [people, setPeople] = useState([]);
     const [user, setUser] = useState(null);
 
@@ -19,9 +18,9 @@ export function Ranking({route, navigation}) {
     }, [retrieveUserInfo]);
 
     useEffect(() => {
-        UsersCollection.getAll().then((usersInfo) => {
-            setPeople(parseCollection(usersInfo));
-        });
+        createRanking(team).then(usersInfo => {
+            setPeople(usersInfo);
+        })
     }, []);
 
     const onChatWith = (person) => {

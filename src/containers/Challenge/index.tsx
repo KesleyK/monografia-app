@@ -3,11 +3,11 @@ import { ScrollView, View } from "react-native";
 import Markdown from 'react-native-markdown-package';
 import { Anchor, Button, Card, Input, PrimaryTitleGoBack, RadioSelect, Text, Wrapper } from "../../components";
 import { CheckBoxSelect } from "../../components/CheckBoxSelect";
+import { earnPoints } from "../../helpers/collectionUtils";
 import { markdownStyle } from "../../helpers/markdownStyles";
 import { ChallengeType } from "../../models/enum/ChallengeType";
 import ChallengeReportsCollection from "../../services/firebase/db/challengeReports";
 import ChallengesCollection from "../../services/firebase/db/challenges";
-import UsersCollection from "../../services/firebase/db/users";
 import { useRequest } from "../../services/firebase/hooks/useRequest";
 import styles from "./styles";
 
@@ -98,7 +98,7 @@ export function Challenge({ route, navigation }) {
         answers.push(answer);
 
         if (answeredCorrectly) {
-            UsersCollection.acquirePoints(subject.userId, challenge.points);
+            earnPoints(subject.userId, challenge.points, subject.participant?.id);
         }
 
         nextChallenge();
@@ -119,7 +119,7 @@ export function Challenge({ route, navigation }) {
                 return <RadioSelect
                     title={"Escolha a alternativa correta:"}
                     data={challenge?.selection}
-                    onSelection={(item) => setSelection(new Set([item]))} // TODO: usar novo state
+                    onSelection={(item) => setSelection(new Set([item]))}
                     value={Number([...selection][0])}
                     correctOption={answeredPreviously ? Number(correct[0]) : -1}
                 />;

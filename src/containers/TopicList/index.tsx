@@ -6,7 +6,7 @@ import { normalizeString, verifyStringInclusion } from "../../helpers/stringMana
 import styles from "./styles";
 
 export function TopicList({ route, navigation }) {
-    const { topics } = route.params;
+    const { topics, participant } = route.params;
     const [searchPhrase, setSearchPhrase] = useState("");
 
     const topicsList = topics?.filter((topic) => {
@@ -15,7 +15,7 @@ export function TopicList({ route, navigation }) {
 
     const onRender = ({ item }) => (
         <View style={styles.cardContainer}>
-            <TouchableOpacity onPress={() => navigation.navigate("Topic", item)}>
+            <TouchableOpacity onPress={() => navigation.navigate("Topic", { topic: item, participant })}>
                 <Card style={styles.card}>
                     <MaterialCommunityIcons name={item.icon} size={80} color="white" />
                     <Text style={styles.cardTitle}>{item.name}</Text>
