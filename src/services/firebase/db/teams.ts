@@ -1,9 +1,5 @@
-import {
-    arrayRemove, arrayUnion, collection, doc, DocumentData,
-    getDoc, getDocs, query, QuerySnapshot, updateDoc, where
-} from "firebase/firestore";
+import { collection, DocumentData, getDocs, query, QuerySnapshot, where } from "firebase/firestore";
 import { db } from "../../../config/firebase";
-import { IParticipant } from "../../../models/IParticipant";
 
 export default abstract class TeamsCollection {
     private static readonly collectionName = "teams";
@@ -15,22 +11,9 @@ export default abstract class TeamsCollection {
         return getDocs(docsQuery);
     }
 
-    static async getAll(user: string) {
-        return getDoc(doc(this.ref, user));
-        // const docsQuery = query(this.ref, where("participants", "array-contains", { userId: user, points: 1, invitationStatus: "PENDING" }));
+    static async getAll(participants: string[]) {
+        const docsQuery = query(this.ref, where("participants", "array-contains-any", participants));
 
-        // return getDocs(docsQuery);
-    }
-
-    static insertParticipant(id: string, participant: IParticipant) {
-        return updateDoc(doc(this.ref, id), {
-            participants: arrayUnion(participant)
-        });
-    }
-
-    static deleteParticipant(id: string, participant: IParticipant) {
-        return updateDoc(doc(this.ref, id), {
-            participants: arrayRemove(participant)
-        });
+        return getDocs(docsQuery);
     }
 }

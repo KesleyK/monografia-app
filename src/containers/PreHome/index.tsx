@@ -1,20 +1,20 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
-import { idText } from "typescript";
-import { Wrapper, SecondaryTitle, Text, Button } from "../../components";
+import { Button, SecondaryTitle, Text, Wrapper } from "../../components";
 import { Card } from "../../components/Card";
 import { parseCollection } from "../../helpers/collectionUtils";
+import { ParticipantStatus } from "../../models/enum/ParticipantStatus";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
+import ParticipantsCollection from "../../services/firebase/db/participants";
 import TeamsCollection from "../../services/firebase/db/teams";
 
 import styles from "./styles";
 
 export function PreHome({ navigation }) {
-    const onGoToGlobalPlatform = () => navigation.navigate("BottomTabNavigator");
-
     const [user, setUser] = useState(null);
     const [teams, setTeams] = useState([]);
+    const [participantOf, setParticipantOf] = useState([]);
 
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
@@ -23,20 +23,38 @@ export function PreHome({ navigation }) {
     }, []);
 
     useEffect(() => {
+        if (!user) {
+            return;
+        }
+
         const getTeams = async () => {
             const global = await TeamsCollection.getMain();
-            const teamsInfo = await TeamsCollection.getAll("uLRuLggpXm8TWlHK5997");
-            setTeams([...parseCollection(global), {id: teamsInfo.id, ...teamsInfo.data()}]);
+            const teamsParticipant = parseCollection(await ParticipantsCollection.find(user.email))
+                .filter((item) => item.status !== ParticipantStatus.DISABLED);
+
+            const teamsInfo = teamsParticipant.length === 0 ? [] :
+                parseCollection(await TeamsCollection.getAll(teamsParticipant.map((item) => item.id)));
+
+            setParticipantOf(teamsParticipant);
+            setTeams([...parseCollection(global), ...teamsInfo]);
         }
 
         getTeams();
-    }, []);
+    }, [user]);
 
-    // useEffect(() => {
-    //     TeamsCollection.getAll(user.email).then((teamsInfo) => {
-    //         setTeams(parseCollection(teamsInfo));
-    //     })
-    // }, [user]);
+    const findParticipantforTeam = (teamId) => {
+        return participantOf.find((participation) => participation.teamId === teamId);
+    }
+
+    const exitTeam = (teamId) => {
+        ParticipantsCollection.updateStatus(findParticipantforTeam(teamId)?.id, ParticipantStatus.DISABLED);
+        setTeams([...teams.filter((item) => item.id !== teamId)]);
+    }
+
+    const onAccessArea = (teamId) => {
+        ParticipantsCollection.updateStatus(findParticipantforTeam(teamId)?.id, ParticipantStatus.ACCEPTED);
+        navigation.navigate("BottomTabNavigator", { team: teamId });
+    }
 
     const onRenderTeam = ({ item }) => {
         return (
@@ -44,7 +62,7 @@ export function PreHome({ navigation }) {
                 <View style={styles.cardTop}>
                     <Text style={styles.cardTitle}>{item?.name}</Text>
                     {item?.ownerId !== "main" &&
-                        <TouchableOpacity onPress={() => console.log("TODO: deny")}>
+                        <TouchableOpacity onPress={() => exitTeam(item?.id)}>
                             <MaterialCommunityIcons name="trash-can-outline" size={30} color="white" />
                         </TouchableOpacity>
                     }
@@ -52,9 +70,7 @@ export function PreHome({ navigation }) {
                 <Text>
                     {item?.description}
                 </Text>
-                <Button style={styles.cardButton} title="Acessar Área" onPress={() => {
-                    navigation.navigate("BottomTabNavigator", { team: item?.id })
-                }} />
+                <Button style={styles.cardButton} title="Acessar Área" onPress={() => onAccessArea(item?.id)} />
             </Card>
         );
     }
