@@ -51,9 +51,12 @@ export function PreHome({ navigation }) {
         setTeams([...teams.filter((item) => item.id !== teamId)]);
     }
 
-    const onAccessArea = (teamId) => {
-        ParticipantsCollection.updateStatus(findParticipantforTeam(teamId)?.id, ParticipantStatus.ACCEPTED);
-        navigation.navigate("BottomTabNavigator", { team: teamId });
+    const onAccessArea = (team) => {
+        if (team.ownerId !== "main") {
+            ParticipantsCollection.updateStatus(findParticipantforTeam(team.id)?.id, ParticipantStatus.ACCEPTED);
+        }
+
+        navigation.navigate("BottomTabNavigator", { team: team.id });
     }
 
     const onRenderTeam = ({ item }) => {
@@ -70,7 +73,7 @@ export function PreHome({ navigation }) {
                 <Text>
                     {item?.description}
                 </Text>
-                <Button style={styles.cardButton} title="Acessar Área" onPress={() => onAccessArea(item?.id)} />
+                <Button style={styles.cardButton} title="Acessar Área" onPress={() => onAccessArea(item)} />
             </Card>
         );
     }
