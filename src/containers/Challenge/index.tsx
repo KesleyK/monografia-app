@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import Markdown from 'react-native-markdown-package';
-import { Anchor, Button, Card, Input, PrimaryTitleGoBack, RadioSelect, Text, Wrapper } from "../../components";
+import { Anchor, Button, Card, Input, LoadingIndicator, PrimaryTitleGoBack, RadioSelect, Text, Wrapper } from "../../components";
 import { CheckBoxSelect } from "../../components/CheckBoxSelect";
-import { earnPoints } from "../../helpers/collectionUtils";
+import { earnPoints, parseCollection } from "../../helpers/collectionUtils";
 import { markdownStyle } from "../../helpers/markdownStyles";
 import { ChallengeType } from "../../models/enum/ChallengeType";
 import ChallengeReportsCollection from "../../services/firebase/db/challengeReports";
@@ -20,37 +20,54 @@ export function Challenge({ route, navigation }) {
 
     const [selection, setSelection] = useState(new Set());
     const [answeredPreviously, setAnsweredPreviously] = useState(false);
+    const [challenges, setChallenges] = useState([]);
     const [challenge, setChallenge] = useState(null);
     const [index, setIndex] = useState(subject.current);
     const [disabled, setDisabled] = useState(false);
     const [correct, setCorrect] = useState([]);
-    const [points, setPoints] = useState([]);
+    const [requestDone, setRequestDone] = useState(false);
 
     useEffect(() => {
         if (index === null) {
             return;
         }
 
-        ChallengesCollection.get(subject.challenges[index]).then((item) => {
-            setChallenge({ id: item.id, ...item.data() });
-            setPoints([...points, { id: item.id, value: item.data().points }]);
+        retrieveChallenges();
+    }, []);
 
-            const report = answers.find(({ challengeId }) => item.id === challengeId);
-            if (report) {
-                setSelection(new Set(report.answer));
-                setAnsweredPreviously(true);
-                setCorrect(item.data().correct);
-                setDisabled(true);
-            }
-        });
-    }, [index]);
+    useEffect(() => {
+        if (challenges.length === 0) {
+            return;
+        }
+
+        const current = challenges[index]
+        setChallenge(current);
+        const report = answers.find(({ challengeId }) => current.id === challengeId);
+
+        if (report) {
+            setSelection(new Set(report.answer));
+            setAnsweredPreviously(true);
+            setCorrect(current.correct);
+            setDisabled(true);
+        }
+    }, [challenges, index]);
+
+    const retrieveChallenges = async () => {
+        const challengesInfo = await ChallengesCollection.getAll(subject.challenges);
+        const challengeList = parseCollection(challengesInfo);
+
+        setChallenges(challengeList);
+        setRequestDone(true);
+    }
 
     const onGoToFeedback = () => {
         navigation.navigate("ChallengeFeedback", {
             challenges: subject.challenges,
             userId: subject.userId,
             reports: answers,
-            points
+            points: challenges.map(item => {
+                return { id: item.id, value: item.points }
+            })
         });
     }
 
@@ -160,17 +177,21 @@ export function Challenge({ route, navigation }) {
                         Desafio {challenge?.name}
                     </PrimaryTitleGoBack>
 
-                    <Card style={styles.body}>
-                        <Markdown styles={markdownStyle}>
-                            {challenge?.body}
-                        </Markdown>
-                    </Card>
+                    {!requestDone ? <LoadingIndicator /> :
+                        <View>
+                            <Card style={styles.body}>
+                                <Markdown styles={markdownStyle}>
+                                    {challenge?.body}
+                                </Markdown>
+                            </Card>
 
-                    <Card style={styles.answer}>
-                        {createFeedbackText()}
-                        {createAnswerBox()}
-                        {answeredPreviously && <Text>{challenge?.feedback}</Text>}
-                    </Card>
+                            <Card style={styles.answer}>
+                                {createFeedbackText()}
+                                {createAnswerBox()}
+                                {answeredPreviously && <Text>{challenge?.feedback}</Text>}
+                            </Card>
+                        </View>
+                    }
                     <View style={styles.links}>
                         <Anchor onPress={previousChallenge}>Anterior</Anchor>
                         <Text>{`Desafio ${index + 1}/${totalChallenges}`}</Text>
