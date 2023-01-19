@@ -1,4 +1,5 @@
 import { DocumentData, QuerySnapshot } from "firebase/firestore";
+import { ParticipantStatus } from "../models/enum/ParticipantStatus";
 import { ITeam } from "../models/ITeam";
 import ParticipantsCollection from "../services/firebase/db/participants";
 import UsersCollection from "../services/firebase/db/users";
@@ -24,14 +25,15 @@ export async function createRanking(team, limit: number = null) {
     }
 
     const participantsInfo = await ParticipantsCollection.findByTeam(team.id, limit);
-    const participants = parseCollection(participantsInfo);
-    
+    const participants = parseCollection(participantsInfo)
+        .filter(participant => participant.status !== ParticipantStatus.DISABLED);
+
     const usersInfo = await UsersCollection.getMultiple(participants.map(item => item.userId))
     const personArray = parseCollection(usersInfo);
-    
-    personArray.forEach(person => {
-        const personInfo = participants.find(participant => person.id === participant.userId);
-        person.points = personInfo.points;
+
+    participants.forEach(participant => {
+        const personInfo = personArray.find(person => participant.userId === person.id);
+        personInfo.points = participant.points;
     });
 
     personArray.sort((a, b) => b.points - a.points);

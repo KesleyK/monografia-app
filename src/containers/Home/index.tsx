@@ -98,9 +98,6 @@ export function Home({ route, navigation }) {
                             <UserCardSimple user={person} key={index} />
                         ))}
                     </View>
-
-                    <Button title={"remove later"} onPress={createChallenges} />
-                    <Button title={"remove later"} onPress={createTopics} />
                 </View>
             </ScrollView>
         </Wrapper>
