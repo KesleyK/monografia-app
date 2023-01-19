@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
 import { Button, LoadingIndicator, SecondaryTitle, Text, Wrapper } from "../../components";
 import { Card } from "../../components/Card";
+import { ConfirmationAlert } from "../../components/ConfirmationAlert";
 import { isGlobalPlatform, parseCollection } from "../../helpers/collectionUtils";
 import { ParticipantStatus } from "../../models/enum/ParticipantStatus";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
@@ -16,6 +17,7 @@ export function PreHome({ navigation }) {
     const [teams, setTeams] = useState([]);
     const [participantOf, setParticipantOf] = useState([]);
     const [requestDone, setRequestDone] = useState(false);
+    const [confirmationComponent, setConfirmationComponent] = useState(null);
 
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
@@ -51,6 +53,18 @@ export function PreHome({ navigation }) {
     const exitTeam = (teamId) => {
         ParticipantsCollection.updateStatus(findParticipantforTeam(teamId)?.id, ParticipantStatus.DISABLED);
         setTeams([...teams.filter((item) => item.id !== teamId)]);
+        setConfirmationComponent(null);
+    }
+
+    const onDeleteTeam = (team) => {
+        setConfirmationComponent(
+            <ConfirmationAlert
+                confirmationMessage={`Tem certeza que deseja sair do time ${team.name}?`}
+                onCancel={() => setConfirmationComponent(null)}
+                onConfirm={() => exitTeam(team?.id)}
+            />
+        );
+        // () => exitTeam(team?.id)
     }
 
     const onAccessArea = (team) => {
@@ -67,7 +81,7 @@ export function PreHome({ navigation }) {
                 <View style={styles.cardTop}>
                     <Text style={styles.cardTitle}>{item?.name}</Text>
                     {!isGlobalPlatform(item) &&
-                        <TouchableOpacity onPress={() => exitTeam(item?.id)}>
+                        <TouchableOpacity onPress={() => onDeleteTeam(item)}>
                             <MaterialCommunityIcons name="trash-can-outline" size={30} color="white" />
                         </TouchableOpacity>
                     }
@@ -95,6 +109,8 @@ export function PreHome({ navigation }) {
                     />
                 }
             </View>
+
+            {confirmationComponent}
         </Wrapper>
     );
 }
