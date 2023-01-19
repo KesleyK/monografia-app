@@ -8,4 +8,5 @@ export interface IChallenge {
     correct: string[];
     points: number;
     category?: string;
+    feedback: string;
 }

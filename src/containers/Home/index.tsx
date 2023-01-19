@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import { Button, PrimaryTitle, SearchBar, Text, UserCardSimple, Wrapper } from "../../components";
+import { PrimaryTitle, SearchBar, Text, UserCardSimple, Wrapper } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createRanking, isGlobalPlatform, parseCollection } from "../../helpers/collectionUtils";
-import createChallenges from "../../helpers/test/createChallenges";
-import createTopics from "../../helpers/test/createTopics";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ParticipantsCollection from "../../services/firebase/db/participants";
 import TopicsCollection from "../../services/firebase/db/topics";

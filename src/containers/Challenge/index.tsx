@@ -169,6 +169,7 @@ export function Challenge({ route, navigation }) {
                     <Card style={styles.answer}>
                         {createFeedbackText()}
                         {createAnswerBox()}
+                        {answeredPreviously && <Text>{challenge?.feedback}</Text>}
                     </Card>
                     <View style={styles.links}>
                         <Anchor onPress={previousChallenge}>Anterior</Anchor>
