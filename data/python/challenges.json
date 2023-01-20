@@ -40,5 +40,32 @@
         "points" : 10,
         "category" : "io",
         "feedback" : "A função input() do python pode receber uma string como argumento para produzir um output antes de receber o valor digitado pelo usuário de forma a especificar o que é esperado que seja digitado. Portanto não existem erros no programa e as opções 1 e 2 estão corretas. O print() utilizado exibe o valor das variáveis `especie` e `localizacao`, que têm o valor determinado pelo usuário, logo, não podendo ser identificado o output antes da execução, tornando a alternativa 4 certa e a 3 errada."
+    },
+    {
+        "name" : "Que fome",
+        "body" : "Vocẽ fica com fome e precisa descobrir como arranjar comida em Pythonia. Ao caminhar pela vila, você se depara com uma construção que aparentava ser algo semelhante a uma loja de conveniência e decide entrar para ver se vendem algo para comer lá. Ao entrar, a única coisa que encontra como alimento são ratos empanados, mas devido à fome, decide ignorar o nojo e decide solicitar 3 deles ao vendedor. Mas antes de fazer o pedido, você precisa ver se tem dinheiro o suficiente para comprar os ratos, precisando de uma multiplicação. Qual é o operador usado para multiplicação em Python?",
+        "type" : 1,
+        "selection" : [
+            "x",
+            "*",
+            "/",
+            "#",
+            "times",
+            "mult"
+        ],
+        "correct" : ["1"],
+        "points" : 5,
+        "category" : "ops",
+        "feedback" : "O operador de multiplicação é o *. Ele é usado entre dois operandos em python, podendo ser números literais ou variáveis que armazenam números."
+    },
+    {
+        "name" : "string",
+        "body" : "string",
+        "type" : 0,
+        "selection" : ["string"],
+        "correct" : ["string"],
+        "points" : 1,
+        "category" : "string",
+        "feedback" : "string"
     }
 ]
