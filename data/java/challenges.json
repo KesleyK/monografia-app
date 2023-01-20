@@ -1,0 +1,12 @@
+[
+    {
+        "name" : "string",
+        "body" : "string",
+        "type" : 0,
+        "selection" : ["string"],
+        "correct" : ["string"],
+        "points" : 1,
+        "category" : "string",
+        "feedback" : "string"
+    }
+]

@@ -63,7 +63,7 @@ export function Topic({ route, navigation }) {
             <View style={styles.cardContainer}>
                 <Card>
                     <Text style={styles.cardTitle}>{item.name}</Text>
-                    <Text>{item.description}</Text>
+                    {!disabled && <Text>{item.description}</Text>}
                     <ProgressBar
                         style={styles.progressBar}
                         total={total}

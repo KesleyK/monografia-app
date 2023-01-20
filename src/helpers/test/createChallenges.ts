@@ -14,7 +14,8 @@ ___("Hello World")
         selection: [],
         correct: ["print"],
         points: 10,
-        category: "io"
+        category: "io",
+        feedback: "Isso é um feedback!"
     });
 
     await ChallengesCollection.createTestData({
@@ -34,7 +35,8 @@ valor = input()
         ],
         correct: ["2"],
         points: 5,
-        category: "io"
+        category: "io",
+        feedback: "Isso é um feedback!"
     });
 
     await ChallengesCollection.createTestData({
@@ -55,7 +57,8 @@ print("Sua idade é", idade)
         ],
         correct: ["3"],
         points: 10,
-        category: "io"
+        category: "io",
+        feedback: "Isso é um feedback!"
     });
     
     await ChallengesCollection.createTestData({
@@ -71,7 +74,8 @@ print("Sua idade é", idade)
         ],
         correct: ["3"],
         points: 10,
-        category: "ops"
+        category: "ops",
+        feedback: "Isso é um feedback!"
     });
 
     await ChallengesCollection.createTestData({
@@ -92,7 +96,8 @@ print(10 * 5)
         ],
         correct: ["2"],
         points: 10,
-        category: "ops"
+        category: "ops",
+        feedback: "Isso é um feedback!"
     });
 
     await ChallengesCollection.createTestData({
@@ -113,7 +118,8 @@ valor++
         ],
         correct: ["3"],
         points: 10,
-        category: "ops"
+        category: "ops",
+        feedback: "Isso é um feedback!"
     });
 
     await ChallengesCollection.createTestData({
@@ -135,7 +141,8 @@ else:
         ],
         correct: ["1"],
         points: 10,
-        category: "ifelse"
+        category: "ifelse",
+        feedback: "Isso é um feedback!"
     });
 
     await ChallengesCollection.createTestData({
@@ -164,7 +171,8 @@ elif(a == 3):
         ],
         correct: ["0"],
         points: 10,
-        category: "ifelse"
+        category: "ifelse",
+        feedback: "Isso é um feedback!"
     });
 
     await ChallengesCollection.createTestData({
@@ -188,7 +196,8 @@ for i in range(1, 5):
         ],
         correct: ["4"],
         points: 10,
-        category: "loop"
+        category: "loop",
+        feedback: "Isso é um feedback!"
     });
 
     console.log("challenges created");
