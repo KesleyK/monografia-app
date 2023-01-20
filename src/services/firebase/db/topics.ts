@@ -1,4 +1,16 @@
-import { collection, doc, DocumentData, DocumentSnapshot, getDoc, getDocs, QuerySnapshot, setDoc } from "firebase/firestore";
+import {
+    collection,
+    doc,
+    DocumentData,
+    documentId,
+    DocumentSnapshot,
+    getDoc,
+    getDocs,
+    query,
+    QuerySnapshot,
+    setDoc,
+    where
+} from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import { ITopic } from "../../../models/ITopic";
 
@@ -10,8 +22,9 @@ export default class TopicsCollection {
         return getDoc(doc(this.ref, id));
     }
 
-    static getAll(): Promise<QuerySnapshot<DocumentData>> {
-        return getDocs(this.ref);
+    static getAll(ids: string[]): Promise<QuerySnapshot<DocumentData>> {
+        const docsQuery = query(this.ref, where(documentId(), "in", ids));
+        return getDocs(docsQuery);
     }
 
     static createTestData(data: ITopic) {

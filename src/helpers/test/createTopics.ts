@@ -72,6 +72,7 @@ export default async () => {
     await TopicsCollection.createTestData({
         name: "Python",
         icon: "language-python",
+        isSequential: true,
         subtopics: [
             {
                 name: "Input e Output",

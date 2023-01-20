@@ -11,11 +11,13 @@ import ChallengeReportsCollection from "../../services/firebase/db/challengeRepo
 import styles from "./styles";
 
 export function Topic({ route, navigation }) {
-    const topic = route.params as ITopic;
+    const { topic, participant } = route.params;
     const [requestDone, setRequestDone] = useState(false);
     const [user, setUser] = useState(null);
     const [progresses, setProgresses] = useState([]);
     const isFocused = useIsFocused();
+
+    let shouldDisable = false;
 
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
@@ -54,6 +56,9 @@ export function Topic({ route, navigation }) {
     const onRenderSubtopic = ({ item }) => {
         const [progress, total] = getProgress(item);
 
+        const disabled = topic.isSequential && shouldDisable;
+        shouldDisable = progress < total;
+
         return (
             <View style={styles.cardContainer}>
                 <Card>
@@ -68,14 +73,15 @@ export function Topic({ route, navigation }) {
 
                     <Button
                         style={styles.cardButton}
-                        title="Acessar Desafios"
+                        title={disabled ? "Bloqueado" : "Acessar Desafios"}
                         onPress={() => navigation.navigate("Challenge", {
                             challenges: item.challenges,
                             current: 0,
                             userId: user.email,
-                            reports: progresses.filter((report) => filterReportsForSubtopic(item, report))
+                            reports: progresses.filter((report) => filterReportsForSubtopic(item, report)),
+                            participant
                         })}
-                        disabled={item.challenges.length === 0}
+                        disabled={item.challenges.length === 0 || disabled}
                     />
                 </Card>
             </View>
