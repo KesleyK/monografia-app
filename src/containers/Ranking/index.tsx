@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import { RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
 import { LoadingIndicator, PrimaryTitleGoBack, UserCardSimple, Wrapper } from "../../components";
 import { createRanking } from "../../helpers/collectionUtils";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
@@ -10,27 +10,38 @@ export function Ranking({route, navigation}) {
     const { team } = route.params;
     const [people, setPeople] = useState([]);
     const [user, setUser] = useState(null);
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
             setUser(userInfo);
         });
-    }, [retrieveUserInfo]);
+    }, []);
 
     useEffect(() => {
+        loadRanking();
+    }, []);
+
+    const loadRanking = () => {
         createRanking(team).then(usersInfo => {
             setPeople(usersInfo);
+            setRefreshing(false);
         })
-    }, []);
+    }
 
     const onChatWith = (person) => {
         ChatCollection.create(user.email, person);
         navigation.navigate("Chat", {userId: person});
     };
 
+    const onRefresh = () => {
+        setRefreshing(true);
+        loadRanking();
+    }
+
     return (
         <Wrapper>
-            <ScrollView>
+            <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
                 <View style={styles.container}>
                     <PrimaryTitleGoBack style={styles.title} onPress={() => navigation.goBack()}>
                         Ranking
