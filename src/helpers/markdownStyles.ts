@@ -36,6 +36,14 @@ export const markdownStyle = {
         borderRadius: 20,
         padding: 15
     },
+    inlineCode: {
+        fontFamily: "Roboto",
+        fontWeight: '500',
+        backgroundColor: DefaultStyles.BACKGROUND_COLOR,
+        color: DefaultStyles.PRIMARY_COLOR,
+        borderRadius: 20,
+        padding: 15
+    },
     tableHeader: {
         backgroundColor: 'grey',
     }

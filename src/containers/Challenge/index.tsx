@@ -51,8 +51,16 @@ export function Challenge({ route, navigation }) {
     const retrieveChallenges = async () => {
         const challengesInfo = await ChallengesCollection.getAll(subject.challenges);
         const challengeList = parseCollection(challengesInfo);
+        const arr = [];
 
-        setChallenges(challengeList);
+        subject.challenges.forEach(element => {
+            const reference = challengeList.find((item) => item.id === element);
+            if (reference) {
+                arr.push(reference);
+            }
+        });
+
+        setChallenges(arr);
         setRequestDone(true);
     }
 

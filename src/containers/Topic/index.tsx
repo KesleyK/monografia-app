@@ -39,7 +39,17 @@ export function Topic({ route, navigation }) {
 
     useEffect(() => {
         SubtopicsCollection.getAll(topic.subtopics).then((subtopicsInfo) => {
-            setSubtopics(parseCollection(subtopicsInfo));
+            const retrievedSubtopics = parseCollection(subtopicsInfo);
+            const arr = [];
+
+            topic.subtopics.forEach(element => {
+                const reference = retrievedSubtopics.find((item) => item.id === element);
+                if (reference) {
+                    arr.push(reference);
+                }
+            });
+
+            setSubtopics(arr);
         });
     }, [])
 

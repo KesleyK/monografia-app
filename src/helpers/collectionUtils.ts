@@ -5,6 +5,10 @@ import ParticipantsCollection from "../services/firebase/db/participants";
 import UsersCollection from "../services/firebase/db/users";
 
 export const parseCollection = (info: QuerySnapshot<DocumentData>) => {
+    if (info.empty) {
+        return [];
+    }
+    
     const arr = [];
 
     info.forEach((doc: DocumentData) => {

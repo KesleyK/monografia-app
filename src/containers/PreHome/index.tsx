@@ -5,6 +5,7 @@ import { Button, LoadingIndicator, SecondaryTitle, Text, Wrapper } from "../../c
 import { Card } from "../../components/Card";
 import { ConfirmationAlert } from "../../components/ConfirmationAlert";
 import { isGlobalPlatform, parseCollection } from "../../helpers/collectionUtils";
+import { createPythonCourse } from "../../helpers/test/globalPlatform";
 import { ParticipantStatus } from "../../models/enum/ParticipantStatus";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ParticipantsCollection from "../../services/firebase/db/participants";
@@ -109,6 +110,7 @@ export function PreHome({ navigation }) {
                     />
                 }
             </View>
+            <Button title="Test" onPress={createPythonCourse}/>
 
             {confirmationComponent}
         </Wrapper>
