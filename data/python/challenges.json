@@ -43,7 +43,7 @@
     },
     {
         "name" : "Que fome",
-        "body" : "Vocẽ fica com fome e precisa descobrir como arranjar comida em Pythonia. Ao caminhar pela vila, você se depara com uma construção que aparentava ser algo semelhante a uma loja de conveniência e decide entrar para ver se vendem algo para comer lá. Ao entrar, a única coisa que encontra como alimento são ratos empanados, mas devido à fome, decide ignorar o nojo e decide solicitar 3 deles ao vendedor. Mas antes de fazer o pedido, você precisa ver se tem dinheiro o suficiente para comprar os ratos, precisando de uma multiplicação. Qual é o operador usado para multiplicação em Python?",
+        "body" : "Você fica com fome e precisa descobrir como arranjar comida em Pythonia. Ao caminhar pela vila, você se depara com uma construção que aparentava ser algo semelhante a uma loja de conveniência e decide entrar para ver se vendem algo para comer lá. Ao entrar, a única coisa que encontra como alimento são ratos empanados, mas devido à fome, decide ignorar o nojo e solicita 3 deles ao vendedor. Mas antes de fazer o pedido, você precisa ver se tem dinheiro o suficiente para comprar os ratos, precisando de uma multiplicação. Qual é o operador usado para multiplicação em Python?",
         "type" : 1,
         "selection" : [
             "x",
@@ -59,13 +59,20 @@
         "feedback" : "O operador de multiplicação é o *. Ele é usado entre dois operandos em python, podendo ser números literais ou variáveis que armazenam números."
     },
     {
-        "name" : "string",
-        "body" : "string",
-        "type" : 0,
-        "selection" : ["string"],
-        "correct" : ["string"],
-        "points" : 1,
-        "category" : "string",
-        "feedback" : "string"
+        "name" : "Mapa",
+        "body" : "Ao sair da loja, você olha em volta e percebe que está totalmente perdido neste local desconhecido, mas encontra um mapa estranho usado pelo habitantes locais que funciona por meio de uma representação textual ao invés de visual, contando os passos para cada direção a partir dele. Você vê o seguinte código que indica o caminho para chegar em um local semelhante a uma praça de alimentação:\n\n```print('frente' + str(10))\nprint('direita' + str(37 + 1/2))\nprint('esquerda' + str(5))```\nQuais das operações listadas abaixo foram utilizadas no código acima?",
+        "type" : 2,
+        "selection" : [
+            "Soma",
+            "subtração",
+            "Multiplicação",
+            "Divisão",
+            "Concatenação",
+            "Casting"
+        ],
+        "correct" : ["0", "3", "4", "5"],
+        "points" : 10,
+        "category" : "ops",
+        "feedback" : "O símbolo + representa normalmente uma soma, mas quando a operação é feita envolvendo duas strings em python, ele representa uma concatenação. No problema, foram utilizadas concatenações em cada linha do código, mas também uma soma na segunda linha dentro dos parênteses juntamente com uma divisão. Por fim, os números presentes no código foram transformados em strings por meio de um casting antes de serem concatenados."
     }
 ]
