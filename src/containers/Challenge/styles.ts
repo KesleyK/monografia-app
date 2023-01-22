@@ -34,5 +34,12 @@ export default StyleSheet.create({
     },
     incorrect: {
         color: DefaultStyles.ERROR_COLOR
+    },
+    longFeedback: {
+        marginTop: 5,
+        backgroundColor: DefaultStyles.BACKGROUND_COLOR,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 5
     }
 });
