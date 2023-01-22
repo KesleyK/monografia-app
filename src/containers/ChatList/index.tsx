@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
 import { LoadingIndicator, PrimaryTitle, Text, UserCardSimple, Wrapper } from "../../components";
+import { chatBetween } from "../../helpers/chatUtils";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ChatCollection from "../../services/firebase/db/chat";
 import UsersCollection from "../../services/firebase/db/users";
@@ -77,7 +78,7 @@ export function ChatList({ navigation }) {
             <UserCardSimple
                 key={index}
                 user={person}
-                onPress={() => onChatWith(person.email)}
+                onPress={() => chatBetween(currentUser.email, person.email, navigation)}
                 chat
                 messages={person.notifications}
             />
