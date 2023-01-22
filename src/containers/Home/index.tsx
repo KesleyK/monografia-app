@@ -10,6 +10,7 @@ import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo"
 import ParticipantsCollection from "../../services/firebase/db/participants";
 import TopicsCollection from "../../services/firebase/db/topics";
 import styles from "./styles";
+import ChatCollection from "../../services/firebase/db/chat";
 
 export function Home({ route, navigation }) {
     const TOPICS_LIMIT = 3;
@@ -17,11 +18,18 @@ export function Home({ route, navigation }) {
 
     const { team } = route.params;
 
+    const [currentUser, setCurrentUser] = useState(null);
     const [searchPhrase, setSearchPhrase] = useState("");
     const [topics, setTopics] = useState([]);
     const [people, setPeople] = useState([]);
     const [participant, setParticipant] = useState(null);
     const [refreshing, setRefreshing] = useState(false);
+
+    useEffect(() => {
+        retrieveUserInfo().then((userInfo) => {
+            setCurrentUser(userInfo);
+        });
+    }, []);
 
     useEffect(() => {
         loadTopics();
@@ -42,7 +50,7 @@ export function Home({ route, navigation }) {
         createRanking(team, RANKING_LIMIT).then(usersInfo => {
             setPeople(usersInfo);
         });
-        
+
         if (!isGlobalPlatform(team)) {
             retrieveUserInfo().then(userInfo => {
                 ParticipantsCollection.findByUser(userInfo.email).then(participants => {
@@ -54,6 +62,11 @@ export function Home({ route, navigation }) {
 
         setRefreshing(false);
     }
+
+    const onChatWith = (person) => {
+        ChatCollection.create(currentUser.email, person);
+        navigation.navigate("Chat", { userId: person });
+    };
 
     const onRefresh = () => {
         setRefreshing(true);
@@ -107,7 +120,11 @@ export function Home({ route, navigation }) {
                         </TouchableOpacity>
 
                         {people.map((person, index) => (
-                            <UserCardSimple user={person} key={index} />
+                            <UserCardSimple
+                                key={index}
+                                user={person}
+                                onPress={() => onChatWith(person.email)}
+                            />
                         ))}
                     </View>
                 </View>
