@@ -15,7 +15,7 @@ export function AccountSettings({ route, navigation }) {
         isFocused && retrieveUserInfo().then((userInfo) => {
             setUser(userInfo);
         });
-    }, [isFocused, retrieveUserInfo]);
+    }, [isFocused]);
 
     return (
         <Wrapper>

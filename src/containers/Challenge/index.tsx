@@ -1,3 +1,4 @@
+import { useIsFocused } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
 import { ScrollView, View } from "react-native";
 import Markdown from 'react-native-markdown-package';
@@ -29,6 +30,7 @@ export function Challenge({ route, navigation }) {
     const [disabled, setDisabled] = useState(false);
     const [correct, setCorrect] = useState([]);
     const [requestDone, setRequestDone] = useState(false);
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         retrieveChallenges();
@@ -49,7 +51,7 @@ export function Challenge({ route, navigation }) {
             setCorrect(current.correct);
             setDisabled(true);
         }
-    }, [challenges, index]);
+    }, [challenges, index, isFocused]);
 
     const retrieveChallenges = async () => {
         const challengesInfo = await ChallengesCollection.getAll(subject.challenges);
