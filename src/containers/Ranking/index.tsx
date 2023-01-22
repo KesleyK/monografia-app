@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
 import { LoadingIndicator, PrimaryTitleGoBack, UserCardSimple, Wrapper } from "../../components";
+import { chatBetween } from "../../helpers/chatUtils";
 import { createRanking } from "../../helpers/collectionUtils";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ChatCollection from "../../services/firebase/db/chat";
@@ -29,11 +30,6 @@ export function Ranking({ route, navigation }) {
         })
     }
 
-    const onChatWith = (person) => {
-        ChatCollection.create(user.email, person);
-        navigation.navigate("Chat", { userId: person });
-    };
-
     const onRefresh = () => {
         setRefreshing(true);
         loadRanking();
@@ -51,7 +47,7 @@ export function Ranking({ route, navigation }) {
                         <UserCardSimple
                             key={index}
                             user={person}
-                            onPress={() => onChatWith(person.id)}
+                            onPress={() => chatBetween(user.email, person.id, navigation, true)}
                         />
                     ))}
                 </View>

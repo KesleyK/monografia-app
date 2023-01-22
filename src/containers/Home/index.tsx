@@ -11,6 +11,7 @@ import ParticipantsCollection from "../../services/firebase/db/participants";
 import TopicsCollection from "../../services/firebase/db/topics";
 import styles from "./styles";
 import ChatCollection from "../../services/firebase/db/chat";
+import { chatBetween } from "../../helpers/chatUtils";
 
 export function Home({ route, navigation }) {
     const TOPICS_LIMIT = 3;
@@ -62,11 +63,6 @@ export function Home({ route, navigation }) {
 
         setRefreshing(false);
     }
-
-    const onChatWith = (person) => {
-        ChatCollection.create(currentUser.email, person);
-        navigation.navigate("Chat", { userId: person });
-    };
 
     const onRefresh = () => {
         setRefreshing(true);
@@ -123,7 +119,7 @@ export function Home({ route, navigation }) {
                             <UserCardSimple
                                 key={index}
                                 user={person}
-                                onPress={() => onChatWith(person.email)}
+                                onPress={() => chatBetween(currentUser.email, person.email, navigation, true)}
                             />
                         ))}
                     </View>
