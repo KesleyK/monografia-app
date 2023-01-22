@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
+import { RefreshControl, ScrollView, View } from "react-native";
 import { LoadingIndicator, PrimaryTitleGoBack, UserCardSimple, Wrapper } from "../../components";
 import { chatBetween } from "../../helpers/chatUtils";
 import { createRanking } from "../../helpers/collectionUtils";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
-import ChatCollection from "../../services/firebase/db/chat";
 import styles from "./styles";
 
 export function Ranking({ route, navigation }) {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
+import { RefreshControl, ScrollView, View } from "react-native";
 import { LoadingIndicator, PrimaryTitle, Text, UserCardSimple, Wrapper } from "../../components";
 import { chatBetween } from "../../helpers/chatUtils";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
@@ -62,10 +62,6 @@ export function ChatList({ navigation }) {
         setPeople(arr);
         setRequestDone(true);
         setRefreshing(false);
-    };
-
-    const onChatWith = (person) => {
-        navigation.navigate("Chat", { userId: person });
     };
 
     const onRefresh = () => {

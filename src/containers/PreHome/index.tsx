@@ -1,7 +1,6 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { FlatList, RefreshControl, TouchableOpacity, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import { Button, LoadingIndicator, SecondaryTitle, Text, Wrapper } from "../../components";
 import { Card } from "../../components/Card";
 import { ConfirmationAlert } from "../../components/ConfirmationAlert";
@@ -68,7 +67,6 @@ export function PreHome({ navigation }) {
                 onConfirm={() => exitTeam(team?.id)}
             />
         );
-        // () => exitTeam(team?.id)
     }
 
     const onAccessArea = (team) => {
