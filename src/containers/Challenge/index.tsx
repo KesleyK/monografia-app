@@ -5,6 +5,7 @@ import { Anchor, Button, Card, Input, LoadingIndicator, PrimaryTitleGoBack, Radi
 import { CheckBoxSelect } from "../../components/CheckBoxSelect";
 import { earnPoints, parseCollection } from "../../helpers/collectionUtils";
 import { markdownStyle } from "../../helpers/markdownStyles";
+import { limitCharacters } from "../../helpers/stringManagement";
 import { ChallengeType } from "../../models/enum/ChallengeType";
 import ChallengeReportsCollection from "../../services/firebase/db/challengeReports";
 import ChallengesCollection from "../../services/firebase/db/challenges";
@@ -12,6 +13,8 @@ import { useRequest } from "../../services/firebase/hooks/useRequest";
 import styles from "./styles";
 
 export function Challenge({ route, navigation }) {
+    const TITLE_MAX_CHAR = 18;
+    
     const subject = route.params;
     const totalChallenges = subject.challenges.length;
     const answers = subject.reports;
@@ -179,7 +182,7 @@ export function Challenge({ route, navigation }) {
             <ScrollView>
                 <View style={styles.container}>
                     <PrimaryTitleGoBack style={styles.title} onPress={() => navigation.goBack()}>
-                        Desafio {challenge?.name}
+                        Desafio {limitCharacters(challenge?.name, TITLE_MAX_CHAR)}
                     </PrimaryTitleGoBack>
 
                     {!requestDone ? <LoadingIndicator /> :
