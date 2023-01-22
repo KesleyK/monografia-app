@@ -198,7 +198,7 @@ export function Challenge({ route, navigation }) {
                             <Card style={styles.answer}>
                                 {createFeedbackText()}
                                 {createAnswerBox()}
-                                {answeredPreviously && <Text>{challenge?.feedback}</Text>}
+                                {answeredPreviously && challenge?.feedback && <Text style={styles.longFeedback}>{challenge?.feedback}</Text>}
                             </Card>
                         </View>
                     }
