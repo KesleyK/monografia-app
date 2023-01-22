@@ -1,10 +1,12 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
-import { FlatList, TouchableOpacity, View } from "react-native";
+import { FlatList, RefreshControl, TouchableOpacity, View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import { Button, LoadingIndicator, SecondaryTitle, Text, Wrapper } from "../../components";
 import { Card } from "../../components/Card";
 import { ConfirmationAlert } from "../../components/ConfirmationAlert";
 import { isGlobalPlatform, parseCollection } from "../../helpers/collectionUtils";
+import { createPythonCourse } from "../../helpers/test/globalPlatform";
 import { ParticipantStatus } from "../../models/enum/ParticipantStatus";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ParticipantsCollection from "../../services/firebase/db/participants";
@@ -17,6 +19,7 @@ export function PreHome({ navigation }) {
     const [teams, setTeams] = useState([]);
     const [participantOf, setParticipantOf] = useState([]);
     const [requestDone, setRequestDone] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
     const [confirmationComponent, setConfirmationComponent] = useState(null);
 
     useEffect(() => {
@@ -30,21 +33,22 @@ export function PreHome({ navigation }) {
             return;
         }
 
-        const getTeams = async () => {
-            const global = await TeamsCollection.getMain();
-            const teamsParticipant = parseCollection(await ParticipantsCollection.findByUser(user.email))
-                .filter((item) => item.status !== ParticipantStatus.DISABLED);
-
-            const teamsInfo = teamsParticipant.length === 0 ? [] :
-                parseCollection(await TeamsCollection.getAll(teamsParticipant.map((item) => item.id)));
-
-            setParticipantOf(teamsParticipant);
-            setTeams([...parseCollection(global), ...teamsInfo]);
-            setRequestDone(true);
-        }
-
         getTeams();
     }, [user]);
+
+    const getTeams = async () => {
+        const global = await TeamsCollection.getMain();
+        const teamsParticipant = parseCollection(await ParticipantsCollection.findByUser(user.email))
+            .filter((item) => item.status !== ParticipantStatus.DISABLED);
+
+        const teamsInfo = teamsParticipant.length === 0 ? [] :
+            parseCollection(await TeamsCollection.getAll(teamsParticipant.map((item) => item.id)));
+
+        setParticipantOf(teamsParticipant);
+        setTeams([...parseCollection(global), ...teamsInfo]);
+        setRequestDone(true);
+        setRefreshing(false);
+    }
 
     const findParticipantforTeam = (teamId) => {
         return participantOf.find((participation) => participation.teamId === teamId);
@@ -94,6 +98,11 @@ export function PreHome({ navigation }) {
         );
     }
 
+    const onRefresh = () => {
+        setRefreshing(true);
+        getTeams();
+    }
+
     return (
         <Wrapper>
             <View style={styles.container}>
@@ -101,6 +110,7 @@ export function PreHome({ navigation }) {
 
                 {!requestDone ? <LoadingIndicator /> :
                     <FlatList
+                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
                         ListEmptyComponent={() => <Text>Quando você entrar em mais times, eles aparecerão aqui!</Text>}
                         contentContainerStyle={styles.flatList}
                         data={teams}
@@ -109,6 +119,7 @@ export function PreHome({ navigation }) {
                     />
                 }
             </View>
+            <Button title="Test" onPress={createPythonCourse} />
 
             {confirmationComponent}
         </Wrapper>

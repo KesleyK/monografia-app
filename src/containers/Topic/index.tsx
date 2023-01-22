@@ -39,7 +39,17 @@ export function Topic({ route, navigation }) {
 
     useEffect(() => {
         SubtopicsCollection.getAll(topic.subtopics).then((subtopicsInfo) => {
-            setSubtopics(parseCollection(subtopicsInfo));
+            const retrievedSubtopics = parseCollection(subtopicsInfo);
+            const arr = [];
+
+            topic.subtopics.forEach(element => {
+                const reference = retrievedSubtopics.find((item) => item.id === element);
+                if (reference) {
+                    arr.push(reference);
+                }
+            });
+
+            setSubtopics(arr);
         });
     }, [])
 
@@ -70,7 +80,7 @@ export function Topic({ route, navigation }) {
             <View style={styles.cardContainer}>
                 <Card>
                     <Text style={styles.cardTitle}>{item.name}</Text>
-                    <Text>{item.description}</Text>
+                    {!disabled && <Text>{item.description}</Text>}
                     <ProgressBar
                         style={styles.progressBar}
                         total={total}

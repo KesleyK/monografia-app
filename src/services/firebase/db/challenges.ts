@@ -23,11 +23,18 @@ export default class ChallengesCollection {
     }
 
     static getAll(ids: string[]): Promise<QuerySnapshot<DocumentData>> {
+        if (!ids || ids.length === 0) {
+            ids = ["none"];
+        }
+
         const docsQuery = query(this.ref, where(documentId(), "in", ids));
         return getDocs(docsQuery);
     }
 
     static createTestData(data: IChallenge) {
-        return setDoc(doc(this.ref), data);
+        const createdDoc = doc(this.ref);
+        setDoc(createdDoc, data);
+
+        return {id: createdDoc.id, ...data};
     }
 }

@@ -28,10 +28,6 @@ export function Challenge({ route, navigation }) {
     const [requestDone, setRequestDone] = useState(false);
 
     useEffect(() => {
-        if (index === null) {
-            return;
-        }
-
         retrieveChallenges();
     }, []);
 
@@ -55,8 +51,16 @@ export function Challenge({ route, navigation }) {
     const retrieveChallenges = async () => {
         const challengesInfo = await ChallengesCollection.getAll(subject.challenges);
         const challengeList = parseCollection(challengesInfo);
+        const arr = [];
 
-        setChallenges(challengeList);
+        subject.challenges.forEach(element => {
+            const reference = challengeList.find((item) => item.id === element);
+            if (reference) {
+                arr.push(reference);
+            }
+        });
+
+        setChallenges(arr);
         setRequestDone(true);
     }
 
@@ -71,6 +75,13 @@ export function Challenge({ route, navigation }) {
         });
     }
 
+    const changeChallenge = (newChallengeIndex) => {
+        setSelection(new Set());
+        setAnsweredPreviously(false);
+        setIndex(newChallengeIndex);
+        setDisabled(false);
+    }
+
     const previousChallenge = () => doRequest(
         {
             handler: () => {
@@ -78,10 +89,7 @@ export function Challenge({ route, navigation }) {
                     throw new Error();
                 }
 
-                setSelection(new Set());
-                setAnsweredPreviously(false);
-                setIndex(index - 1);
-                setDisabled(false);
+                changeChallenge(index - 1);
             }
         },
         "Não existe desafio anterior!"
@@ -92,10 +100,7 @@ export function Challenge({ route, navigation }) {
             return onGoToFeedback();
         }
 
-        setSelection(new Set());
-        setAnsweredPreviously(false);
-        setIndex(index + 1);
-        setDisabled(false);
+        changeChallenge(index + 1);
     };
 
     const isAnswerCorrect = () => {
@@ -204,8 +209,8 @@ export function Challenge({ route, navigation }) {
                             title={"Responder"}
                             onPress={answerChallenge}
                             softDisabled={disabled || selection.size === 0}
-                            disabledMessage={selection.size > 0 ? 
-                                "Não é possível responder novamente!" : 
+                            disabledMessage={selection.size > 0 ?
+                                "Não é possível responder novamente!" :
                                 "Favor, marcar uma alternativa"}
                         />
 

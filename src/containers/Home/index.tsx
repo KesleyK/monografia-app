@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import { RefreshControl, ScrollView, TouchableOpacity, View } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { PrimaryTitle, SearchBar, Text, UserCardSimple, Wrapper } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
@@ -21,8 +21,14 @@ export function Home({ route, navigation }) {
     const [topics, setTopics] = useState([]);
     const [people, setPeople] = useState([]);
     const [participant, setParticipant] = useState(null);
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
+        loadTopics();
+        loadRanking();
+    }, []);
+
+    const loadTopics = () => {
         if (team.topics.length === 0) {
             return;
         }
@@ -30,13 +36,13 @@ export function Home({ route, navigation }) {
         TopicsCollection.getAll(team.topics).then((topicsInfo) => {
             setTopics(parseCollection(topicsInfo));
         });
-    }, []);
+    }
 
-    useEffect(() => {
+    const loadRanking = () => {
         createRanking(team, RANKING_LIMIT).then(usersInfo => {
             setPeople(usersInfo);
         });
-
+        
         if (!isGlobalPlatform(team)) {
             retrieveUserInfo().then(userInfo => {
                 ParticipantsCollection.findByUser(userInfo.email).then(participants => {
@@ -45,7 +51,15 @@ export function Home({ route, navigation }) {
                 });
             });
         }
-    }, []);
+
+        setRefreshing(false);
+    }
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        loadTopics();
+        loadRanking();
+    }
 
     const topicsList = topics
         .filter((topic) => verifyStringInclusion(normalizeString(topic.name), normalizeString(searchPhrase)))
@@ -61,7 +75,7 @@ export function Home({ route, navigation }) {
 
     return (
         <Wrapper>
-            <ScrollView>
+            <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
                 <View style={styles.container}>
                     <PrimaryTitle style={styles.title}>Bem-vindo!</PrimaryTitle>
 
