@@ -17,7 +17,7 @@ export function ChatList({ navigation }) {
         retrieveUserInfo().then((userInfo) => {
             setCurrentUser(userInfo);
         });
-    }, [retrieveUserInfo]);
+    }, []);
 
     useEffect(() => {
         fetchConversations();
@@ -74,9 +74,13 @@ export function ChatList({ navigation }) {
 
     const renderList = people.length === 0 ? <Text>Nenhuma conversa encontrada!</Text> :
         people.map((person, index) => (
-            <TouchableOpacity key={index} onPress={() => onChatWith(person.email)}>
-                <UserCardSimple user={person} chat messages={person.notifications} />
-            </TouchableOpacity>
+            <UserCardSimple
+                key={index}
+                user={person}
+                onPress={() => onChatWith(person.email)}
+                chat
+                messages={person.notifications}
+            />
         ))
 
 

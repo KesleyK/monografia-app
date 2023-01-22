@@ -6,7 +6,7 @@ import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo"
 import ChatCollection from "../../services/firebase/db/chat";
 import styles from "./styles";
 
-export function Ranking({route, navigation}) {
+export function Ranking({ route, navigation }) {
     const { team } = route.params;
     const [people, setPeople] = useState([]);
     const [user, setUser] = useState(null);
@@ -31,7 +31,7 @@ export function Ranking({route, navigation}) {
 
     const onChatWith = (person) => {
         ChatCollection.create(user.email, person);
-        navigation.navigate("Chat", {userId: person});
+        navigation.navigate("Chat", { userId: person });
     };
 
     const onRefresh = () => {
@@ -47,10 +47,12 @@ export function Ranking({route, navigation}) {
                         Ranking
                     </PrimaryTitleGoBack>
 
-                    {people.length === 0 ? <LoadingIndicator/> : people.map((person, index) => (
-                        <TouchableOpacity key={index} onPress={() => onChatWith(person.id)}>
-                            <UserCardSimple user={person} />
-                        </TouchableOpacity>
+                    {people.length === 0 ? <LoadingIndicator /> : people.map((person, index) => (
+                        <UserCardSimple
+                            key={index}
+                            user={person}
+                            onPress={() => onChatWith(person.id)}
+                        />
                     ))}
                 </View>
             </ScrollView>
