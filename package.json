@@ -25,6 +25,7 @@
         "expo": "~46.0.13",
         "expo-constants": "~13.2.4",
         "expo-status-bar": "~1.4.0",
+        "expo-updates": "~0.14.7",
         "firebase": "^9.10.0",
         "formik": "^2.2.9",
         "react": "18.0.0",
