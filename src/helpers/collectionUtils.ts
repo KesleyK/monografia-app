@@ -30,7 +30,7 @@ export async function createRanking(team, limit: number = null) {
 
     const participantsInfo = await ParticipantsCollection.findByTeam(team.id, limit);
     const participants = parseCollection(participantsInfo)
-        .filter(participant => participant.status !== ParticipantStatus.DISABLED);
+        .filter(participant => participant.status === ParticipantStatus.ACCEPTED);
 
     const usersInfo = await UsersCollection.getMultiple(participants.map(item => item.userId))
     const personArray = parseCollection(usersInfo);
