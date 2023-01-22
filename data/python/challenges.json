@@ -94,5 +94,115 @@
         "category": "ops",
         "order": 4,
         "feedback": "O símbolo + representa normalmente uma soma, mas quando a operação é feita envolvendo duas strings em python, ele representa uma concatenação. No problema, foram utilizadas concatenações em cada linha do código, mas também uma soma na segunda linha dentro dos parênteses juntamente com uma divisão. Por fim, os números presentes no código foram transformados em strings por meio de um casting antes de serem concatenados."
+    },
+    {
+        "name": "",
+        "body": "",
+        "type": 2,
+        "selection": [],
+        "correct": [],
+        "points": 10,
+        "category": "ops",
+        "order": 5,
+        "feedback": ""
+    },
+    {
+        "name": "",
+        "body": "",
+        "type": 2,
+        "selection": [],
+        "correct": [],
+        "points": 10,
+        "category": "ops",
+        "order": 6,
+        "feedback": ""
+    },
+    {
+        "name": "",
+        "body": "",
+        "type": 2,
+        "selection": [],
+        "correct": [],
+        "points": 10,
+        "category": "ops",
+        "order": 7,
+        "feedback": ""
+    },
+    {
+        "name": "",
+        "body": "",
+        "type": 2,
+        "selection": [],
+        "correct": [],
+        "points": 10,
+        "category": "ops",
+        "order": 8,
+        "feedback": ""
+    },
+    {
+        "name": "",
+        "body": "",
+        "type": 2,
+        "selection": [],
+        "correct": [],
+        "points": 10,
+        "category": "ops",
+        "order": 9,
+        "feedback": ""
+    },
+    {
+        "name": "",
+        "body": "",
+        "type": 2,
+        "selection": [],
+        "correct": [],
+        "points": 10,
+        "category": "ops",
+        "order": 10,
+        "feedback": ""
+    },
+    {
+        "name": "",
+        "body": "",
+        "type": 2,
+        "selection": [],
+        "correct": [],
+        "points": 10,
+        "category": "ops",
+        "order": 11,
+        "feedback": ""
+    },
+    {
+        "name": "",
+        "body": "",
+        "type": 2,
+        "selection": [],
+        "correct": [],
+        "points": 10,
+        "category": "ops",
+        "order": 12,
+        "feedback": ""
+    },
+    {
+        "name": "",
+        "body": "",
+        "type": 2,
+        "selection": [],
+        "correct": [],
+        "points": 10,
+        "category": "ops",
+        "order": 13,
+        "feedback": ""
+    },
+    {
+        "name": "",
+        "body": "",
+        "type": 2,
+        "selection": [],
+        "correct": [],
+        "points": 10,
+        "category": "ops",
+        "order": 14,
+        "feedback": ""
     }
 ]
