@@ -2,7 +2,14 @@ import { View, Text } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 import styles from "./styles";
 
-export function Dropdown({ setSelected, values, placeholder, searchEnabled = false, error = "" }) {
+export function Dropdown({
+    setSelected,
+    values,
+    placeholder,
+    searchEnabled = false,
+    error = "",
+    defaultOption = null
+}) {
     let inputBoxStyle = { ...styles.inputBox };
     let errorComponent;
 
@@ -24,6 +31,7 @@ export function Dropdown({ setSelected, values, placeholder, searchEnabled = fal
                 save="value"
                 search={searchEnabled}
                 placeholder={placeholder}
+                defaultOption={defaultOption}
             />
             {errorComponent}
         </View>
