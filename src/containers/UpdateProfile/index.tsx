@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Button, DatePicker, Dropdown, Input, PrimaryTitleGoBack, Wrapper } from "../../components";
+import { Button, DatePicker, Dropdown, Input, LoadingIndicator, PrimaryTitleGoBack, Wrapper } from "../../components";
 import { EducationalBackground } from "../../models/enum/EducationalBackground";
 import { IRegisterFormValues, registerInitialValues, registerSchema } from "../../schemas/updateProfile";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
@@ -11,6 +11,7 @@ import styles from "./styles";
 
 export function UpdateProfile({ navigation }) {
     const [user, setUser] = useState(null);
+    const [requestDone, setRequestDone] = useState(false);
     const [doRequest, responseComponent] = useRequest();
 
     useEffect(() => {
@@ -19,8 +20,9 @@ export function UpdateProfile({ navigation }) {
             registerInitialValues.name = userInfo.name;
             registerInitialValues.birthDate = userInfo.birthDate;
             registerInitialValues.educationalBackground = userInfo.educationalBackground;
+            setRequestDone(true);
         });
-    }, [retrieveUserInfo]);
+    }, []);
 
     const onFormSubmit = async (formData: IRegisterFormValues) => {
         doRequest({
@@ -43,37 +45,46 @@ export function UpdateProfile({ navigation }) {
                     Alterar Dados Pessoais
                 </PrimaryTitleGoBack>
 
-                <Formik initialValues={registerInitialValues} validationSchema={registerSchema} onSubmit={onFormSubmit}>
-                    {({ handleChange, handleSubmit, setFieldValue, values, errors }) => (
-                        <View>
-                            <Input
-                                placeholder="Nome Completo"
-                                value={values.name}
-                                onChangeText={handleChange("name")}
-                                error={errors.name}
-                            />
+                {!requestDone ? <LoadingIndicator /> :
+                    <Formik
+                        enableReinitialize={true}
+                        initialValues={registerInitialValues}
+                        validationSchema={registerSchema}
+                        onSubmit={onFormSubmit}
+                    >
+                        {({ handleChange, handleSubmit, setFieldValue, values, errors }) => (
+                            <View>
+                                <Input
+                                    placeholder="Nome Completo"
+                                    value={values.name}
+                                    onChangeText={handleChange("name")}
+                                    error={errors.name}
+                                />
 
-                            <DatePicker
-                                date={values.birthDate}
-                                placeholder={values.birthDate?.toLocaleDateString("pt-BR") ?? "Data de Nascimento"}
-                                onChange={(_, selectedDate) => setFieldValue("birthDate", selectedDate)}
-                                error={errors.birthDate}
-                                maximumDate={new Date()}
-                            />
+                                <DatePicker
+                                    date={values.birthDate}
+                                    placeholder={values.birthDate?.toLocaleDateString("pt-BR") ?? "Data de Nascimento"}
+                                    onChange={(_, selectedDate) => setFieldValue("birthDate", selectedDate)}
+                                    error={errors.birthDate}
+                                    maximumDate={new Date()}
+                                />
 
-                            <Dropdown
-                                placeholder={"Formação Acadêmica"}
-                                setSelected={handleChange("educationalBackground")}
-                                values={Object.values(EducationalBackground)}
-                                defaultOption={{ key: values.educationalBackground, value: values.educationalBackground }}
-                                error={errors.educationalBackground}
-                            />
+                                <Dropdown
+                                    placeholder={"Formação Acadêmica"}
+                                    setSelected={handleChange("educationalBackground")}
+                                    values={Object.values(EducationalBackground)}
+                                    defaultOption={{ key: values.educationalBackground, value: values.educationalBackground }}
+                                    error={errors.educationalBackground}
+                                />
 
-                            <Button title="Salvar" fullWidth onPress={handleSubmit} style={styles.submit} />
-                        </View>
-                    )}
-                </Formik>
+                                <Button title="Salvar" fullWidth onPress={handleSubmit} style={styles.submit} />
+                            </View>
+                        )}
+                    </Formik>
+                }
             </View>
+
+            {responseComponent}
         </Wrapper>
     );
 }
