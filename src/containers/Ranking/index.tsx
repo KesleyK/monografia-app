@@ -1,46 +1,53 @@
 import React, { useEffect, useState } from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import { RefreshControl, ScrollView, View } from "react-native";
 import { LoadingIndicator, PrimaryTitleGoBack, UserCardSimple, Wrapper } from "../../components";
-import { parseCollection } from "../../helpers/collectionUtils";
+import { chatBetween } from "../../helpers/chatUtils";
+import { createRanking } from "../../helpers/collectionUtils";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
-import ChatCollection from "../../services/firebase/db/chat";
-import UsersCollection from "../../services/firebase/db/users";
 import styles from "./styles";
 
-export function Ranking({route, navigation}) {
-    const { platform } = route.params; // TODO
+export function Ranking({ route, navigation }) {
+    const { team } = route.params;
     const [people, setPeople] = useState([]);
     const [user, setUser] = useState(null);
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
             setUser(userInfo);
         });
-    }, [retrieveUserInfo]);
-
-    useEffect(() => {
-        UsersCollection.getAll().then((usersInfo) => {
-            setPeople(parseCollection(usersInfo));
-        });
     }, []);
 
-    const onChatWith = (person) => {
-        ChatCollection.create(user.email, person);
-        navigation.navigate("Chat", {userId: person});
-    };
+    useEffect(() => {
+        loadRanking();
+    }, []);
+
+    const loadRanking = () => {
+        createRanking(team).then(usersInfo => {
+            setPeople(usersInfo);
+            setRefreshing(false);
+        })
+    }
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        loadRanking();
+    }
 
     return (
         <Wrapper>
-            <ScrollView>
+            <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
                 <View style={styles.container}>
                     <PrimaryTitleGoBack style={styles.title} onPress={() => navigation.goBack()}>
                         Ranking
                     </PrimaryTitleGoBack>
 
-                    {people.length === 0 ? <LoadingIndicator/> : people.map((person, index) => (
-                        <TouchableOpacity key={index} onPress={() => onChatWith(person.id)}>
-                            <UserCardSimple user={person} />
-                        </TouchableOpacity>
+                    {people.length === 0 ? <LoadingIndicator /> : people.map((person, index) => (
+                        <UserCardSimple
+                            key={index}
+                            user={person}
+                            onPress={() => chatBetween(user.email, person.id, navigation, true)}
+                        />
                     ))}
                 </View>
             </ScrollView>
