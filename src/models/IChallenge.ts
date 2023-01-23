@@ -5,8 +5,7 @@ export interface IChallenge {
     body: string;
     type: ChallengeType;
     selection?: string[];
-    correct: string[];
+    correct: string;
     points: number;
     category?: string;
-    feedback?: string;
 }

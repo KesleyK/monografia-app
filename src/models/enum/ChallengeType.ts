@@ -1,5 +1,5 @@
 export enum ChallengeType {
-    INPUT,
-    RADIO,
-    CHECKBOX
+    INPUT = 0,
+    RADIO = 1,
+    CHECKBOX = 2
 }

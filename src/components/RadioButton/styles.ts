@@ -20,9 +20,9 @@ export default StyleSheet.create({
         backgroundColor: RADIO_COLOR
     },
     correctBox: {
-        borderColor: DefaultStyles.SUCCESS_COLOR
+        borderColor: "lightgreen"
     },
     correctText: {
-        color: DefaultStyles.SUCCESS_COLOR
+        color: "lightgreen"
     }
 });

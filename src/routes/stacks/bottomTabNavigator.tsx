@@ -5,7 +5,7 @@ import config from "./config/bottomTabNavigator";
 
 const Tab = createBottomTabNavigator();
 
-export function BottomTabNavigator(props) {
+export function BottomTabNavigator() {
     function getScreenOptions(screen) {
         const options = {
             ...screen.options,
@@ -27,7 +27,6 @@ export function BottomTabNavigator(props) {
                     options={getScreenOptions(screen)}
                     name={screen.name}
                     component={screen.component}
-                    initialParams={props.route.params}
                 />
             ))}
         </Tab.Navigator>

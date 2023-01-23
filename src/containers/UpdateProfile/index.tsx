@@ -1,42 +1,41 @@
-import { Formik } from "formik";
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Button, DatePicker, Dropdown, Input, LoadingIndicator, PrimaryTitleGoBack, Wrapper } from "../../components";
+import { Button, DatePicker, Dropdown, Input, PrimaryTitleGoBack, Wrapper } from "../../components";
 import { EducationalBackground } from "../../models/enum/EducationalBackground";
-import { IRegisterFormValues, registerInitialValues, registerSchema } from "../../schemas/updateProfile";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import { updateUserProfile } from "../../services/firebase/auth/updateUserProfile";
-import { useRequest } from "../../services/firebase/hooks/useRequest";
 import styles from "./styles";
 
 export function UpdateProfile({ navigation }) {
+    const [name, setName] = useState("");
+    const [date, setDate] = useState(new Date());
+    const [educationalBackground, setEducationalBackground] = useState(null);
     const [user, setUser] = useState(null);
-    const [requestDone, setRequestDone] = useState(false);
-    const [doRequest, responseComponent] = useRequest();
 
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
             setUser(userInfo);
-            registerInitialValues.name = userInfo.name;
-            registerInitialValues.birthDate = userInfo.birthDate;
-            registerInitialValues.educationalBackground = userInfo.educationalBackground;
-            setRequestDone(true);
+            setName(userInfo.name);
+            setDate(userInfo.birthDate);
+            setEducationalBackground(userInfo.educationalBackground);
         });
-    }, []);
+    }, [retrieveUserInfo]);
 
-    const onFormSubmit = async (formData: IRegisterFormValues) => {
-        doRequest({
-            handler: async () => {
-                user.name = formData.name;
-                user.birthDate = formData.birthDate;
-                user.educationalBackground = formData.educationalBackground;
+    const onFormSubmit = async () => {
+        user.name = name;
+        user.birthDate = date;
+        user.educationalBackground = educationalBackground;
 
-                await updateUserProfile(user);
-                navigation.goBack();
-                alert("Dados alterados com sucesso!");
-            }
-        });
-    }
+        try {
+            await updateUserProfile(user);
+        } catch (err) {
+            alert("Erro ao alterar dados! " + err);
+            return;
+        }
+
+        navigation.goBack();
+        alert("Dados alterados com sucesso!");
+    };
 
     return (
         <Wrapper>
@@ -45,46 +44,28 @@ export function UpdateProfile({ navigation }) {
                     Alterar Dados Pessoais
                 </PrimaryTitleGoBack>
 
-                {!requestDone ? <LoadingIndicator /> :
-                    <Formik
-                        enableReinitialize={true}
-                        initialValues={registerInitialValues}
-                        validationSchema={registerSchema}
-                        onSubmit={onFormSubmit}
-                    >
-                        {({ handleChange, handleSubmit, setFieldValue, values, errors }) => (
-                            <View>
-                                <Input
-                                    placeholder="Nome Completo"
-                                    value={values.name}
-                                    onChangeText={handleChange("name")}
-                                    error={errors.name}
-                                />
+                <Input placeholder="Nome Completo" value={name} onChangeText={setName} />
 
-                                <DatePicker
-                                    date={values.birthDate}
-                                    placeholder={values.birthDate?.toLocaleDateString("pt-BR") ?? "Data de Nascimento"}
-                                    onChange={(_, selectedDate) => setFieldValue("birthDate", selectedDate)}
-                                    error={errors.birthDate}
-                                    maximumDate={new Date()}
-                                />
+                <DatePicker
+                    date={date}
+                    placeholder={
+                        date?.toDateString() === new Date().toDateString()
+                            ? "Data de Nascimento"
+                            : date.toLocaleDateString("pt-BR")
+                    }
+                    onChange={(event, selectedDate) => {
+                        setDate(selectedDate);
+                    }}
+                />
 
-                                <Dropdown
-                                    placeholder={"Formação Acadêmica"}
-                                    setSelected={handleChange("educationalBackground")}
-                                    values={Object.values(EducationalBackground)}
-                                    defaultOption={{ key: values.educationalBackground, value: values.educationalBackground }}
-                                    error={errors.educationalBackground}
-                                />
+                <Dropdown
+                    placeholder={"Formação Acadêmica"}
+                    setSelected={setEducationalBackground}
+                    values={Object.values(EducationalBackground)}
+                />
 
-                                <Button title="Salvar" fullWidth onPress={handleSubmit} style={styles.submit} />
-                            </View>
-                        )}
-                    </Formik>
-                }
+                <Button title="Salvar" fullWidth onPress={onFormSubmit} style={{ marginTop: 15 }} />
             </View>
-
-            {responseComponent}
         </Wrapper>
     );
 }

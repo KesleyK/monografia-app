@@ -3,7 +3,6 @@ import { db } from "../../../config/firebase";
 import { parseCollection } from "../../../helpers/collectionUtils";
 import { IChallengeReport } from "../../../models/IChallengeReport";
 import { ITopic } from "../../../models/ITopic";
-import SubtopicsCollection from "./subtopics";
 
 export default class ChallengeReportsCollection {
     private static readonly collectionName = "challengeReports";
@@ -26,8 +25,7 @@ export default class ChallengeReportsCollection {
 
     static async findByTopic(user: string, topic: ITopic) {
         const challenges = []
-        const subtopics = parseCollection(await SubtopicsCollection.getAll(topic.subtopics));
-        for (const subtopic of subtopics) {
+        for (const subtopic of topic.subtopics) {
             challenges.concat(subtopic.challenges);
         }
 

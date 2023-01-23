@@ -1,24 +1,21 @@
 import { useIsFocused } from "@react-navigation/native";
+import { setPersistence } from "firebase/auth/react-native";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { Button, Card, LoadingIndicator, PrimaryTitleGoBack, Text, Wrapper } from "../../components";
 import { ProgressBar } from "../../components/ProgressBar";
-import { parseCollection } from "../../helpers/collectionUtils";
+import { ITopic } from "../../models/ITopic";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ChallengeReportsCollection from "../../services/firebase/db/challengeReports";
-import SubtopicsCollection from "../../services/firebase/db/subtopics";
 import styles from "./styles";
 
 export function Topic({ route, navigation }) {
-    const { topic, participant } = route.params;
+    const topic = route.params as ITopic;
     const [requestDone, setRequestDone] = useState(false);
     const [user, setUser] = useState(null);
     const [progresses, setProgresses] = useState([]);
-    const [subtopics, setSubtopics] = useState([])
     const isFocused = useIsFocused();
-
-    let shouldDisable = false;
 
     useEffect(() => {
         retrieveUserInfo().then((userInfo) => {
@@ -36,22 +33,6 @@ export function Topic({ route, navigation }) {
             setRequestDone(true);
         });
     }, [isFocused, user]);
-
-    useEffect(() => {
-        SubtopicsCollection.getAll(topic.subtopics).then((subtopicsInfo) => {
-            const retrievedSubtopics = parseCollection(subtopicsInfo);
-            const arr = [];
-
-            topic.subtopics.forEach(element => {
-                const reference = retrievedSubtopics.find((item) => item.id === element);
-                if (reference) {
-                    arr.push(reference);
-                }
-            });
-
-            setSubtopics(arr);
-        });
-    }, [])
 
     const getProgress = ({ challenges }) => {
         const total = challenges?.length || 0;
@@ -73,14 +54,11 @@ export function Topic({ route, navigation }) {
     const onRenderSubtopic = ({ item }) => {
         const [progress, total] = getProgress(item);
 
-        const disabled = topic.isSequential && shouldDisable;
-        shouldDisable = progress < total;
-
         return (
             <View style={styles.cardContainer}>
                 <Card>
                     <Text style={styles.cardTitle}>{item.name}</Text>
-                    {!disabled && <Text>{item.description}</Text>}
+                    <Text>{item.description}</Text>
                     <ProgressBar
                         style={styles.progressBar}
                         total={total}
@@ -90,15 +68,14 @@ export function Topic({ route, navigation }) {
 
                     <Button
                         style={styles.cardButton}
-                        title={disabled ? "Bloqueado" : "Acessar Desafios"}
+                        title="Acessar Desafios"
                         onPress={() => navigation.navigate("Challenge", {
                             challenges: item.challenges,
                             current: 0,
                             userId: user.email,
-                            reports: progresses.filter((report) => filterReportsForSubtopic(item, report)),
-                            participant
+                            reports: progresses.filter((report) => filterReportsForSubtopic(item, report))
                         })}
-                        disabled={item.challenges.length === 0 || disabled}
+                        disabled={item.challenges.length === 0}
                     />
                 </Card>
             </View>
@@ -116,7 +93,7 @@ export function Topic({ route, navigation }) {
                     <FlatList
                         ListEmptyComponent={() => <Text>Nenhum Conteúdo Encontrado!</Text>}
                         contentContainerStyle={styles.flatList}
-                        data={subtopics} //TODO
+                        data={topic.subtopics}
                         numColumns={1}
                         renderItem={onRenderSubtopic}
                     />

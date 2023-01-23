@@ -29,13 +29,17 @@ export function Register({ navigation }) {
         doRequest({ handler: async () => await createUser(user as IUser, formData.password) });
     }
 
-    const policiesLink = (
-        <Anchor onPress={async () => {
-            await Linking.openURL("https://pedenite.github.io/monografia-pages/");
-        }}>
-            Políticas de Privacidade
-        </Anchor>
-    );
+    const getPoliciesLink = () => {
+        return (
+            <Anchor
+                onPress={async () => {
+                    await Linking.openURL("https://pedenite.github.io/monografia-pages/");
+                }}
+            >
+                Políticas de Privacidade
+            </Anchor>
+        );
+    }
 
     return (
         <Wrapper>
@@ -95,14 +99,14 @@ export function Register({ navigation }) {
                                 value={policyAccepted}
                                 onValueChange={acceptPolicy}
                             >
-                                Confirmo que li e aceito as {policiesLink} do aplicativo.
+                                Confirmo que li e aceito as {getPoliciesLink()} do aplicativo.
                             </CheckBox>
 
                             <Button
                                 title="Cadastrar"
                                 fullWidth
                                 onPress={handleSubmit}
-                                style={styles.submit}
+                                style={{ marginTop: 15 }}
                                 disabled={!policyAccepted}
                             />
                         </View>

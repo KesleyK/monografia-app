@@ -11,9 +11,7 @@ import {
     QuerySnapshot,
     setDoc,
     updateDoc,
-    limit,
-    where,
-    documentId
+    limit
 } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import { getDateFromSeconds } from "../../../helpers/dateUtils";
@@ -28,17 +26,16 @@ export default class UsersCollection {
         return getDoc(doc(this.ref, id));
     }
 
-    static getMultiple(ids: string[]): Promise<QuerySnapshot<DocumentData>> {
-        const docsQuery = query(this.ref, where(documentId(), "in", ids));
-        return getDocs(docsQuery);
+    static getAll(team = null): Promise<QuerySnapshot<DocumentData>> {
+        const order = orderBy("points", "desc");
+        const q = query(this.ref, order);
+
+        return getDocs(q);
     }
 
-    static getAll(limitBy = 0): Promise<QuerySnapshot<DocumentData>> {
+    static find(limitBy, team = null): Promise<QuerySnapshot<DocumentData>> {
         const order = orderBy("points", "desc");
-        
-        const q = limitBy ?
-            query(this.ref, order, limit(limitBy)) :
-            query(this.ref, order);
+        const q = query(this.ref, order, limit(limitBy));
 
         return getDocs(q);
     }

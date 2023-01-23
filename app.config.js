@@ -2,8 +2,8 @@ import 'dotenv/config';
 
 export default {
   "expo": {
-    "name": "algoritmia",
-    "slug": "algoritmia",
+    "name": "tcc-app",
+    "slug": "tcc-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "entryPoint": "./src/AppEntry.ts",
@@ -39,9 +39,6 @@ export default {
       "firebaseStorageBucket": process.env.FIREBASE_STORAGE_BUCKET,
       "firebaseMessagingSenderId": process.env.FIREBASE_MESSAGING_SENDER_ID,
       "firebaseAppId": process.env.FIREBASE_APP_ID
-    },
-    "android": {
-      "package": "br.unb.algoritmia"
     }
   }
 }

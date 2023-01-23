@@ -1,4 +1,4 @@
-export function normalizeString(str: string): string {
+export function normalizeString(str: string) {
     return str
         .toLowerCase()
         .normalize("NFD")
@@ -6,21 +6,15 @@ export function normalizeString(str: string): string {
         .replace(/\s/g, "");
 }
 
-export function verifyStringInclusion(completedStr: string, includedStr: string): boolean {
+export function verifyStringInclusion(completedStr: string, includedStr: string) {
     if (!includedStr.length) return true;
     return completedStr.includes(includedStr);
 }
 
-export function extractFirstName(name: string): string {
-    name = name?.trim();
+export function extractFirstName(name: string) {
     if (!name) {
         return "";
     }
-
+    
     return name.split(" ")[0];
-}
-
-export function limitCharacters(s: string, n: number): string {
-    return s == null || s.length <= n ? s :
-        s.substring(0, n - 3) + "...";
 }

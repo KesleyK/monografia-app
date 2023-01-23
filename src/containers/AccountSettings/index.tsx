@@ -6,8 +6,7 @@ import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo"
 import { signoutUser } from "../../services/firebase/auth/signoutUser";
 import styles from "./styles";
 
-export function AccountSettings({ route, navigation }) {
-    // const { team } = route.params; // TODO
+export function AccountSettings({ navigation }) {
     const [user, setUser] = useState(null);
     const isFocused = useIsFocused();
 
@@ -15,7 +14,7 @@ export function AccountSettings({ route, navigation }) {
         isFocused && retrieveUserInfo().then((userInfo) => {
             setUser(userInfo);
         });
-    }, [isFocused]);
+    }, [isFocused, retrieveUserInfo]);
 
     return (
         <Wrapper>

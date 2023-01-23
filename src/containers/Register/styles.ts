@@ -13,8 +13,5 @@ export default StyleSheet.create({
         flexDirection: "row",
         alignSelf: "center",
         marginTop: "10%"
-    },
-    submit: {
-        marginTop: 15
     }
 });
