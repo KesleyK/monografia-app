@@ -117,7 +117,7 @@ export function PreHome({ navigation }) {
                     />
                 }
             </View>
-            <Button title="Test" onPress={createPythonCourse} />
+            {/* <Button title="Test" onPress={createPythonCourse} /> */}
 
             {confirmationComponent}
         </Wrapper>
