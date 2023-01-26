@@ -13,7 +13,7 @@
     },
     {
         "name": "Condicionais",
-        "description": "",
+        "description": "Você escutou sobre um tesouro proibido de Pythonia e está interessado em saber mais sobre ele para ver do que se trata. Devido ao ar misterioso, você imagina que pode ter alguma relação com a razão por você estar neste local e pode te ajudar a encontrar pistas sobre o caminho de volta para casa.",
         "category": "ifelse",
         "order": 2
     },

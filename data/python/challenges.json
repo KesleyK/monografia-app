@@ -1,7 +1,7 @@
 [
     {
         "name": "Primeiro contato",
-        "body": "Ao andar pela vila, você é abordado por um dos seres que ali vivem, que percebe que você não é um deles. Complete o seguinte código para produzir um output na saída padrão tendo como conteúdo, a frase `Olá Cobra`:\n\n```___('Olá Cobra')```",
+        "body": "Ao andar pela vila, você é abordado por um dos seres que ali vivem, que percebe que você não é um deles. Complete o seguinte código para produzir um output na saída padrão tendo como conteúdo, a frase `Olá Cobra`:\n\n```\n___('Olá Cobra')\n```",
         "type": 0,
         "selection": [],
         "correct": [
@@ -33,7 +33,7 @@
     },
     {
         "name": "Obtendo informações",
-        "body": "Agora que vocês já se conhecem, chegou a sua chance de obter mais informações sobre o local que você está e sobre os habitantes locais. Para isso, você elaborou um *script* com as perguntas que irá fazer:\n\n```especie = input('O que são vocês?')\nlocalizacao = input('Onde eu estou?')\nprint(especie, localizacao)```\n\n O que o código acima faz?",
+        "body": "Agora que vocês já se conhecem, chegou a sua chance de obter mais informações sobre o local que você está e sobre os habitantes locais. Para isso, você elaborou um *script* com as perguntas que irá fazer:\n\n```\nespecie = input('O que são vocês?')\nlocalizacao = input('Onde eu estou?')\nprint(especie, localizacao)\n```\n\n O que o código acima faz?",
         "type": 2,
         "selection": [
             "Produz o output 'Onde estou?",
@@ -74,7 +74,7 @@
     },
     {
         "name": "Mapa",
-        "body": "Ao sair da loja, você olha em volta e percebe que está totalmente perdido neste local desconhecido, mas encontra um mapa estranho usado pelo habitantes locais que funciona por meio de uma representação textual ao invés de visual, contando os passos para cada direção a partir dele. Você vê o seguinte código que indica o caminho para chegar em um local semelhante a uma praça de alimentação:\n\n```print('frente' + str(10))\nprint('direita' + str(37 + 1/2))\nprint('esquerda' + str(5))```\n\nQuais das operações listadas abaixo foram utilizadas no código acima?",
+        "body": "Ao sair da loja, você olha em volta e percebe que está totalmente perdido neste local desconhecido, mas encontra um mapa estranho usado pelo habitantes locais que funciona por meio de uma representação textual ao invés de visual, contando os passos para cada direção a partir dele. Você vê o seguinte código que indica o caminho para chegar em um local semelhante a uma praça de alimentação:\n\n```\nprint('frente' + str(10))\nprint('direita' + str(37 + 1/2))\nprint('esquerda' + str(5))\n```\n\nQuais das operações listadas abaixo foram utilizadas no código acima?",
         "type": 2,
         "selection": [
             "Soma",
@@ -96,26 +96,35 @@
         "feedback": "O símbolo + representa normalmente uma soma, mas quando a operação é feita envolvendo duas strings em python, ele representa uma concatenação. No problema, foram utilizadas concatenações em cada linha do código, mas também uma soma na segunda linha dentro dos parênteses juntamente com uma divisão. Por fim, os números presentes no código foram transformados em strings por meio de um casting antes de serem concatenados."
     },
     {
-        "name": "",
-        "body": "",
+        "name": "Eavesdropping",
+        "body": "Ao sentar-se para comer sua deliciosa refeição, você começa a degustar dos ratos que comprou anteriormente enquanto escuta a conversa de outros que estão ali. Te chama atenção uma conversa em particular sobre um tesouro que ninguém conseguiu alcançar até hoje e muitos perderam suas vidas na testativa. Por se tratar de uma aventura perigosa, as autoridades locais proibiram que os habitantes revelassem a localização desta. Porém, um dos Pythons estava muito curioso e assim, o outro resolveu revelar as coordenadas para ele por meio de um código para que fique mais difícil de descobrirem que ele está cometendo um crime.\n\n```\nx = 2 ** 3 + 10 * 5\ny = 30 / (2 + 3) - 10\n```\n\n Quais são os valores de x e de y?",
         "type": 2,
-        "selection": [],
-        "correct": [],
+        "selection": [
+            "x = 90",
+            "x = 58",
+            "y = -4",
+            "y = -6",
+            "Nenhuma das alternativas acima, o código contém um erro"
+        ],
+        "correct": [
+            "1",
+            "2"
+        ],
         "points": 10,
         "category": "ops",
         "order": 5,
-        "feedback": ""
+        "feedback": "A ordem de precedência dos operadores em python é feita da seguinte forma (PEMDAS):\nP - Parênteses;\nE - Exponenciação;\nM - Multiplicação;\nD - Divisão;\nA - Adição;\nS - Subtração."
     },
     {
-        "name": "",
-        "body": "",
-        "type": 2,
+        "name": "Mais Informações",
+        "body": "Você volta à loja que comprou a comida para perguntar ao dono sobre o tesouro que ouviste falar, mas imediatamente é interrompido pelo própio dono, que te chama para um local mais privado para conversar sobre este assunto. Ele parece surpreso sobre o fato de você ter comnhecimento do tesouro, mas já começa te falando que não te recomenda ir lá, pois correrá risco de vida, mas se insiste em ir, deverá ter ao menos uma espada e um escudo. Ele tem ambos os itens para te vender, porém você percebe que não tem dinheiro o suficiente para ambos neste momento. O lojista está disposto a te ajudar e te passa uma 'quest' para que ele te dê o item que falta de graça após você resolver um problema para ele, mas você percebe que terá que comprar um dos 2 itens para ser capaz de realizar a quest para ele.\n\n```\nitem = input()\n\nif item == 'espada':\n\tprint('Realizar quest')\nelif item == 'escudo':\n\tprint('Impossível realizar quest')\nelse:\n\tprint('Game over')\n```\n\nQual valor você passa de input para a variável `item` de forma a obter como output, `Realizar quest`?",
+        "type": 0,
         "selection": [],
-        "correct": [],
+        "correct": ["espada"],
         "points": 10,
-        "category": "ops",
+        "category": "ifelse",
         "order": 6,
-        "feedback": ""
+        "feedback": "A variável item tem seu valor digitado pelo usuário, que neste caso é você, e é possível notar que a condição item == 'espada' produz exatamente o output desejado."
     },
     {
         "name": "",
@@ -124,7 +133,7 @@
         "selection": [],
         "correct": [],
         "points": 10,
-        "category": "ops",
+        "category": "ifelse",
         "order": 7,
         "feedback": ""
     },
@@ -135,7 +144,7 @@
         "selection": [],
         "correct": [],
         "points": 10,
-        "category": "ops",
+        "category": "ifelse",
         "order": 8,
         "feedback": ""
     },
