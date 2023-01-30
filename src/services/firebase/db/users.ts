@@ -66,7 +66,7 @@ export default class UsersCollection {
             educationalBackground: Object.values(EducationalBackground).find(
                 (s) => s === firestoreData.educationalBackground
             ),
-            birthDate: getDateFromSeconds(firestoreData.birthDate.seconds),
+            birthDate: getDateFromSeconds(firestoreData?.birthDate?.seconds),
             points: firestoreData.points
         };
     }
