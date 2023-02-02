@@ -118,7 +118,8 @@ export function Challenge({ route, navigation }) {
             userId: subject.userId,
             challengeId: challenge.id,
             answer: [...selection].map((it) => it.toString()),
-            answeredCorrectly
+            answeredCorrectly,
+            createdAt: new Date().toDateString()
         };
 
         ChallengeReportsCollection.post(answer);
