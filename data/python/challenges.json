@@ -97,7 +97,7 @@
     },
     {
         "name": "Eavesdropping",
-        "body": "Ao sentar-se para comer sua deliciosa refeição, você começa a degustar dos ratos que comprou anteriormente enquanto escuta a conversa de outros que estão ali. Te chama atenção uma conversa em particular sobre um tesouro que ninguém conseguiu alcançar até hoje e muitos perderam suas vidas na tentativa. Por se tratar de uma aventura perigosa, as autoridades locais proibiram que os habitantes revelassem a localização desta. Porém, um dos Pythons estava muito curioso e assim, o outro resolveu revelar as coordenadas para ele por meio de um código para que fique mais difícil de descobrirem que ele está cometendo um crime.\n\n```\nx = 2 ** 3 + 10 * 5\ny = 30 / (2 + 3) - 10\n```\n\n Quais são os valores de x e de y?",
+        "body": "Ao sentar-se para comer sua deliciosa refeição, você começa a degustar dos ratos que comprou anteriormente enquanto escuta a conversa de outros que estão ali. Te chama atenção uma conversa em particular sobre um tesouro que ninguém conseguiu alcançar até hoje e muitos perderam suas vidas na tentativa. Por se tratar de uma aventura perigosa, as autoridades locais proibiram que os habitantes revelassem a localização do tesouro. Porém, um dos Pythons estava muito curioso e assim, o outro resolveu revelar as coordenadas para ele por meio de um código para que fique mais difícil de descobrirem que ele está cometendo um crime.\n\n```\nx = 2 ** 3 + 10 * 5\ny = 30 / (2 + 3) - 10\n```\n\n Quais são os valores de x e de y?",
         "type": 2,
         "selection": [
             "x = 90",
@@ -146,7 +146,7 @@
     },
     {
         "name": "Obstáculo",
-        "body": "Enquanto você atacava os slimes mais fracos com a esperança de expulsá-los do local, os outros não ficaram nada felizes e começaram a se juntar uns aos outros, formando um único organismo gigante e bem mais forte. Agora em risco de vida, você tem que analizar que tipos de ataque usar contra esse mostro ameaçador.\n\n```\npoder_player = 10\npoder_slimes = 70\n\nagilidade_player = 50\nagilidade_slimes = 15\n\nataque1 = (poder_player > poder_slimes and agilidade_player > agilidade_slimes)\n\nataque2 = (poder_player > poder_slimes or agilidade_player > agilidade_slimes)\n\nataque3 = (poder_player < agilidade_slimes and agilidade_player > poder_slimes or poder_player == agilidade_player)\n\nataque4 = (poder_player < agilidade_slimes and (agilidade_player > poder_slimes or poder_player != agilidade_player and not poder_player < 10))\n```\n\nQuais ataques você deve usar, ou seja, quais ataques tem o valor booleano `True`?",
+        "body": "Enquanto você atacava os slimes mais fracos com a esperança de expulsá-los do local, os outros não ficaram nada felizes e começaram a se juntar uns aos outros, formando um único organismo gigante e bem mais forte. Agora em risco de vida, você tem que analisar que tipos de ataque usar contra esse mostro ameaçador.\n\n```\npoder_player = 10\npoder_slimes = 70\n\nagilidade_player = 50\nagilidade_slimes = 15\n\nataque1 = (poder_player > poder_slimes and agilidade_player > agilidade_slimes)\n\nataque2 = (poder_player > poder_slimes or agilidade_player > agilidade_slimes)\n\nataque3 = (poder_player < agilidade_slimes and agilidade_player > poder_slimes or poder_player == agilidade_player)\n\nataque4 = (poder_player < agilidade_slimes and (agilidade_player > poder_slimes or poder_player != agilidade_player and not poder_player < 10))\n```\n\nQuais ataques você deve usar, ou seja, quais ataques tem o valor booleano `True`?",
         "type": 2,
         "selection": [
             "ataque1",
@@ -163,7 +163,7 @@
     },
     {
         "name": "Poder Adquirido",
-        "body": "Você está com uma sensação estranha, mas por hora, deixa para lá isso para investigar onde você se encontra. Assim que você levanta, você vê o lojista, que foi quem te ajudou após a conclusão da quest. Desta vez, ele se apresenta como Carlos e te agradece por resolver o problema que ele estava enfrentando e, como combinado, te dá o escudo como recompensa. Agora você está pronto para ir investigar o local para o qual você obteve as coordenadas. De repente, enquanto você está pensando em como chegar ao local o seu novo poder se ativa automaticamente, te teletransportando para o local representado pelas variáveis `x` e `y` do seguinte código:\n\n```\nx = 10\ny = 53\n\nwhile (x < 58 or y > -4):\n\tx += 1\n\ty += 1\n```\n\nOnde você foi parar? (Quais são os valores de `x` e `y`?)",
+        "body": "Você está com uma sensação estranha, mas por hora, deixa para lá isso para investigar onde você se encontra. Assim que você levanta, você vê o lojista, que foi quem te ajudou após a conclusão da quest. Desta vez, ele se apresenta como Carlos e te agradece por resolver o problema que ele estava enfrentando e, como combinado, te dá o escudo como recompensa. Agora você está pronto para ir investigar o local para o qual você obteve as coordenadas. De repente, enquanto você está pensando em como chegar ao local o seu novo poder se ativa automaticamente, te teletransportando para o local representado pelas variáveis `x` e `y` do seguinte código:\n\n```\nx = 10\ny = 53\n\nwhile (x < 58 or y > -4):\n\tx += 1\n\ty -= 1\n```\n\nOnde você foi parar? (Quais são os valores de `x` e `y`?)",
         "type": 2,
         "selection": [
             "58",

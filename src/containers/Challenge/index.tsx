@@ -15,7 +15,7 @@ import styles from "./styles";
 
 export function Challenge({ route, navigation }) {
     const TITLE_MAX_CHAR = 18;
-    
+
     const subject = route.params;
     const totalChallenges = subject.challenges.length;
     const answers = subject.reports;
@@ -143,26 +143,34 @@ export function Challenge({ route, navigation }) {
         switch (challenge?.type) {
             default:
             case ChallengeType.RADIO:
-                return <RadioSelect
-                    title={"Escolha a alternativa correta:"}
-                    data={challenge?.selection}
-                    onSelection={(item) => setSelection(new Set([item]))}
-                    value={Number([...selection][0])}
-                    correctOption={answeredPreviously ? Number(correct[0]) : -1}
-                />;
+                return (
+                    <View style={styles.answerOptions}>
+                        <RadioSelect
+                            title={"Escolha a alternativa correta:"}
+                            data={challenge?.selection}
+                            onSelection={(item) => setSelection(new Set([item]))}
+                            value={Number([...selection][0])}
+                            correctOption={answeredPreviously ? Number(correct[0]) : -1}
+                        />
+                    </View >
+                );
 
             case ChallengeType.CHECKBOX:
-                return <CheckBoxSelect
-                    title={"Escolha a(s) alternativa(s) correta(s):"}
-                    data={challenge?.selection}
-                    onSelection={setSelection}
-                    value={new Set([...selection].map((item) => Number(item)))}
-                    correctOptions={new Set(answeredPreviously ? [...correct].map((item) => Number(item)) : [])}
-                />;
+                return (
+                    <View style={styles.answerOptions}>
+                        <CheckBoxSelect
+                            title={"Escolha a(s) alternativa(s) correta(s):"}
+                            data={challenge?.selection}
+                            onSelection={setSelection}
+                            value={new Set([...selection].map((item) => Number(item)))}
+                            correctOptions={new Set(answeredPreviously ? [...correct].map((item) => Number(item)) : [])}
+                        />
+                    </View>
+                );
 
             case ChallengeType.INPUT:
                 return (
-                    <View>
+                    <View style={styles.answerOptions}>
                         {answeredPreviously && !isAnswerCorrect() &&
                             <Text style={styles.textFeedbackReview}>
                                 A resposta correta é: <Text style={styles.correct}>{[...challenge.correct].toString()}</Text>
