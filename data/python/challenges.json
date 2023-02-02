@@ -74,7 +74,7 @@
     },
     {
         "name": "Mapa",
-        "body": "Ao sair da loja, você olha em volta e percebe que está totalmente perdido neste local desconhecido, mas encontra um mapa estranho usado pelo habitantes locais que funciona por meio de uma representação textual ao invés de visual, contando os passos para cada direção a partir dele. Você vê o seguinte código que indica o caminho para chegar em um local semelhante a uma praça de alimentação:\n\n```\nprint('frente' + str(10))\nprint('direita' + str(37 + 1/2))\nprint('esquerda' + str(5))\n```\n\nQuais das operações listadas abaixo foram utilizadas no código acima?",
+        "body": "Ao sair da loja, você olha em volta e percebe que está totalmente perdido(a) neste local desconhecido, mas encontra um mapa estranho usado pelos habitantes locais que funciona por meio de uma representação textual ao invés de visual, contando os passos para cada direção a partir dele. Você vê o seguinte código que indica o caminho para chegar em um local semelhante a uma praça de alimentação:\n\n```\nprint('frente' + str(10))\nprint('direita' + str(37 + 1/2))\nprint('esquerda' + str(5))\n```\n\nQuais das operações listadas abaixo foram utilizadas no código acima?",
         "type": 2,
         "selection": [
             "Soma",
@@ -97,7 +97,7 @@
     },
     {
         "name": "Eavesdropping",
-        "body": "Ao sentar-se para comer sua deliciosa refeição, você começa a degustar dos ratos que comprou anteriormente enquanto escuta a conversa de outros que estão ali. Te chama atenção uma conversa em particular sobre um tesouro que ninguém conseguiu alcançar até hoje e muitos perderam suas vidas na testativa. Por se tratar de uma aventura perigosa, as autoridades locais proibiram que os habitantes revelassem a localização desta. Porém, um dos Pythons estava muito curioso e assim, o outro resolveu revelar as coordenadas para ele por meio de um código para que fique mais difícil de descobrirem que ele está cometendo um crime.\n\n```\nx = 2 ** 3 + 10 * 5\ny = 30 / (2 + 3) - 10\n```\n\n Quais são os valores de x e de y?",
+        "body": "Ao sentar-se para comer sua deliciosa refeição, você começa a degustar dos ratos que comprou anteriormente enquanto escuta a conversa de outros que estão ali. Te chama atenção uma conversa em particular sobre um tesouro que ninguém conseguiu alcançar até hoje e muitos perderam suas vidas na tentativa. Por se tratar de uma aventura perigosa, as autoridades locais proibiram que os habitantes revelassem a localização do tesouro. Porém, um dos Pythons estava muito curioso e assim, o outro resolveu revelar as coordenadas para ele por meio de um código para que fique mais difícil de descobrirem que ele está cometendo um crime.\n\n```\nx = 2 ** 3 + 10 * 5\ny = 30 / (2 + 3) - 10\n```\n\n Quais são os valores de x e de y?",
         "type": 2,
         "selection": [
             "x = 90",
@@ -117,101 +117,154 @@
     },
     {
         "name": "Mais Informações",
-        "body": "Você volta à loja que comprou a comida para perguntar ao dono sobre o tesouro que ouviste falar, mas imediatamente é interrompido pelo própio dono, que te chama para um local mais privado para conversar sobre este assunto. Ele parece surpreso sobre o fato de você ter comnhecimento do tesouro, mas já começa te falando que não te recomenda ir lá, pois correrá risco de vida, mas se insiste em ir, deverá ter ao menos uma espada e um escudo. Ele tem ambos os itens para te vender, porém você percebe que não tem dinheiro o suficiente para ambos neste momento. O lojista está disposto a te ajudar e te passa uma 'quest' para que ele te dê o item que falta de graça após você resolver um problema para ele, mas você percebe que terá que comprar um dos 2 itens para ser capaz de realizar a quest para ele.\n\n```\nitem = input()\n\nif item == 'espada':\n\tprint('Realizar quest')\nelif item == 'escudo':\n\tprint('Impossível realizar quest')\nelse:\n\tprint('Game over')\n```\n\nQual valor você passa de input para a variável `item` de forma a obter como output, `Realizar quest`?",
+        "body": "Você volta à loja que comprou a comida para perguntar ao dono sobre o tesouro que ouviste falar, mas imediatamente é interrompido pelo própio dono, que te chama para um local mais privado para conversar sobre este assunto. Ele parece surpreso sobre o fato de você ter comnhecimento do tesouro, mas já começa te falando que não te recomenda ir lá, pois correrá risco de vida, mas se insiste em ir, deverá ter ao menos uma espada e um escudo. Ele tem ambos os itens para te vender, porém você percebe que não tem dinheiro o suficiente para ambos neste momento. O lojista está disposto a te ajudar e te passa uma *quest* para que ele te dê sem custo, o item que falta após você resolver um problema para ele, mas você percebe que terá que comprar um dos 2 itens para ser capaz de realizar a quest para ele.\n\n```\nitem = input()\n\nif item == 'escudo':\n\tprint('Impossível realizar quest')\nelif item == 'espada':\n\tprint('Realizar quest')\nelse:\n\tprint('Game over')\n```\n\nQual valor você passa de input para a variável `item` de forma a obter o output `Realizar quest`?",
         "type": 0,
         "selection": [],
         "correct": ["espada"],
         "points": 10,
         "category": "ifelse",
         "order": 6,
-        "feedback": "A variável item tem seu valor digitado pelo usuário, que neste caso é você, e é possível notar que a condição item == 'espada' produz exatamente o output desejado."
+        "feedback": "A variável item tem seu valor digitado pelo usuário, e é possível notar que a condição item == 'espada' produz exatamente o output desejado."
     },
     {
-        "name": "",
-        "body": "",
-        "type": 2,
-        "selection": [],
-        "correct": [],
-        "points": 10,
+        "name": "Slimes",
+        "body": "Após comprar a sua espada, você parte para realizar a sua *quest*. O lojista disse que precisa de alguém para espantar alguns monstros que invadiram as suas plantações e estão devorando todo o seu trabalho no local. Com as direções passadas, você chega ao local sem problemas e se depara com vários *slimes* que dominaram toda a plantação. Eles parecem fracos, mas para ficar seguro, você procede com a expulsão deles com cautela e observa os mais fracos para derrotar, e com sorte, amedrontar os outros que irão embora após ver seus companheiros caindo. Você precisa de uma forma de comparar a sua força com a dos *slimes* para selecionar os mais fracos. Qual o operador representa a comparação 'Menor ou igual' na **linguagem python**?",
+        "type": 1,
+        "selection": [
+            "≤",
+            "<=",
+            "=<",
+            "≥",
+            ">=",
+            "=>"
+        ],
+        "correct": [1],
+        "points": 5,
         "category": "ifelse",
         "order": 7,
-        "feedback": ""
+        "feedback": "<= é a operação de menor ou igual na linguagem python e >= é a operação de maior ou igual"
     },
     {
-        "name": "",
-        "body": "",
+        "name": "Obstáculo",
+        "body": "Enquanto você atacava os slimes mais fracos com a esperança de expulsá-los do local, os outros não ficaram nada felizes e começaram a se juntar uns aos outros, formando um único organismo gigante e bem mais forte. Agora em risco de vida, você tem que analisar que tipos de ataque usar contra esse mostro ameaçador.\n\n```\npoder_player = 10\npoder_slimes = 70\n\nagilidade_player = 50\nagilidade_slimes = 15\n\nataque1 = (poder_player > poder_slimes and agilidade_player > agilidade_slimes)\n\nataque2 = (poder_player > poder_slimes or agilidade_player > agilidade_slimes)\n\nataque3 = (poder_player < agilidade_slimes and agilidade_player > poder_slimes or poder_player == agilidade_player)\n\nataque4 = (poder_player < agilidade_slimes and (agilidade_player > poder_slimes or poder_player != agilidade_player and not poder_player < 10))\n```\n\nQuais ataques você deve usar, ou seja, quais ataques tem o valor booleano `True`?",
         "type": 2,
-        "selection": [],
-        "correct": [],
-        "points": 10,
+        "selection": [
+            "ataque1",
+            "ataque2",
+            "ataque3",
+            "ataque4",
+            "Nenhuma das alternativas acima"
+        ],
+        "correct": [1, 3],
+        "points": 20,
         "category": "ifelse",
         "order": 8,
-        "feedback": ""
+        "feedback": "As operações lógicas têm precedência abaixo de todas as operações aritméticas, vistas anteriormente. Após elas, temos as comparações como '==', '>', '<', etc. Em seguida, temos o 'not', seguido pelo 'and' e por fim, o 'or', que possui a menor precedência de todos. Boa parte do código exibido no desafio pode ser ignorada ao se usar da tabela verdade, não avaliando o lado direito da operação, por exemplo. A depender do valor obtido do lado esquerdo."
     },
     {
-        "name": "",
-        "body": "",
+        "name": "Poder Adquirido",
+        "body": "Você está com uma sensação estranha, mas por hora, deixa para lá isso para investigar onde você se encontra. Assim que você levanta, você vê o lojista, que foi quem te ajudou após a conclusão da quest. Desta vez, ele se apresenta como Carlos e te agradece por resolver o problema que ele estava enfrentando e, como combinado, te dá o escudo como recompensa. Agora você está pronto para ir investigar o local para o qual você obteve as coordenadas. De repente, enquanto você está pensando em como chegar ao local o seu novo poder se ativa automaticamente, te teletransportando para o local representado pelas variáveis `x` e `y` do seguinte código:\n\n```\nx = 10\ny = 53\n\nwhile (x < 58 or y > -4):\n\tx += 1\n\ty -= 1\n```\n\nOnde você foi parar? (Quais são os valores de `x` e `y`?)",
         "type": 2,
-        "selection": [],
-        "correct": [],
+        "selection": [
+            "58",
+            "-4",
+            "10",
+            "53",
+            "67"
+        ],
+        "correct": [
+            "1",
+            "4"
+        ],
         "points": 10,
-        "category": "ops",
+        "category": "for",
         "order": 9,
-        "feedback": ""
+        "feedback": "O while vai executar até que nenhuma das duas condições sejam verdadeiras, já que foi usado o operador or. Como y = 53 está mais longe de -4 do que x = 10 está de 58, sendo as distâncias, 57 e 48 respectivamente, esta diferença das distâncias é adicionada ao valor desejado de x (58 + (57-48)) = 58 + 9 = 67. Logo as respostas corretas são -4 e 67."
     },
     {
-        "name": "",
-        "body": "",
-        "type": 2,
-        "selection": [],
-        "correct": [],
+        "name": "Quase lá",
+        "body": "Com o seu novo poder de teletransporte descoberto, por não saber usá-lo corretamente, acabou se desviando um pouco do caminho, porém está mais perto do que antes. Agora basta seguir em uma direção para chegar ao local. Ao começar a caminhada, você é emboscado por seres muitos semelhantes aos da vila em que estava, sendo humanóides com cabeça de cobra, mas de uma espécie diferente chamada cobra-real. Ao contrário dos vizinhos, estes não são nada amigáveis e começam a te atacar. Complete o código a seguir para que você itere sobre todos os inimigos analisando quais deve atacar e contra quais deve defender: \n\n```\npoder_ataque = 5\n\ninimigos = [3, 1, 5, 2, 10]\n\n___ inimigo ___ inimigos:\n\tif (poder_ataque > inimigo):\n\t\tprint('atacar')\n\telse:\n\t\tprint('defender')\n```\n\n",
+        "type": 1,
+        "selection": [
+            "while :",
+            "while in",
+            "while of",
+            "for :",
+            "for in",
+            "for of",
+            "Nenhuma das alternativas acima"
+        ],
+        "correct": [4],
         "points": 10,
-        "category": "ops",
+        "category": "for",
         "order": 10,
-        "feedback": ""
+        "feedback": "Para iterar sobre os elementos de uma lista em python, uma das formas mais simples é usando o for in"
     },
     {
-        "name": "",
-        "body": "",
-        "type": 2,
+        "name": "Emboscada",
+        "body": "Após incapacitar os inimigos que você possuía força o suficiente para derrotar, os outros chamaram reforços, que rapidamente te cercaram. Após perder a esperança em um momento de pânico, você sente novamente aquele novo poder.\n\n```\ninimigos_restantes = 50\n\nwhile True:\n\tprint('ataca inimigo')\n\tinimigos_restantes -= 1\n\n\tif (inimigos_restantes == 0):\n\t\t___\n\nprint('Quantidade de inimigos restante:', inimigos_restantes)\n```\n\nEm um ataque especial, você derrota todos os inimigos teletransportando para trás de cada um e desferindo um golpe, mas não consegue parar o ataque. Complete o código para sair do *loop* infinito e parar o ataque após a derrota de todos os inimigos.",
+        "type": 0,
         "selection": [],
-        "correct": [],
+        "correct": ["break"],
         "points": 10,
-        "category": "ops",
+        "category": "for",
         "order": 11,
-        "feedback": ""
+        "feedback": "break é usado para quebrar qualquer laço de repetição em python"
     },
     {
-        "name": "",
-        "body": "",
-        "type": 2,
+        "name": "Enigma",
+        "body": "Ao chegar no local indicado pelas coordenadas, você encontra um portão que está trancado, mas vê coisas escritas nele:\n\n```\n___ abrirPortao():\n\tprint('Abrindo o portão...')\n\t# Restante do código oculto\n```\n\nInfelizmente, parte da escrita está apagada, provavelmente devido ao tempo que já está abandonado. Complete o código de forma a obter uma função chamada `abrirPortao`.",
+        "type": 0,
         "selection": [],
-        "correct": [],
+        "correct": ["def"],
         "points": 10,
-        "category": "ops",
+        "category": "func",
         "order": 12,
-        "feedback": ""
+        "feedback": "Todas as funções em python devem iniciar com a palavra def"
     },
     {
-        "name": "",
-        "body": "",
-        "type": 2,
-        "selection": [],
-        "correct": [],
-        "points": 10,
-        "category": "ops",
+        "name": "O que fazer?",
+        "body": "Você conseguiu desvendar o trecho restante do código escrito no portão, mas nada aconteceu. Por se tratar de uma função, falta realizar a chamada dela. Qual das alternativas representa a forma correta de chamar a função da questão anterior?",
+        "type": 1,
+        "selection": [
+            "abrirPortao",
+            "abrirPortao()",
+            "call abrirPortao",
+            "call abrirPortao()",
+            "Nenhuma das alternativas acima"
+        ],
+        "correct": [1],
+        "points": 5,
+        "category": "func",
         "order": 13,
-        "feedback": ""
+        "feedback": "A forma correta de executar uma função em python é chamando o nome da função seguido de parênteses com argumentos opcionais (A depender da declaração da função). Exemplo: print()"
     },
     {
-        "name": "",
-        "body": "",
+        "name": "Chefão",
+        "body": "Ao abrir o portão, você se depara com um dos humanóides cobra-real, porém 10x maior. Assim que você entra no seu campo de visão, ele começa a se mover em sua direção. Você decide que usar o ataque especial de antes é a melhor forma de derrotar o chefe, mas não lembra como usá-lo, portanto decide armazená-lo em uma função para facilitar a reutilização. Quais das formas a seguir podem ser usadas para transformar o seguinte código em uma função sem causar erros na execução?\n\n```\nataques_desferidos = 0\n\nwhile ataques_desferidos < ataques_necessarios:\n\tprint('ataca inimigo')\n\tataques_desferidos += 1\n```\n\n> Obs.: `...` representa o código acima.",
         "type": 2,
-        "selection": [],
-        "correct": [],
+        "selection": [
+            "void ativa_poder_especial():\n\t...",
+            "def ativa_poder_especial():\n\t...",
+            "void ativa_poder_especial(ataques_necessarios):\n\t...",
+            "def ativa_poder_especial(ataques_necessarios):\n\t...",
+            "Nenhuma das alternativas acima"
+        ],
+        "correct": [3],
         "points": 10,
-        "category": "ops",
+        "category": "func",
         "order": 14,
-        "feedback": ""
+        "feedback": "Uma função é definida em python com a palavra 'def'. No caso do código mostrado, não exite declaração para a variável 'ataques_necessarios', portanto um erro é gerado em tempo de execução a menos que a variável seja declarada. Uma função pode receber parâmetros que funcionam como variáveis e podem ter um valor passado durante a chamada da função. Exemplo: ativa_poder_especial(100)"
+    },
+    {
+        "name": "Fim",
+        "body": "Ao abrir o baú, você vê uma luz te consumir por inteiro até que você não veja mais nada. Após a sua visão retornar, você vê que está de volta no mundo real e tudo está de volta ao normal.\n\nParabéns por conluir o curso de python. Gostaríamos de ouvir de você o que achou do curso (resposta livre). Lembre de ver a sua posição no ranking do aplicativo =).\n\nNão se preocupe, a sua resposta aqui não vale pontos, pode escrever com sinceridade a sua opnião, incluindo o que acha que poderia melhorar.",
+        "type": 0,
+        "selection": [],
+        "correct": [""],
+        "points": 0,
+        "category": "conc",
+        "order": 15,
+        "feedback": "Obrigado por concluir o curso de Python na plataforma Algoritmia! Apesar de mostrar \"resposta incorreta\" no feedback, saiba que a sua resposta está corretíssima, independente do que escreveu, não se preocupe! =)"
     }
 ]

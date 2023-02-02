@@ -19,7 +19,7 @@ export function CheckBoxSelect({
                     key={index}
                     onValueChange={() => {
                         value.has(index) ? value.delete(index) : value.add(index);
-                        onSelection(new Set(value));
+                        onSelection(new Set([...value].sort()));
                     }}
                     value={value?.has?.(index)}
                     correct={correctOptions.has(index)}
