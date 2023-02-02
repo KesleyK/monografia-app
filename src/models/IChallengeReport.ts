@@ -3,4 +3,5 @@ export interface IChallengeReport {
     challengeId: string;
     answer: string[];
     answeredCorrectly: boolean;
+    createdAt: string;
 }
