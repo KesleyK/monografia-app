@@ -25,8 +25,14 @@
     },
     {
         "name": "Funções",
-        "description": "",
+        "description": "Por pouco, você consegue incapacitar todos os inimigos que te ameaçavam, e com isso, você descobriu grandes utilidades para seu novo poder e viu que este lugar que você se encontra pode ser mais perigoso do que pensava. Agora é hora de continuar o caminho para o suposto tesouro.",
         "category": "func",
         "order": 4
+    },
+    {
+        "name": "Conclusão",
+        "description": "Você consegue derrotar o chefão usando seu poder especial e suas habilidades em python e vê uma passagem se abrir após a vitória. Nesta passagem tem um baú do tesouro como mencionado pelos Pythons e você, ansiosamente procede para abrir o baú e obter a sua recompensa.",
+        "category": "conc",
+        "order": 5
     }
 ]
