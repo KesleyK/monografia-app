@@ -13,20 +13,26 @@
     },
     {
         "name": "Condicionais",
-        "description": "",
+        "description": "Você escutou sobre um tesouro proibido de Pythonia e está interessado em saber mais sobre ele para ver do que se trata. Devido ao ar misterioso, você imagina que pode ter alguma relação com a razão por você estar neste local e pode te ajudar a encontrar pistas sobre o caminho de volta para casa.",
         "category": "ifelse",
         "order": 2
     },
     {
         "name": "Loops",
-        "description": "",
+        "description": "Você conseguiu derrotar os slimes com muita dificuldade e se encontra extremamente cansado e apaga ali mesmo no chão. Ao acordar, você vê que está na casa de algum dos habitante de lá e você sente algo estranho...",
         "category": "for",
         "order": 3
     },
     {
         "name": "Funções",
-        "description": "",
+        "description": "Por pouco, você consegue incapacitar todos os inimigos que te ameaçavam, e com isso, você descobriu grandes utilidades para seu novo poder e viu que este lugar que você se encontra pode ser mais perigoso do que pensava. Agora é hora de continuar o caminho para o suposto tesouro.",
         "category": "func",
         "order": 4
+    },
+    {
+        "name": "Conclusão",
+        "description": "Você consegue derrotar o chefão usando seu poder especial e suas habilidades em python e vê uma passagem se abrir após a vitória. Nesta passagem tem um baú do tesouro como mencionado pelos Pythons e você, ansiosamente procede para abrir o baú e obter a sua recompensa.",
+        "category": "conc",
+        "order": 5
     }
 ]

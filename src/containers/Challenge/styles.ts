@@ -15,6 +15,9 @@ export default StyleSheet.create({
     answer: {
         marginBottom: "1%"
     },
+    answerOptions: {
+        paddingRight: 20
+    },
     links: {
         flexDirection: "row",
         justifyContent: "space-between",
