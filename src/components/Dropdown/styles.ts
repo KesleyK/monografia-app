@@ -28,7 +28,7 @@ export default StyleSheet.create({
         fontWeight: "bold"
     },
     placeholder: {
-        color: DefaultStyles.CARD_COLOR
+        color: DefaultStyles.PLACEHOLDER_COLOR
     },
     dropdown: {
         backgroundColor: DefaultStyles.SECONDARY_COLOR,
