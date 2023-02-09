@@ -5,7 +5,7 @@ export default StyleSheet.create({
     container: {
         padding: 8,
         flexDirection: "row",
-        backgroundColor: DefaultStyles.PRIMARY_COLOR,
+        backgroundColor: DefaultStyles.SEARCH_BAR_COLOR,
         borderRadius: 20,
         alignItems: "center"
     },

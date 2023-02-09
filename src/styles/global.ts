@@ -4,6 +4,7 @@ export enum DefaultStyles {
     TERTIARY_COLOR = "#555",
     BACKGROUND_COLOR = "#2B2B2B",
     CARD_COLOR = "#363E40",
+    SEARCH_BAR_COLOR = "#EEE",
     ANCHOR_COLOR = "#30A7C1",
     PLACEHOLDER_COLOR = "#363E40",
     BUTTON_COLOR = "#EEE",
