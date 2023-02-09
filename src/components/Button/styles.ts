@@ -3,7 +3,7 @@ import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     button: {
-        backgroundColor: DefaultStyles.PRIMARY_COLOR,
+        backgroundColor: DefaultStyles.BUTTON_COLOR,
         paddingVertical: 12,
         borderRadius: 5,
         alignItems: "center",
@@ -15,8 +15,9 @@ export default StyleSheet.create({
     },
     title: {
         textTransform: "uppercase",
-        fontWeight: "bold"
+        fontWeight: "bold",
+        color: DefaultStyles.BUTTON_TEXT_COLOR
     }, disabled: {
-        backgroundColor: DefaultStyles.SECONDARY_COLOR
+        backgroundColor: DefaultStyles.DISABLED_COLOR
     }
 });

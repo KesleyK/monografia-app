@@ -13,7 +13,7 @@ export default StyleSheet.create({
         alignSelf: "flex-start",
     },
     sent: {
-        backgroundColor: "#555",
+        backgroundColor: DefaultStyles.TERTIARY_COLOR,
         alignSelf: "flex-end",
     }
 });

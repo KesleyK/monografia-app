@@ -30,7 +30,7 @@ export default StyleSheet.create({
         paddingHorizontal: 8,
         paddingVertical: 5,
         textAlignVertical: "top",
-        color: "white",
+        color: DefaultStyles.PRIMARY_COLOR,
         paddingRight: 50
     },
     send: {

@@ -6,6 +6,7 @@ import { extractFirstName } from "../../helpers/stringManagement";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ChatCollection from "../../services/firebase/db/chat";
 import UsersCollection from "../../services/firebase/db/users";
+import { DefaultStyles } from "../../styles/global";
 import styles from "./styles";
 
 export function Chat({ route, navigation }) {
@@ -105,7 +106,7 @@ export function Chat({ route, navigation }) {
                         value={message}
                     />
                     <TouchableOpacity style={styles.send} onPress={onSendMessage} >
-                        <Ionicons name={"send"} size={25} color="white" />
+                        <Ionicons name={"send"} size={25} color={DefaultStyles.ICON_COLOR} />
                     </TouchableOpacity>
                 </View>
             </View>

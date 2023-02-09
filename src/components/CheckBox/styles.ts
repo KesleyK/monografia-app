@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { DefaultStyles } from "../../styles/global";
 
-const CHECKBOX_COLOR = DefaultStyles.PRIMARY_COLOR;
+const CHECKBOX_COLOR = DefaultStyles.BUTTON_COLOR;
 
 export default StyleSheet.create({
     item: {

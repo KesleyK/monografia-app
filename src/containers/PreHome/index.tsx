@@ -10,6 +10,7 @@ import { ParticipantStatus } from "../../models/enum/ParticipantStatus";
 import { retrieveUserInfo } from "../../services/firebase/auth/retrieveUserInfo";
 import ParticipantsCollection from "../../services/firebase/db/participants";
 import TeamsCollection from "../../services/firebase/db/teams";
+import { DefaultStyles } from "../../styles/global";
 
 import styles from "./styles";
 
@@ -84,7 +85,7 @@ export function PreHome({ navigation }) {
                     <Text style={styles.cardTitle}>{item?.name}</Text>
                     {!isGlobalPlatform(item) &&
                         <TouchableOpacity onPress={() => onDeleteTeam(item)}>
-                            <MaterialCommunityIcons name="trash-can-outline" size={30} color="white" />
+                            <MaterialCommunityIcons name="trash-can-outline" size={30} color={DefaultStyles.ICON_COLOR} />
                         </TouchableOpacity>
                     }
                 </View>

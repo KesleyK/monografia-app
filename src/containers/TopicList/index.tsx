@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
 import { Card, PrimaryTitleGoBack, SearchBar, Text, Wrapper } from "../../components";
 import { normalizeString, verifyStringInclusion } from "../../helpers/stringManagement";
+import { DefaultStyles } from "../../styles/global";
 import styles from "./styles";
 
 export function TopicList({ route, navigation }) {
@@ -17,7 +18,7 @@ export function TopicList({ route, navigation }) {
         <View style={styles.cardContainer}>
             <TouchableOpacity onPress={() => navigation.navigate("Topic", { topic: item, participant })}>
                 <Card style={styles.card}>
-                    <MaterialCommunityIcons name={item.icon} size={80} color="white" />
+                    <MaterialCommunityIcons name={item.icon} size={80} color={DefaultStyles.ICON_COLOR} />
                     <Text style={styles.cardTitle}>{item.name}</Text>
                 </Card>
             </TouchableOpacity>

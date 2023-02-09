@@ -12,6 +12,7 @@ import TopicsCollection from "../../services/firebase/db/topics";
 import styles from "./styles";
 import ChatCollection from "../../services/firebase/db/chat";
 import { chatBetween } from "../../helpers/chatUtils";
+import { DefaultStyles } from "../../styles/global";
 
 export function Home({ route, navigation }) {
     const TOPICS_LIMIT = 3;
@@ -75,7 +76,7 @@ export function Home({ route, navigation }) {
         .map((topic, index) => (
             <TouchableOpacity style={styles.topicClickable} onPress={() => navigation.navigate("Topic", { topic, participant })} key={index}>
                 <View style={styles.topicsCard}>
-                    <MaterialCommunityIcons name={topic.icon} size={40} color="white" />
+                    <MaterialCommunityIcons name={topic.icon} size={40} color={DefaultStyles.ICON_COLOR} />
                     <Text style={styles.topicName}>{topic.name}</Text>
                 </View>
             </TouchableOpacity>
@@ -97,7 +98,7 @@ export function Home({ route, navigation }) {
                         >
                             <PrimaryTitle small>Tópicos</PrimaryTitle>
 
-                            <AntDesign name="arrowsalt" size={12} color="white" />
+                            <AntDesign name="arrowsalt" size={12} color={DefaultStyles.ICON_COLOR} />
                         </TouchableOpacity>
 
                         <View style={styles.topicsList}>
@@ -112,7 +113,7 @@ export function Home({ route, navigation }) {
                         >
                             <PrimaryTitle small>Ranking</PrimaryTitle>
 
-                            <AntDesign name="arrowsalt" size={12} color="white" />
+                            <AntDesign name="arrowsalt" size={12} color={DefaultStyles.ICON_COLOR} />
                         </TouchableOpacity>
 
                         {people.map((person, index) => (

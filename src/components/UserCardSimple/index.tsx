@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity, View } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 import { Notifications } from "../Notifications";
 import { Text } from "../Text";
 import styles from "./styles";
@@ -8,7 +9,7 @@ export function UserCardSimple({ user, chat = false, messages = 0, onPress = nul
     const innerContent = (
         <View style={styles.user}>
             <View style={styles.userLeftBox}>
-                <Ionicons style={styles.userIcon} name="ios-person-circle-sharp" size={40} color="white" />
+                <Ionicons style={styles.userIcon} name="ios-person-circle-sharp" size={40} color={DefaultStyles.ICON_COLOR} />
                 <Text>{user?.name}</Text>
             </View>
 
