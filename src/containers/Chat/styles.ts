@@ -18,7 +18,7 @@ export default StyleSheet.create({
         position: "absolute",
         marginHorizontal: "10%",
         marginBottom: "7%",
-        backgroundColor: "#555",
+        backgroundColor: DefaultStyles.TERTIARY_COLOR,
         alignSelf: "center",
         bottom: 5,
         width: "95%",
