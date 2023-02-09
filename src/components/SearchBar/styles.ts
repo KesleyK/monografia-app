@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import { DefaultStyles } from "../../styles/global";
 
 export default StyleSheet.create({
     container: {
         padding: 8,
         flexDirection: "row",
-        backgroundColor: "#eee",
+        backgroundColor: DefaultStyles.PRIMARY_COLOR,
         borderRadius: 20,
         alignItems: "center"
     },
