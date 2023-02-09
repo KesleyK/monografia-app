@@ -106,7 +106,7 @@ export function Chat({ route, navigation }) {
                         value={message}
                     />
                     <TouchableOpacity style={styles.send} onPress={onSendMessage} >
-                        <Ionicons name={"send"} size={25} color={DefaultStyles.ICON_COLOR} />
+                        <Ionicons name={"send"} size={25} color="white" />
                     </TouchableOpacity>
                 </View>
             </View>
